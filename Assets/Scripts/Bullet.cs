@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 20f;
+    private float speed;
     public float lifetime = 2f;
-    public int damage = 20;
+    public int damage;
 
     private void Start()
     {
@@ -14,6 +14,12 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         transform.position += transform.forward * speed * Time.deltaTime;
+    }
+
+    public void SetBulletStats(float bulletSpeed, int bulletDamage)
+    {
+        speed = bulletSpeed;
+        damage = bulletDamage;
     }
 
     private void OnTriggerEnter(Collider other)
