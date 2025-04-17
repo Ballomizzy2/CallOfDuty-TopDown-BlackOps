@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static MeleeHitBoxHandler;
 
 public class PlayerMelee : MonoBehaviour
 {
@@ -31,10 +32,20 @@ public class PlayerMelee : MonoBehaviour
         MeleeHitBoxHandler.Instance.OnMeleeContact += MeleeHitBoxHandler_OnMeleeContact;
     }
 
-    private void MeleeHitBoxHandler_OnMeleeContact(object sender, EventArgs e)
+    private void MeleeHitBoxHandler_OnMeleeContact(object sender, MeleeHitEventArgs e)
     {
         //unpack the game object ref and deal damage
         Debug.Log("thip");
+
+        GameObject hitObject = e.hitObject;
+
+        if (hitObject != null)
+        {
+            Debug.Log("Hit: " + hitObject.name);
+            Destroy(hitObject );
+        }
+        
+
     }
 
     private void PlayerMelee_OnMeleeAction(object sender, EventArgs e)

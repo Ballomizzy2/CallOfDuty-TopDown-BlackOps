@@ -3,7 +3,11 @@ using UnityEngine;
 
 public class MeleeHitBoxHandler : MonoBehaviour
 {
-    public event EventHandler OnMeleeContact;
+    public event EventHandler<MeleeHitEventArgs> OnMeleeContact;
+    public class MeleeHitEventArgs : EventArgs
+    {
+        public GameObject hitObject;
+    }
     public static MeleeHitBoxHandler Instance {  get; private set; }
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject nose;
@@ -13,7 +17,7 @@ public class MeleeHitBoxHandler : MonoBehaviour
         //OnMeleeContact?.Invoke(this,);
         if(other.gameObject!= player && other.gameObject != nose)
         {
-            OnMeleeContact?.Invoke(this, EventArgs.Empty);
+            OnMeleeContact?.Invoke(this, new MeleeHitEventArgs { hitObject= other.gameObject});
         }
             
     }
