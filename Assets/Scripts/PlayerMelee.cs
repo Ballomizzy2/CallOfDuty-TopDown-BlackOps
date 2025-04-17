@@ -13,7 +13,6 @@ public class PlayerMelee : MonoBehaviour
     private InputSystem_Actions inputActions;
 
     //health stuff- extract into appropriate place later
-    
     [SerializeField] private int hp = 3;
     private bool isHurt = false;
     private float hurtInterval = 3;
@@ -70,6 +69,43 @@ public class PlayerMelee : MonoBehaviour
     private void Update()
     {
         //timer to disable the actived melee hitbox
+        meleeHitBoxReset();
+
+        //hp regen timer
+        hurtCountDown();
+    }
+
+    public void isHurtOn()
+    {
+        hp--;
+        Debug.Log("ow: " + hp);
+        isHurt =true;
+    }
+
+    private void hurtCountDown()
+    {
+        if (isHurt)
+        {
+            if (hp <= 0)
+            {
+                gameObject.SetActive(false);
+            }
+
+            //if hp=0 then GAMEOVER
+            hurtInterval -= Time.deltaTime;
+            if (hurtInterval < 0)
+            {
+                //if count down finishes reset variables n give back hp
+                hp = 3;
+                isHurt = false;
+                hurtInterval = 3;
+                Debug.Log("Timer Done. HP restored: " + hp);
+            }
+        }
+    }
+
+    private void meleeHitBoxReset()
+    {
         if (meleeBoxIsActive)
         {
             meleeTimer -= Time.deltaTime;
@@ -81,32 +117,5 @@ public class PlayerMelee : MonoBehaviour
 
             }
         }
-
-        //hp regen timer
-        if(isHurt)
-        {
-            if (hp <= 0)
-            {
-               gameObject.SetActive(false);
-            }
-            
-            //if hp=0 then GAMEOVER
-            hurtInterval -= Time.deltaTime;
-            if (hurtInterval < 0)
-            {
-                //if count down finishes reset variables n give back hp
-                hp = 3;
-                isHurt = false;
-                hurtInterval = 3;
-                Debug.Log("uwu" + hp);
-            }
-        }
-    }
-
-    public void isHurtOn()
-    {
-        hp--;
-        Debug.Log("ow: " + hp);
-        isHurt =true;
     }
 }
