@@ -12,6 +12,12 @@ public class PlayerMelee : MonoBehaviour
     private bool meleeBoxIsActive = false;
     private InputSystem_Actions inputActions;
 
+    //health stuff- extract into appropriate place later
+    
+    [SerializeField] private int hp = 3;
+    private bool isHurt = false;
+    private float hurtInterval = 3;
+
     private void Start()
     {
         playerMeleeHitBox.SetActive(false);
@@ -35,13 +41,13 @@ public class PlayerMelee : MonoBehaviour
     private void MeleeHitBoxHandler_OnMeleeContact(object sender, MeleeHitEventArgs e)
     {
         //unpack the game object ref and deal damage
-        Debug.Log("thip");
+        //Debug.Log("thip");
 
         GameObject hitObject = e.hitObject;
 
         if (hitObject != null)
         {
-            Debug.Log("Hit: " + hitObject.name);
+            //Debug.Log("Hit: " + hitObject.name);
             Destroy(hitObject );
         }
         
@@ -50,7 +56,7 @@ public class PlayerMelee : MonoBehaviour
 
     private void PlayerMelee_OnMeleeAction(object sender, EventArgs e)
     {
-        Debug.Log("swish!");
+        //Debug.Log("swish!");
         playerMeleeHitBox.SetActive(true);
         meleeBoxIsActive=true;
     }
@@ -63,7 +69,7 @@ public class PlayerMelee : MonoBehaviour
     }
     private void Update()
     {
-        //
+        //timer to disable the actived melee hitbox
         if (meleeBoxIsActive)
         {
             meleeTimer -= Time.deltaTime;
@@ -75,5 +81,32 @@ public class PlayerMelee : MonoBehaviour
 
             }
         }
+
+        //hp regen timer
+        if(isHurt)
+        {
+            if (hp <= 0)
+            {
+               gameObject.SetActive(false);
+            }
+            
+            //if hp=0 then GAMEOVER
+            hurtInterval -= Time.deltaTime;
+            if (hurtInterval < 0)
+            {
+                //if count down finishes reset variables n give back hp
+                hp = 3;
+                isHurt = false;
+                hurtInterval = 3;
+                Debug.Log("uwu" + hp);
+            }
+        }
+    }
+
+    public void isHurtOn()
+    {
+        hp--;
+        Debug.Log("ow: " + hp);
+        isHurt =true;
     }
 }

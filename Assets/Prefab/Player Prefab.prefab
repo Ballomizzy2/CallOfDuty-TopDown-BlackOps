@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2254290426958762548}
   - component: {fileID: 1060442778201904865}
   - component: {fileID: 4792540255082385134}
+  - component: {fileID: 4723671408749034160}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -261,11 +262,30 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5a1039a9-2870-4aaa-8536-082441c779f8
+    m_ActionName: 'Player/Melee[/Keyboard/f]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &4723671408749034160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706819725991656005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f806edca302bc84c801b8b775de7569, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMeleeHitBox: {fileID: 3222077430195716492}
+  meleeTimer: 0.1
+  hp: 3
 --- !u!1 &2284465733302083067
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,7 +349,7 @@ Transform:
   m_GameObject: {fileID: 2980151159123633509}
   serializedVersion: 2
   m_LocalRotation: {x: 0.70090926, y: -0.000000078609546, z: 0.00000007724939, w: 0.71325046}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -621,8 +641,9 @@ GameObject:
   - component: {fileID: 8000636147595777698}
   - component: {fileID: 2493520048751248376}
   - component: {fileID: 4194073992090350705}
+  - component: {fileID: 4995738846722995473}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: MeleeHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -674,7 +695,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 6dcad3bde6c254f4396b4bf2eec32518, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -717,6 +738,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4995738846722995473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3222077430195716492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e4e4b94ab2f0b642a6c7f0d434d906a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 706819725991656005}
+  nose: {fileID: 7415432170309441319}
 --- !u!1 &7415432170309441319
 GameObject:
   m_ObjectHideFlags: 0
@@ -782,7 +817,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 6dcad3bde6c254f4396b4bf2eec32518, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
