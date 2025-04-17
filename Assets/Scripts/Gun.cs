@@ -53,9 +53,15 @@ public class Gun : MonoBehaviour
             }
         }
 
-        if (gunData.shootSound && audioSource)
+        if (gunData.shootSound)
         {
-            audioSource.PlayOneShot(gunData.shootSound);
+            AudioSource tempAudio = gameObject.AddComponent<AudioSource>();
+            tempAudio.clip = gunData.shootSound;
+            tempAudio.volume = 0.7f;
+            tempAudio.pitch = Random.Range(0.95f, 1.05f); // optional: slight variation
+            tempAudio.spatialBlend = 0f; // 0 = 2D, 1 = 3D
+            tempAudio.Play();
+            Destroy(tempAudio, gunData.shootSound.length);
         }
     }
 
