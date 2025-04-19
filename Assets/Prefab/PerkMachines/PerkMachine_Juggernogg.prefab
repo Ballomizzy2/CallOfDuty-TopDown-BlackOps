@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 8732540473290061729}
   - component: {fileID: 5687533951223401215}
   - component: {fileID: 5969515323525734027}
-  - component: {fileID: 3152168070086051154}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,29 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &3152168070086051154
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5077029068258765149}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &6003985943012618021
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,7 +95,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6621679518859221097}
-  m_Layer: 0
+  - component: {fileID: 5535837815557723145}
+  m_Layer: 6
   m_Name: PerkMachine_Juggernogg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,6 +119,27 @@ Transform:
   - {fileID: 3423468043675381847}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5535837815557723145
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6003985943012618021}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 4, z: 1}
+  m_Center: {x: 0, y: 1.86, z: 0}
 --- !u!1 &6221845157182531025
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,7 +149,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3423468043675381847}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: visualHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,8 +184,7 @@ GameObject:
   - component: {fileID: 3230037421354893425}
   - component: {fileID: 7282973984427088824}
   - component: {fileID: 3889924980550567086}
-  - component: {fileID: 816639345895829025}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,27 +259,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &816639345895829025
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8496317122694561866}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8748945032430229100
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,7 +268,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1381153912573301722}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CylinderHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,7 +284,7 @@ Transform:
   m_GameObject: {fileID: 8748945032430229100}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0360075, y: 2.818387, z: 0.2308674}
+  m_LocalPosition: {x: 0.07, y: 2.818387, z: 0.2308674}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

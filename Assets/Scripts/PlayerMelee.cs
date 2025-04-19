@@ -6,16 +6,21 @@ using static MeleeHitBoxHandler;
 public class PlayerMelee : MonoBehaviour
 {
     public event EventHandler OnMeleeAction;
-    
+
+    [Header("Melee")]
     [SerializeField] private GameObject playerMeleeHitBox;
     [SerializeField] private float meleeTimer= 0.1f;
     private bool meleeBoxIsActive = false;
     private InputSystem_Actions inputActions;
 
     //health stuff- extract into appropriate place later
+    [Header("Health")]
     [SerializeField] private int hp = 3;
     private bool isHurt = false;
     private float hurtInterval = 3;
+
+    [Header("Interaction")]
+    [SerializeField] float interactRayCastDist = 4f;
 
     private void Start()
     {
@@ -73,6 +78,9 @@ public class PlayerMelee : MonoBehaviour
 
         //hp regen timer
         HurtCountDown();
+
+        //interactions w/ world objs
+        Interactions();
     }
 
     public void isHurtOn()
@@ -117,5 +125,15 @@ public class PlayerMelee : MonoBehaviour
 
             }
         }
+    }
+    private void Interactions()
+    {
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit raycastHit, interactRayCastDist))
+        {
+            Debug.Log(raycastHit.transform);
+        }
+
+        
+        //Debug.DrawRay(transform.position, transform.forward, Color.red);
     }
 }
