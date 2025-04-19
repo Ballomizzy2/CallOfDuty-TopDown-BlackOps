@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f542cd5718dcafc4691dd4028ec0110b, type: 3}
+  m_Name: Olympia
+  m_EditorClassIdentifier: 
+  gunName: Olympia
+  magazineSize: 2
+  reserveAmmo: 38
+  reloadTime: 3.5
+  fireDelay: 0.4
+  bulletSpeed: 80
+  damage: 150
+  bulletPrefab: {fileID: 323053151204081425, guid: ff2c32612bed55541bbaf1b086a5e24d, type: 3}
+  muzzleFlashPrefab: {fileID: 0}
+  shootSound: {fileID: 8300000, guid: 605a85aa802a0ce4884d6c95f2728979, type: 3}
+  reloadSound: {fileID: 8300000, guid: 5077f7389d8623c4ca875be1b1a75ea9, type: 3}

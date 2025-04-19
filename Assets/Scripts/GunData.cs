@@ -23,4 +23,12 @@ public class GunData : ScriptableObject
     [Header("Audio")]
     public AudioClip shootSound;
     public AudioClip reloadSound;
+
+    [Header("Fire Mode")]
+    public bool isAutomatic = false;
+
+    [Header("Burst Settings")]
+    public bool isBurst = false;
+    public int burstCount = 3;         // How many bullets per burst
+    public float burstDelay = 0.1f;    // Delay between shots in a burst
 }

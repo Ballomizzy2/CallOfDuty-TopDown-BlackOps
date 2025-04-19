@@ -24,12 +24,35 @@ public class Gun : MonoBehaviour
     {
         if (isReloading) return;
 
-        if (Input.GetMouseButton(0) && Time.time >= nextFireTime) // Left-click
+        // ?? Full-Auto
+        if (gunData.isAutomatic)
         {
-            if (currentAmmo > 0) Fire();
-            else StartCoroutine(Reload());
+            if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
+            {
+                if (currentAmmo > 0) Fire();
+                else StartCoroutine(Reload());
+            }
+        }
+        // ?? Burst Fire
+        else if (gunData.isBurst)
+        {
+            if (Input.GetMouseButtonDown(0) && Time.time >= nextFireTime)
+            {
+                if (currentAmmo > 0) StartCoroutine(BurstFire());
+                else StartCoroutine(Reload());
+            }
+        }
+        // ?? Semi-Auto
+        else
+        {
+            if (Input.GetMouseButtonDown(0) && Time.time >= nextFireTime)
+            {
+                if (currentAmmo > 0) Fire();
+                else StartCoroutine(Reload());
+            }
         }
 
+        // ?? Manual Reload
         if (Input.GetKeyDown(KeyCode.R) && currentAmmo < gunData.magazineSize && reserveAmmo > 0)
         {
             StartCoroutine(Reload());
@@ -83,5 +106,24 @@ public class Gun : MonoBehaviour
         reserveAmmo -= ammoToReload;
 
         isReloading = false;
+    }
+
+    private IEnumerator BurstFire()
+    {
+        nextFireTime = Time.time + gunData.fireDelay; // Prevents starting a new burst too soon
+
+        for (int i = 0; i < gunData.burstCount; i++)
+        {
+            if (currentAmmo > 0)
+            {
+                Fire();
+                yield return new WaitForSeconds(gunData.burstDelay);
+            }
+            else
+            {
+                StartCoroutine(Reload());
+                yield break;
+            }
+        }
     }
 }

@@ -716,7 +716,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b23b38b2ecbc369488f9cb0ecb9f40d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunData: {fileID: 11400000, guid: 91e0b15934b38af49a77114d9fde5fd5, type: 2}
+  gunData: {fileID: 11400000, guid: 742e49a730653c444be3d86daa250709, type: 2}
   gunMuzzle: {fileID: 1466693554}
 --- !u!82 &1816310078
 AudioSource:
