@@ -69,10 +69,10 @@ public class PlayerMelee : MonoBehaviour
     private void Update()
     {
         //timer to disable the actived melee hitbox
-        meleeHitBoxReset();
+        MeleeHitBoxReset();
 
         //hp regen timer
-        hurtCountDown();
+        HurtCountDown();
     }
 
     public void isHurtOn()
@@ -82,7 +82,7 @@ public class PlayerMelee : MonoBehaviour
         isHurt =true;
     }
 
-    private void hurtCountDown()
+    private void HurtCountDown()
     {
         if (isHurt)
         {
@@ -104,7 +104,7 @@ public class PlayerMelee : MonoBehaviour
         }
     }
 
-    private void meleeHitBoxReset()
+    private void MeleeHitBoxReset()
     {
         if (meleeBoxIsActive)
         {
