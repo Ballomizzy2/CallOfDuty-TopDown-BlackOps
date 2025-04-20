@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 9075445044335533600}
   - component: {fileID: 470290632020972536}
   - component: {fileID: 7118710099118172333}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PerkMachine_Staminup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,7 +336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1879126e4cb22534ba338eaac15a8570, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  perkSodaSO: {fileID: 11400000, guid: d46a745a95e567343abf4fe2daf13cba, type: 2}
+  heldPerkSodaSO: {fileID: 11400000, guid: d46a745a95e567343abf4fe2daf13cba, type: 2}
 --- !u!1 &6517134069760236557
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +347,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1783731398608206897}
   m_Layer: 6
-  m_Name: PerkMachine_Staminup
+  m_Name: PerkMachine_StaminUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

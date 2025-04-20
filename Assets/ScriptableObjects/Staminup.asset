@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Staminup
   m_EditorClassIdentifier: 
   perkName: Staminup
+  perkID: 1
   price: 2000
   description: base move speed + 7% & stamina x2
   statModifiers:

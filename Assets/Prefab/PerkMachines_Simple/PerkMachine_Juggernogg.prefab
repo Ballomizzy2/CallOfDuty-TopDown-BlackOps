@@ -128,7 +128,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2690432657049950529}
   - component: {fileID: 1182257733540489412}
-  - component: {fileID: 564044247404132971}
+  - component: {fileID: 8298612213332655675}
   m_Layer: 6
   m_Name: PerkMachine_Juggernogg
   m_TagString: Untagged
@@ -173,7 +173,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 4, z: 1}
   m_Center: {x: 0, y: 1.86, z: 0}
---- !u!114 &564044247404132971
+--- !u!114 &8298612213332655675
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1879126e4cb22534ba338eaac15a8570, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  perkSodaSO: {fileID: 11400000, guid: 0d7b89bf58a506746bd297af0dcf1317, type: 2}
+  heldPerkSodaSO: {fileID: 11400000, guid: 0d7b89bf58a506746bd297af0dcf1317, type: 2}
 --- !u!1 &6003985943012618021
 GameObject:
   m_ObjectHideFlags: 0

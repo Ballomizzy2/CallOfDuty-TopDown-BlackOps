@@ -1,7 +1,11 @@
 using UnityEngine;
 
-public class PerkSodaHolder : MonoBehaviour
+public class PerkSodaSOHolder : MonoBehaviour
 {
 
-    [SerializeField] PerkSodasSO perkSodaSO;
+    [SerializeField] private PerkSodasSO heldPerkSodaSO;
+    public PerkSodasSO GetHeldPerkSodaSO()
+    {
+        return heldPerkSodaSO;
+    }
 }

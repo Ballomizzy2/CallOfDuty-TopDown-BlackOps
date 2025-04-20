@@ -8,9 +8,10 @@ public class PerkSodasSO : ScriptableObject
 {
     //holds a perk with a potential list of modifiers;
     public string perkName;
+    public PerkID perkID;
     public int price;
     public string description;
 
-    public List<StatModifier> statModifiers;
+    public List<PerkSodaStatModifier> statModifiers;
 
 }

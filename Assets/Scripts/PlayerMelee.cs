@@ -5,7 +5,13 @@ using static MeleeHitBoxHandler;
 
 public class PlayerMelee : MonoBehaviour
 {
-    public event EventHandler OnMeleeAction;
+    public static PlayerMelee Instance { get; private set; }
+    public event EventHandler OnMeleeAction; 
+    public event EventHandler<RayCastHitInteract> OnRayCastHitInteract; //event for telling GM player interact
+    public class RayCastHitInteract :EventArgs
+    {
+        public GameObject lookAtInteract;
+    }
 
     [Header("Melee")]
     [SerializeField] private GameObject playerMeleeHitBox;
@@ -20,8 +26,11 @@ public class PlayerMelee : MonoBehaviour
     private float hurtInterval = 3;
 
     [Header("Interaction")]
+
+    
     [SerializeField] float interactRayCastDist = 4f;
-    private GameObject storedRayHit;
+    private GameObject storedRayHit =null;
+    //private GameObject storedShereHit; //for to hold object from sphere hitm when/if set up
 
     private void Start()
     {
@@ -30,6 +39,9 @@ public class PlayerMelee : MonoBehaviour
 
     private void Awake()
     {
+
+        Instance = this;
+
         //reference the new input system to get acess to 'performed.
         inputActions = new InputSystem_Actions();
         inputActions.Player.Enable();
@@ -66,6 +78,14 @@ public class PlayerMelee : MonoBehaviour
         //Player HOLD E
         //Debug.Log("MOZZERELLA!");
         Debug.Log(storedRayHit);
+        if (storedRayHit != null)
+        {
+            //package the object data and send to GM
+            Debug.Log("About to invoke with: " + storedRayHit.name);
+
+            OnRayCastHitInteract?.Invoke(this, new RayCastHitInteract { lookAtInteract = storedRayHit });
+
+        }
 
     }
 
@@ -86,6 +106,15 @@ public class PlayerMelee : MonoBehaviour
 
 
         //Debug.DrawRay(transform.position, transform.forward, Color.red);
+    }
+
+    public int GetPlayerHP()
+    {
+        return hp;
+    }
+    public void SetPlayerHP(int hp)
+    {
+        this.hp = hp;
     }
 
     public float sphereRadius = 1f;
