@@ -13,7 +13,7 @@ public class PlayerMelee : MonoBehaviour
     private bool meleeBoxIsActive = false;
     private InputSystem_Actions inputActions;
 
-    //health stuff- extract into appropriate place later
+
     [Header("Health")]
     [SerializeField] private int hp = 3;
     private bool isHurt = false;
@@ -21,6 +21,7 @@ public class PlayerMelee : MonoBehaviour
 
     [Header("Interaction")]
     [SerializeField] float interactRayCastDist = 4f;
+    private GameObject storedRayHit;
 
     private void Start()
     {
@@ -33,15 +34,80 @@ public class PlayerMelee : MonoBehaviour
         inputActions = new InputSystem_Actions();
         inputActions.Player.Enable();
 
-        //subscribing to event from input system
+        //subscribing to events from input system
         inputActions.Player.Melee.performed += Melee_performed;
+
+        inputActions.Player.Interact.performed += Interact_performed;
 
         //subscribing to an event from itself
         OnMeleeAction += PlayerMelee_OnMeleeAction;
 
         MeleeHitBoxHandler.Instance.OnMeleeContact += MeleeHitBoxHandler_OnMeleeContact;
+
+      
     }
 
+    private void Update()
+    {
+        //timer to disable the actived melee hitbox
+        MeleeHitBoxReset();
+
+        //hp regen timer
+        HurtCountDown();
+
+        //interactions w/ world objs
+        Interactions();
+    }
+
+
+    ///interact related methods
+    private void Interact_performed(InputAction.CallbackContext obj)
+    {
+        //Player HOLD E
+        //Debug.Log("MOZZERELLA!");
+        Debug.Log(storedRayHit);
+
+    }
+
+    private void Interactions()
+    {
+        //turn objects that hold an SO into interface?
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit raycastHit, interactRayCastDist))
+        {
+            //Debug.Log(raycastHit.transform);
+            storedRayHit = raycastHit.transform.gameObject;
+        }
+        else
+        {
+            //stored item= null
+            storedRayHit = null;
+        }
+        
+
+
+        //Debug.DrawRay(transform.position, transform.forward, Color.red);
+    }
+
+    public float sphereRadius = 1f;
+    public float castDistance = 5f;
+
+    //private void OnDrawGizmos()
+    //{
+    //    Vector3 origin = transform.position;
+    //    Vector3 direction = transform.forward;
+    //    Vector3 endPoint = origin + direction * castDistance;
+
+    //    Gizmos.color = Color.red;
+
+    //    // Draw start and end spheres
+    //    Gizmos.DrawWireSphere(origin, sphereRadius);
+    //    Gizmos.DrawWireSphere(endPoint, sphereRadius);
+
+    //    // Draw line between start and end
+    //    Gizmos.DrawLine(origin, endPoint);
+    //}
+
+    ///Melee related methods
     private void MeleeHitBoxHandler_OnMeleeContact(object sender, MeleeHitEventArgs e)
     {
         //unpack the game object ref and deal damage
@@ -71,18 +137,23 @@ public class PlayerMelee : MonoBehaviour
         OnMeleeAction?.Invoke(this,EventArgs.Empty);
         
     }
-    private void Update()
+
+    private void MeleeHitBoxReset()
     {
-        //timer to disable the actived melee hitbox
-        MeleeHitBoxReset();
+        if (meleeBoxIsActive)
+        {
+            meleeTimer -= Time.deltaTime;
+            if (meleeTimer < 0)
+            {
+                meleeBoxIsActive = false;
+                playerMeleeHitBox.SetActive(false);
+                meleeTimer = 0.1f;
 
-        //hp regen timer
-        HurtCountDown();
-
-        //interactions w/ world objs
-        Interactions();
+            }
+        }
     }
 
+    ///Health relaated methods
     public void isHurtOn()
     {
         hp--;
@@ -112,28 +183,6 @@ public class PlayerMelee : MonoBehaviour
         }
     }
 
-    private void MeleeHitBoxReset()
-    {
-        if (meleeBoxIsActive)
-        {
-            meleeTimer -= Time.deltaTime;
-            if (meleeTimer < 0)
-            {
-                meleeBoxIsActive = false;
-                playerMeleeHitBox.SetActive(false);
-                meleeTimer = 0.1f;
 
-            }
-        }
-    }
-    private void Interactions()
-    {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit raycastHit, interactRayCastDist))
-        {
-            Debug.Log(raycastHit.transform);
-        }
 
-        
-        //Debug.DrawRay(transform.position, transform.forward, Color.red);
-    }
 }

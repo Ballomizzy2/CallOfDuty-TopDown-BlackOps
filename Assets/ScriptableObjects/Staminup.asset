@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7bb8a0e3964a6fc49a92b0e6d8545229, type: 3}
-  m_Name: Juggernog
+  m_Name: Staminup
   m_EditorClassIdentifier: 
-  perkName: Juggernog
-  price: 2500
-  description: increase health
+  perkName: Staminup
+  price: 2000
+  description: base move speed + 7% & stamina x2
   statModifiers:
-  - statType: 0
+  - statType: 1
+    value: 0.7
+  - statType: 2
     value: 2

@@ -1,10 +1,16 @@
+using NUnit.Framework;
 using UnityEngine;
+using System.Collections.Generic;
 
-[CreateAssetMenu()]
+
+[CreateAssetMenu(fileName = "NewPerk", menuName = "Perk System/Perk")]
 public class PerkSodasSO : ScriptableObject
 {
+    //holds a perk with a potential list of modifiers;
     public string perkName;
     public int price;
-    public float modifier;
+    public string description;
+
+    public List<StatModifier> statModifiers;
 
 }
