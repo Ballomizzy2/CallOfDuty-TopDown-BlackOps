@@ -7,6 +7,7 @@ public enum ValueType
     Double,     // Higher-precision decimals (rare in Unity)
     Bool,       // True/False values (e.g., toggle abilities)
     String,     // Text values (e.g., descriptions, names)
+    Percent,
 
 }
 

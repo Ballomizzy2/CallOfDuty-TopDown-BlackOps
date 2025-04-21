@@ -18,8 +18,8 @@ MonoBehaviour:
   description: base move speed + 7% & stamina x2
   statModifiers:
   - statType: 1
-    valType: 1
-    value: 0.7
+    valType: 5
+    value: 0.07
   - statType: 2
     valType: 0
     value: 2
