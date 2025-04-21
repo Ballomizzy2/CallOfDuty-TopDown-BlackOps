@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 1182257733540489412}
   - component: {fileID: 8298612213332655675}
   m_Layer: 6
-  m_Name: PerkMachine_Juggernogg
+  m_Name: PerkMachine_Juggernog_child
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -196,7 +196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6621679518859221097}
   m_Layer: 6
-  m_Name: PerkMachine_Juggernogg
+  m_Name: PerkMachine_Juggernog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -271,7 +271,7 @@ GameObject:
   - component: {fileID: 470290632020972536}
   - component: {fileID: 7118710099118172333}
   m_Layer: 6
-  m_Name: PerkMachine_Staminup
+  m_Name: PerkMachine_StaminUp_child
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
