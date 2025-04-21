@@ -90,7 +90,14 @@ public class GameManager : MonoBehaviour
                 PlayerMelee.Instance.SetPlayerHP((int)(perkSoda.statModifiers[0].value += PlayerMelee.Instance.GetPlayerHP()));
                 break;
             case PerkID.StaminUp:
+                //PlayerMovement: speed +0.7%, stamina x2
+                float tempSpeed= PlayerMovement.Instance.speed;
+                tempSpeed += (float) (perkSoda.statModifiers[0].value * tempSpeed);
+                PlayerMovement.Instance.speed = tempSpeed;
 
+                float tempStamina = PlayerMovement.Instance.maxStamina;
+                tempStamina = (float)(perkSoda.statModifiers[1].value * tempStamina);
+                PlayerMovement.Instance.maxStamina = tempStamina;
                 break;
             case PerkID.DoubleTap:
                 break;
