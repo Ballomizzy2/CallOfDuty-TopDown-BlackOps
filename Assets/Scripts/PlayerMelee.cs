@@ -81,7 +81,7 @@ public class PlayerMelee : MonoBehaviour
         if (storedRayHit != null)
         {
             //package the object data and send to GM
-            Debug.Log("About to invoke with: " + storedRayHit.name);
+       
 
             OnRayCastHitInteract?.Invoke(this, new RayCastHitInteract { lookAtInteract = storedRayHit });
 

@@ -59,7 +59,12 @@ public class GameManager : MonoBehaviour
             playerPerkList.Add(tempPerkSO);
             //call method to do handle stats...
             HandlePerkSodaModifierAllocation(tempPerkSO);
-            //Debug.Log("should work?!");
+            Debug.Log($"-{playerScore}, you got {tempPerkSO.perkID}");
+            for (int i = 0; i < tempPerkSO.statModifiers.Count; i++)
+            {
+                Debug.Log($"stat affected:{tempPerkSO.statModifiers[i].statType}\n" +
+                    $" +{tempPerkSO.statModifiers[i].valType} {tempPerkSO.statModifiers[i].value} ");
+            }
         }
         else
         {
@@ -87,7 +92,7 @@ public class GameManager : MonoBehaviour
         switch (perkSoda.perkID)
         {
             case PerkID.Juggernog:
-                PlayerMelee.Instance.SetPlayerHP((int)(perkSoda.statModifiers[0].value += PlayerMelee.Instance.GetPlayerHP()));
+                PlayerMelee.Instance.SetPlayerHP((int)(perkSoda.statModifiers[0].value + PlayerMelee.Instance.GetPlayerHP()));
                 break;
             case PerkID.StaminUp:
                 //PlayerMovement: speed +0.7%, stamina x2
