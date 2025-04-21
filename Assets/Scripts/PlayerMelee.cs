@@ -155,7 +155,7 @@ public class PlayerMelee : MonoBehaviour
 
     private void PlayerMelee_OnMeleeAction(object sender, EventArgs e)
     {
-        //Debug.Log("swish!");
+        Debug.Log("swish!");
         playerMeleeHitBox.SetActive(true);
         meleeBoxIsActive=true;
     }
