@@ -3,15 +3,20 @@ using System.Collections;
 
 public class Gun : MonoBehaviour
 {
-    public GunData gunData; // Drag the ScriptableObject into this field
+    public GunData gunData; // Assign in Inspector
     [SerializeField] private Transform gunMuzzle;
+    [SerializeField] private GameObject hitEffectPrefab;
 
     private int currentAmmo;
     private int reserveAmmo;
+    public int GetCurrentAmmo() => currentAmmo;
+    public int GetReserveAmmo() => reserveAmmo;
     private float nextFireTime = 0f;
     private bool isReloading = false;
-
     private AudioSource audioSource;
+
+    public enum WeaponSlot { Primary, Secondary }
+    public WeaponSlot slot = WeaponSlot.Primary;
 
     private void Start()
     {
@@ -24,7 +29,6 @@ public class Gun : MonoBehaviour
     {
         if (isReloading) return;
 
-        // ?? Full-Auto
         if (gunData.isAutomatic)
         {
             if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
@@ -33,7 +37,6 @@ public class Gun : MonoBehaviour
                 else StartCoroutine(Reload());
             }
         }
-        // ?? Burst Fire
         else if (gunData.isBurst)
         {
             if (Input.GetMouseButtonDown(0) && Time.time >= nextFireTime)
@@ -42,8 +45,7 @@ public class Gun : MonoBehaviour
                 else StartCoroutine(Reload());
             }
         }
-        // ?? Semi-Auto
-        else
+        else // Semi-auto
         {
             if (Input.GetMouseButtonDown(0) && Time.time >= nextFireTime)
             {
@@ -52,7 +54,6 @@ public class Gun : MonoBehaviour
             }
         }
 
-        // ?? Manual Reload
         if (Input.GetKeyDown(KeyCode.R) && currentAmmo < gunData.magazineSize && reserveAmmo > 0)
         {
             StartCoroutine(Reload());
@@ -66,7 +67,11 @@ public class Gun : MonoBehaviour
 
         Debug.Log("Fired " + gunData.gunName + " | Ammo: " + currentAmmo + "/" + reserveAmmo);
 
-        if (gunData.bulletPrefab)
+        if (gunData.useRaycast)
+        {
+            RaycastShoot();
+        }
+        else if (gunData.bulletPrefab)
         {
             GameObject bullet = Instantiate(gunData.bulletPrefab, gunMuzzle.position, gunMuzzle.rotation);
             Bullet bulletScript = bullet.GetComponent<Bullet>();
@@ -80,13 +85,39 @@ public class Gun : MonoBehaviour
         {
             AudioSource tempAudio = gameObject.AddComponent<AudioSource>();
             tempAudio.clip = gunData.shootSound;
-            tempAudio.volume = 0.7f;
-            tempAudio.pitch = Random.Range(0.95f, 1.05f); // optional: slight variation
-            tempAudio.spatialBlend = 0f; // 0 = 2D, 1 = 3D
+            tempAudio.volume = 1f;
+            tempAudio.pitch = Random.Range(0.95f, 1.05f);
+            tempAudio.spatialBlend = 0f;
             tempAudio.Play();
             Destroy(tempAudio, gunData.shootSound.length);
         }
     }
+
+    private void RaycastShoot()
+    {
+        Ray ray = new Ray(gunMuzzle.position, gunMuzzle.forward);
+
+        // Draw a visible line in the Scene view
+        Debug.DrawRay(ray.origin, ray.direction * gunData.raycastRange, Color.red, 0.5f);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, gunData.raycastRange))
+        {
+            Debug.Log("Hit: " + hit.collider.name);
+
+            if (hit.collider.CompareTag("Zombie"))
+            {
+                Destroy(hit.collider.gameObject); // Replace with proper damage system later
+            }
+
+            // Optional: Visual impact point
+            if (hitEffectPrefab)
+            {
+                Instantiate(hitEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
+            }
+        }
+    }
+
+
 
     private IEnumerator Reload()
     {
@@ -110,7 +141,7 @@ public class Gun : MonoBehaviour
 
     private IEnumerator BurstFire()
     {
-        nextFireTime = Time.time + gunData.fireDelay; // Prevents starting a new burst too soon
+        nextFireTime = Time.time + gunData.fireDelay;
 
         for (int i = 0; i < gunData.burstCount; i++)
         {
@@ -126,4 +157,12 @@ public class Gun : MonoBehaviour
             }
         }
     }
+
+    // For weapon switching
+    public void SetActive(bool isActive)
+    {
+        gameObject.SetActive(isActive);
+    }
+
+    public bool IsReloading => isReloading;
 }

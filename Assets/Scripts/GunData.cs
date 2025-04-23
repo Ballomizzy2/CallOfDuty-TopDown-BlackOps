@@ -31,4 +31,8 @@ public class GunData : ScriptableObject
     public bool isBurst = false;
     public int burstCount = 3;         // How many bullets per burst
     public float burstDelay = 0.1f;    // Delay between shots in a burst
+
+    [Header("Fire Type")]
+    public bool useRaycast = false;
+    public float raycastRange = 100f;
 }
