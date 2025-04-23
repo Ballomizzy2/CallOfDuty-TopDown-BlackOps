@@ -25,10 +25,12 @@ public class PlayerMovement : MonoBehaviour
     
     private Vector2 move;
     private bool isSprinting = false;
+    private CharacterController controller;
 
     private void Awake()
     {
         currentStamina = maxStamina;
+        controller = GetComponent<CharacterController>();
     }
 
     //This function gets the new input system settings and stores them in move
@@ -69,9 +71,11 @@ public class PlayerMovement : MonoBehaviour
         //if isSprinting == true: currentSpeed = sprintMultiplier * speed, else: currentSpeed = speed
         currentSpeed = isSprinting ? sprintMultiplier * speed : speed;
         
-        Vector3 movement = new Vector3(move.x, 0, move.y);
         
-        transform.Translate(movement * (currentSpeed * Time.deltaTime), Space.World);
+        Vector3 input = new Vector3(move.x, 0, move.y).normalized;
+        Vector3 movement = input * (currentSpeed * Time.deltaTime);
+        
+        controller.Move(movement);
     }
 
     //function that controls our player's aim. Makes player rotate to face the mouse.
