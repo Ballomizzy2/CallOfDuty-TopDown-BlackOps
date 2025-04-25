@@ -124,9 +124,15 @@ public class Gun : MonoBehaviour
         isReloading = true;
         Debug.Log("Reloading...");
 
-        if (gunData.reloadSound && audioSource)
+        if (gunData.reloadSound)
         {
-            audioSource.PlayOneShot(gunData.reloadSound);
+            AudioSource tempAudio = gameObject.AddComponent<AudioSource>();
+            tempAudio.clip = gunData.reloadSound;
+            tempAudio.volume = 1f;
+            tempAudio.pitch = Random.Range(0.95f, 1.05f);
+            tempAudio.spatialBlend = 0f;
+            tempAudio.Play();
+            Destroy(tempAudio, gunData.reloadSound.length);
         }
 
         yield return new WaitForSeconds(gunData.reloadTime);

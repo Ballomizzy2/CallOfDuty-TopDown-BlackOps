@@ -21,8 +21,8 @@ MonoBehaviour:
   damage: 21
   bulletPrefab: {fileID: 323053151204081425, guid: ff2c32612bed55541bbaf1b086a5e24d, type: 3}
   muzzleFlashPrefab: {fileID: 0}
-  shootSound: {fileID: 8300000, guid: 809f97a8f08547c41bd450c4e361143a, type: 3}
-  reloadSound: {fileID: 8300000, guid: 9eb1846f7f3b0144386c0ffa3ed16d13, type: 3}
+  shootSound: {fileID: 8300000, guid: f4262a56eb2a65c45a655f5577ec0360, type: 3}
+  reloadSound: {fileID: 8300000, guid: 6036ee5065d0df8429d355215ac228e7, type: 3}
   isAutomatic: 0
   isBurst: 0
   burstCount: 3
