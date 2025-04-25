@@ -24,3 +24,8 @@ MonoBehaviour:
   shootSound: {fileID: 8300000, guid: ab20d832b0d693046a8abd572682c8c6, type: 3}
   reloadSound: {fileID: 8300000, guid: 987c81428088f3c4cb0b54bb61c9d4e0, type: 3}
   isAutomatic: 1
+  isBurst: 0
+  burstCount: 3
+  burstDelay: 0.1
+  useRaycast: 1
+  raycastRange: 100

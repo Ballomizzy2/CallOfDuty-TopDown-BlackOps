@@ -27,3 +27,5 @@ MonoBehaviour:
   isBurst: 1
   burstCount: 3
   burstDelay: 0.07
+  useRaycast: 1
+  raycastRange: 100

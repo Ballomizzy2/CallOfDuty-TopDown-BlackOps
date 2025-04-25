@@ -23,3 +23,9 @@ MonoBehaviour:
   muzzleFlashPrefab: {fileID: 0}
   shootSound: {fileID: 8300000, guid: 1dbeddbe8846a2045b8cda0faa7821b5, type: 3}
   reloadSound: {fileID: 8300000, guid: a420fcd7ccc49e340bdb70731c02f2dd, type: 3}
+  isAutomatic: 0
+  isBurst: 0
+  burstCount: 3
+  burstDelay: 0.1
+  useRaycast: 1
+  raycastRange: 100
