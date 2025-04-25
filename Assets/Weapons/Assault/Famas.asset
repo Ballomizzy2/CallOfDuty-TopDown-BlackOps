@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f542cd5718dcafc4691dd4028ec0110b, type: 3}
+  m_Name: Famas
+  m_EditorClassIdentifier: 
+  gunName: Famas
+  magazineSize: 30
+  reserveAmmo: 150
+  reloadTime: 2.6
+  fireDelay: 0.06
+  bulletSpeed: 90
+  damage: 100
+  bulletPrefab: {fileID: 323053151204081425, guid: ff2c32612bed55541bbaf1b086a5e24d, type: 3}
+  muzzleFlashPrefab: {fileID: 0}
+  shootSound: {fileID: 8300000, guid: 1df8fa8561c2fe54eb440aff0fa645cd, type: 3}
+  reloadSound: {fileID: 8300000, guid: e5ccb13b2b047c743bc9e0a955f260c2, type: 3}
+  isAutomatic: 1
