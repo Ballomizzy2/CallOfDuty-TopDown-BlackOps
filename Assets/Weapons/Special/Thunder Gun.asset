@@ -19,7 +19,13 @@ MonoBehaviour:
   fireDelay: 0.38
   bulletSpeed: 55
   damage: 2147483647
-  bulletPrefab: {fileID: 323053151204081425, guid: ff2c32612bed55541bbaf1b086a5e24d, type: 3}
+  bulletPrefab: {fileID: 323053151204081425, guid: 34ff0326bc0e0634990ec62cef286d8b, type: 3}
   muzzleFlashPrefab: {fileID: 0}
   shootSound: {fileID: 8300000, guid: 9926826883f20924cac7d3cb945633f5, type: 3}
   reloadSound: {fileID: 8300000, guid: 9c672165b7c8aae40a1074393d44bb68, type: 3}
+  isAutomatic: 0
+  isBurst: 0
+  burstCount: 3
+  burstDelay: 0.1
+  useRaycast: 0
+  raycastRange: 100
