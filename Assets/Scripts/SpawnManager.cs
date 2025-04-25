@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
 
 public class SpawnManager : MonoBehaviour
@@ -10,30 +10,52 @@ public class SpawnManager : MonoBehaviour
         public int count;
     }
 
-    public List<SpawnWave> waves;
-    public float spawnRadius = 10f;
-    public Transform player;
+    [Header("Wave settings")]
+    public List<SpawnWave> waves = new List<SpawnWave>();
 
+    [Header("References")]
+    public Transform player;
+    public float heightOffset = 0.25f;
+
+    
+    private Transform[] spawnPoints;
+
+    #region ──  Initialisation ────────────────────────────────────────────────────
+    private void Awake()
+    {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("SpawnPoint");
+        spawnPoints = new Transform[objs.Length];
+        for (int i = 0; i < objs.Length; i++)
+            spawnPoints[i] = objs[i].transform;
+
+        if (spawnPoints.Length == 0)
+            Debug.LogWarning("[SpawnManager] No objects tagged “SpawnPoint” found in the scene.");
+    }
+    #endregion
+
+    #region ──  Public API ───────────────────────────────────────────────────────
     public void SpawningWave()
     {
-        foreach (var wave in waves)
+        if (spawnPoints.Length == 0) return;   // safe-guard
+
+        foreach (SpawnWave wave in waves)
         {
             for (int i = 0; i < wave.count; i++)
             {
-                Vector3 spawnPos = GetRandomNavMeshPoint(spawnRadius);
-                GameObject enemy = Instantiate(wave.enemyType, spawnPos, Quaternion.identity);
+                Transform point = spawnPoints[Random.Range(0, spawnPoints.Length)];
+
+                // If the SpawnPoint is on the NavMesh this is usually enough,
+                // otherwise you can still sample the NavMesh around “point.position”.
+                Vector3 spawnPos = point.position + Vector3.up * heightOffset;
+
+                GameObject enemy = Instantiate(
+                    wave.enemyType,
+                    spawnPos,
+                    point.rotation);          // inherit any desired facing
+
                 enemy.GetComponent<EnemyController>().target = player;
             }
         }
     }
-
-    private Vector3 GetRandomNavMeshPoint(float radius)
-    {
-        Vector3 randomDirection = Random.insideUnitSphere * radius;
-        randomDirection += transform.position;
-
-        if (UnityEngine.AI.NavMesh.SamplePosition(randomDirection, out var hit, radius, 1))
-            return hit.position;
-        return transform.position;
-    }
+    #endregion
 }
