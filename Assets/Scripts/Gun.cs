@@ -3,31 +3,36 @@ using System.Collections;
 
 public class Gun : MonoBehaviour
 {
-    public GunData gunData; // Assign in Inspector
+    public GunData gunData; // Drag the ScriptableObject into this field
     [SerializeField] private Transform gunMuzzle;
-    [SerializeField] private GameObject hitEffectPrefab;
 
     private int currentAmmo;
     private int reserveAmmo;
-    public int GetCurrentAmmo() => currentAmmo;
-    public int GetReserveAmmo() => reserveAmmo;
     private float nextFireTime = 0f;
     private bool isReloading = false;
     private AudioSource audioSource;
-
-    public enum WeaponSlot { Primary, Secondary }
-    public WeaponSlot slot = WeaponSlot.Primary;
+    private bool isAiming = false;
+    private PlayerMovement playerMovement;
+    private float originalMoveSpeed;
+    private bool adsSlowed = false;
 
     private void Start()
     {
         currentAmmo = gunData.magazineSize;
         reserveAmmo = gunData.reserveAmmo;
         audioSource = GetComponent<AudioSource>();
+        playerMovement = FindObjectOfType<PlayerMovement>();
+        originalMoveSpeed = playerMovement.speed;
     }
 
     void Update()
     {
+        isAiming = Input.GetMouseButton(1); // Right-click to aim
+
+        HandleADSMovement();
+
         if (isReloading) return;
+        isAiming = Input.GetMouseButton(1); // Right-click = Aim Down Sights
 
         if (gunData.isAutomatic)
         {
@@ -69,7 +74,10 @@ public class Gun : MonoBehaviour
 
         if (gunData.useRaycast)
         {
-            RaycastShoot();
+            if (gunData.isShotgun)
+                ShotgunRaycastShoot();
+            else
+                RaycastShoot();
         }
         else if (gunData.bulletPrefab)
         {
@@ -92,32 +100,6 @@ public class Gun : MonoBehaviour
             Destroy(tempAudio, gunData.shootSound.length);
         }
     }
-
-    private void RaycastShoot()
-    {
-        Ray ray = new Ray(gunMuzzle.position, gunMuzzle.forward);
-
-        // Draw a visible line in the Scene view
-        Debug.DrawRay(ray.origin, ray.direction * gunData.raycastRange, Color.red, 0.5f);
-
-        if (Physics.Raycast(ray, out RaycastHit hit, gunData.raycastRange))
-        {
-            Debug.Log("Hit: " + hit.collider.name);
-
-            if (hit.collider.CompareTag("Zombie"))
-            {
-                Destroy(hit.collider.gameObject); // Replace with proper damage system later
-            }
-
-            // Optional: Visual impact point
-            if (hitEffectPrefab)
-            {
-                Instantiate(hitEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
-            }
-        }
-    }
-
-
 
     private IEnumerator Reload()
     {
@@ -164,11 +146,99 @@ public class Gun : MonoBehaviour
         }
     }
 
-    // For weapon switching
+    private void RaycastShoot()
+    {
+        Vector3 shootDirection = gunMuzzle.forward;
+
+        float currentSpread = isAiming ? gunData.adsSpreadAngle : gunData.hipfireSpreadAngle;
+
+        if (currentSpread > 0f)
+        {
+            shootDirection = ApplySpread(shootDirection, currentSpread);
+        }
+
+        Ray ray = new Ray(gunMuzzle.position, shootDirection);
+        Debug.DrawRay(ray.origin, ray.direction * gunData.raycastRange, Color.red, 0.5f);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, gunData.raycastRange))
+        {
+            if (hit.collider.CompareTag("Zombie"))
+            {
+                Destroy(hit.collider.gameObject);
+            }
+        }
+    }
+
+    private void ShotgunRaycastShoot()
+    {
+        for (int i = 0; i < gunData.pelletsPerShot; i++)
+        {
+            Vector3 pelletDirection = gunMuzzle.forward;
+
+            float currentSpread = isAiming ? gunData.adsSpreadAngle : gunData.hipfireSpreadAngle;
+
+            if (currentSpread > 0f)
+            {
+                pelletDirection = ApplySpread(pelletDirection, currentSpread);
+            }
+
+            Ray ray = new Ray(gunMuzzle.position, pelletDirection);
+            Debug.DrawRay(ray.origin, ray.direction * gunData.raycastRange, Color.yellow, 0.2f);
+
+            if (Physics.Raycast(ray, out RaycastHit hit, gunData.raycastRange))
+            {
+                if (hit.collider.CompareTag("Zombie"))
+                {
+                    Destroy(hit.collider.gameObject);
+                }
+            }
+        }
+    }
+
+    private Vector3 ApplySpread(Vector3 direction, float spreadAngle)
+    {
+        float spreadRadius = Mathf.Tan(spreadAngle * Mathf.Deg2Rad / 2f);
+
+        // Only randomize along the X-axis (left-right)
+        float randomX = Random.Range(-spreadRadius, spreadRadius);
+
+        Vector3 spreadDirection = direction + (gunMuzzle.right * randomX);
+        return spreadDirection.normalized;
+    }
+
+
+    // Weapon Manager access
     public void SetActive(bool isActive)
     {
         gameObject.SetActive(isActive);
     }
 
     public bool IsReloading => isReloading;
+
+    public int GetCurrentAmmo() => currentAmmo;
+    public int GetReserveAmmo() => reserveAmmo;
+
+    public void ReinitializeWeapon()
+    {
+        currentAmmo = gunData.magazineSize;
+        reserveAmmo = gunData.reserveAmmo;
+    }
+
+    private void HandleADSMovement()
+    {
+        if (playerMovement == null) return;
+
+        if (isAiming && !adsSlowed)
+        {
+            playerMovement.speed = originalMoveSpeed * gunData.adsSpeedMultiplier;
+            adsSlowed = true;
+        }
+        else if (!isAiming && adsSlowed)
+        {
+            playerMovement.speed = originalMoveSpeed;
+            adsSlowed = false;
+        }
+    }
+
+
 }

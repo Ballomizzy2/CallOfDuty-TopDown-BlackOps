@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1490455048565427274}
+  - {fileID: 4533096888161422625}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1396052392252646596
@@ -50,7 +50,8 @@ MonoBehaviour:
   damageMask:
     serializedVersion: 2
     m_Bits: 0
-  explosionEffect: {fileID: 0}
+  explosionEffect: {fileID: 7757430206321162395, guid: b994c94fbf9b5d547b1bda86f029f1ec, type: 3}
+  explosionSound: {fileID: 8300000, guid: ff725e38ecb838d4b8b8bb1d8d3acd4d, type: 3}
 --- !u!1001 &3305952432041511202
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -108,8 +109,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b994c94fbf9b5d547b1bda86f029f1ec, type: 3}
---- !u!4 &1490455048565427274 stripped
+--- !u!4 &4533096888161422625 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 4129293712574530920, guid: b994c94fbf9b5d547b1bda86f029f1ec, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1371858057698870275, guid: b994c94fbf9b5d547b1bda86f029f1ec, type: 3}
   m_PrefabInstance: {fileID: 3305952432041511202}
   m_PrefabAsset: {fileID: 0}

@@ -24,15 +24,29 @@ public class GunData : ScriptableObject
     public AudioClip shootSound;
     public AudioClip reloadSound;
 
-    [Header("Fire Mode")]
+    [Header("Fire Mode Settings")]
     public bool isAutomatic = false;
-
-    [Header("Burst Settings")]
     public bool isBurst = false;
     public int burstCount = 3;         // How many bullets per burst
     public float burstDelay = 0.1f;    // Delay between shots in a burst
 
-    [Header("Fire Type")]
+    [Header("Firing Method")]
     public bool useRaycast = false;
     public float raycastRange = 100f;
+
+    [Header("Accuracy Settings")]
+    [Tooltip("Spread angle when hipfiring (in degrees).")]
+    public float hipfireSpreadAngle = 5f;
+
+    [Tooltip("Spread angle when aiming down sights (ADS) (in degrees).")]
+    public float adsSpreadAngle = 1f;
+    public float adsSpeedMultiplier = 0.5f; // How much the player slows when aiming
+
+
+    [Header("Shotgun Settings")]
+    public bool isShotgun = false;
+    public int pelletsPerShot = 8;
+
+    [Header("UI Settings")]
+    public Sprite weaponIcon;
 }
