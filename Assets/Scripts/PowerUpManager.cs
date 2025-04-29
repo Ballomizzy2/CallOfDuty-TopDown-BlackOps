@@ -4,6 +4,7 @@ using UnityEngine;
 public class PowerUpManager : MonoBehaviour
 {
     public List<GameObject> powerUpPrefabs;
+    public GameObject playerPrefab;
     
     public static PowerUpManager Instance;
 
@@ -17,6 +18,7 @@ public class PowerUpManager : MonoBehaviour
 
     public void TryDropPowerUp(Vector3 position)
     {
+        //CHANGE THIS AFTER TESTING TO 0.03f
         float dropChance = 1f;
         float randomNumber = Random.value;
         //Debug.Log($"[PowerUpManager] Will try to spawn {powerUpPrefabs.Count} prefabs");
@@ -27,7 +29,9 @@ public class PowerUpManager : MonoBehaviour
             int index = Random.Range(0, powerUpPrefabs.Count);
             if (index >= 0 && index < powerUpPrefabs.Count) 
             {
-                Instantiate(powerUpPrefabs[index], position, Quaternion.identity);
+                GameObject powerup = Instantiate(powerUpPrefabs[index], position, Quaternion.identity);
+                PowerUp powerupScript = powerup.GetComponent<PowerUp>();
+                powerupScript.playerPrefab = playerPrefab;
             } 
             else 
             {
