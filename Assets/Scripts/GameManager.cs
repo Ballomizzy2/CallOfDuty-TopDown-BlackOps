@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     public int playerScore;
 
     [SerializeField] List<PerkSodasSO> playerPerkList;
+    private const int PERK_LAYER = 6;
+    private const int WALLBUY_LAYER = 7;
 
     private void Awake()
     {
@@ -32,12 +34,12 @@ public class GameManager : MonoBehaviour
     public void HandleLookAtInteractType(GameObject item)
     {
         //this method checks type of object by layer then calls respective purchaseHandler
-        if (item.layer == 6)
+        if (item.layer == PERK_LAYER)
         {
             //perks
             HandlePerkPurchase(item);
         }
-        else if (item.layer == 7)
+        else if (item.layer == WALLBUY_LAYER)
         {
             //wallbuy
         }
