@@ -7,16 +7,8 @@ public class PlayerMelee : MonoBehaviour
 {
     public static PlayerMelee Instance { get; private set; }
     public event EventHandler OnMeleeAction; 
-    public event EventHandler<RayCastHitInteract> OnRayCastHitInteract; //event for telling GM player interact
-    public event EventHandler<OverLapHitInteract> OnOverLapHitInteract;
-    public class RayCastHitInteract :EventArgs
-    {
-        public GameObject lookAtInteract;
-    }
-    public class OverLapHitInteract : EventArgs
-    {
-        public GameObject overLapHit;
-    }
+
+
 
     [Header("Melee")]
     [SerializeField] private GameObject playerMeleeHitBox;
@@ -30,12 +22,7 @@ public class PlayerMelee : MonoBehaviour
     private bool isHurt = false;
     private float hurtInterval = 3;
 
-    [Header("Interaction")]
-
-    
-    [SerializeField] float interactRayCastDist = 4f;
-    private GameObject storedRayHit =null;
-    private GameObject storedShereHit; //for to hold object from sphere hitm when/if set up
+   
 
     private void Start()
     {
@@ -45,8 +32,8 @@ public class PlayerMelee : MonoBehaviour
     private void Awake()
     {
 
-        Instance = this;
 
+        Instance = this;
         //reference the new input system to get acess to 'performed.
         inputActions = new InputSystem_Actions();
         inputActions.Player.Enable();
@@ -54,7 +41,7 @@ public class PlayerMelee : MonoBehaviour
         //subscribing to events from input system
         inputActions.Player.Melee.performed += Melee_performed;
 
-        inputActions.Player.Interact.performed += Interact_performed;
+        
 
         //subscribing to an event from itself
         OnMeleeAction += PlayerMelee_OnMeleeAction;
@@ -72,62 +59,10 @@ public class PlayerMelee : MonoBehaviour
         //hp regen timer
         HurtCountDown();
 
-        //interactions w/ world objs
-        Interactions();
-    }
-
-
-    ///interact related methods
-    private void Interact_performed(InputAction.CallbackContext obj)
-    {
-        //Player HOLD E
-        //Debug.Log("MOZZERELLA!");
-        Debug.Log("stored ray hit: "+ storedRayHit);
-        Debug.Log("stored sphere hit: " + storedShereHit);
-        if (storedRayHit != null)
-        {
-            //package the object data and send to GM
-       
-
-            OnRayCastHitInteract?.Invoke(this, new RayCastHitInteract { lookAtInteract = storedRayHit });
-
-        }
-        else if(storedShereHit != null)
-        {
-            OnOverLapHitInteract?.Invoke(this,new OverLapHitInteract { overLapHit = storedShereHit });
-        }
 
     }
 
-    private void Interactions()
-    {
-        //turn objects that hold an SO into interface?
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit raycastHit, interactRayCastDist))
-        {
-            //Debug.Log(raycastHit.transform);
-            storedRayHit = raycastHit.transform.gameObject;
-            storedShereHit = null;
-        }
-        else
-        {
-            Collider[] sphereHits = Physics.OverlapSphere(transform.position, sphereRadius);
 
-            storedRayHit = null; // clear ray so you don't accidentally double interact
-
-            foreach (var hit in sphereHits)
-            {
-                if (hit != null) // optional: filter by tag/layer here
-                {
-                    storedShereHit = hit.gameObject;
-                    break;
-                }
-            }
-        }
-
-
-
-        //Debug.DrawRay(transform.position, transform.forward, Color.red);
-    }
 
     public int GetPlayerHP()
     {
@@ -138,8 +73,7 @@ public class PlayerMelee : MonoBehaviour
         this.hp = hp;
     }
 
-    public float sphereRadius = 1f;
-    public float castDistance = 5f;
+
 
     //private void OnDrawGizmos()
     //{

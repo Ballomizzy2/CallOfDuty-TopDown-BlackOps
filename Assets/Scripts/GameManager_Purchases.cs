@@ -31,11 +31,11 @@ public class GameManager_Purchases : MonoBehaviour
     private void Start()
     {
         //listen to the interact lookat event
-        PlayerMelee.Instance.OnRayCastHitInteract += PlayerMelee_OnRayCastHitInteract;
-        PlayerMelee.Instance.OnOverLapHitInteract += PlayerMelee_OnOverLapHitInteract;
+        PlayerController.Instance.OnRayCastHitInteract += PlayerMelee_OnRayCastHitInteract;
+        PlayerController.Instance.OnOverLapHitInteract += PlayerMelee_OnOverLapHitInteract;
     }
 
-    private void PlayerMelee_OnOverLapHitInteract(object sender, PlayerMelee.OverLapHitInteract e)
+    private void PlayerMelee_OnOverLapHitInteract(object sender, PlayerController.OverLapHitInteract e)
     {
         //unlike ray case, go stright to filter bc i didnt think of it then....
         switch (e.overLapHit.layer)
@@ -49,7 +49,7 @@ public class GameManager_Purchases : MonoBehaviour
         }
     }
 
-    private void PlayerMelee_OnRayCastHitInteract(object sender, PlayerMelee.RayCastHitInteract e)
+    private void PlayerMelee_OnRayCastHitInteract(object sender, PlayerController.RayCastHitInteract e)
     {
         switch (e.lookAtInteract.layer)
         {
