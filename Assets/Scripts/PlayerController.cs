@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerMelee Instance { get; private set; }
     [Header("Points")]
     public int currentPoints = 1000;
 
