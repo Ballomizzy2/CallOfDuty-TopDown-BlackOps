@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem.LowLevel;
 //handles Game logic
 
-public class GameManager : MonoBehaviour
+public class GameManager_Purchases : MonoBehaviour
 {
+
     //player inv: perks, load out
     //map items: doors, wall guns, box, perks
     //logic for buying stuff?
@@ -20,6 +21,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] List<PerkSodasSO> playerPerkList;
     private const int PERK_LAYER = 6;
     private const int WALLBUY_LAYER = 7;
+    private const int DOOR_LAYER = 8;
+    private const int BOX_LAYER = 9;
 
     private void Awake()
     {
@@ -29,26 +32,45 @@ public class GameManager : MonoBehaviour
     {
         //listen to the interact lookat event
         PlayerMelee.Instance.OnRayCastHitInteract += PlayerMelee_OnRayCastHitInteract;
+        PlayerMelee.Instance.OnOverLapHitInteract += PlayerMelee_OnOverLapHitInteract;
     }
 
-    public void HandleLookAtInteractType(GameObject item)
+    private void PlayerMelee_OnOverLapHitInteract(object sender, PlayerMelee.OverLapHitInteract e)
     {
-        //this method checks type of object by layer then calls respective purchaseHandler
-        if (item.layer == PERK_LAYER)
+        //unlike ray case, go stright to filter bc i didnt think of it then....
+        switch (e.overLapHit.layer)
         {
-            //perks
-            HandlePerkPurchase(item);
-        }
-        else if (item.layer == WALLBUY_LAYER)
-        {
-            //wallbuy
-        }
+            case DOOR_LAYER:
+                HandleDoorPurchase(e.overLapHit);
+                break;
+            case BOX_LAYER:
+                break;
 
+        }
     }
 
     private void PlayerMelee_OnRayCastHitInteract(object sender, PlayerMelee.RayCastHitInteract e)
     {
-        HandleLookAtInteractType(e.lookAtInteract);
+        switch (e.lookAtInteract.layer)
+        {
+            case PERK_LAYER:
+                HandlePerkPurchase(e.lookAtInteract); //pass the game object
+                break;
+            case WALLBUY_LAYER:
+                //wall buy
+                break;
+        }
+    }
+    private void HandleDoorPurchase(GameObject item)
+    {
+        
+        int tempPrice= item.GetComponent<DoorsHandler>().GetPrice();
+        if(playerScore>=tempPrice)
+        {
+            playerScore-=tempPrice;
+            
+        }
+        
     }
 
     private void HandlePerkPurchase(GameObject item)
@@ -98,8 +120,8 @@ public class GameManager : MonoBehaviour
                 break;
             case PerkID.StaminUp:
                 //PlayerMovement: speed +0.7%, stamina x2
-                float tempSpeed= PlayerMovement.Instance.speed;
-                tempSpeed += (float) (perkSoda.statModifiers[0].value * tempSpeed);
+                float tempSpeed = PlayerMovement.Instance.speed;
+                tempSpeed += (float)(perkSoda.statModifiers[0].value * tempSpeed);
                 PlayerMovement.Instance.speed = tempSpeed;
 
                 float tempStamina = PlayerMovement.Instance.maxStamina;

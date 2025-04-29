@@ -8,9 +8,14 @@ public class PlayerMelee : MonoBehaviour
     public static PlayerMelee Instance { get; private set; }
     public event EventHandler OnMeleeAction; 
     public event EventHandler<RayCastHitInteract> OnRayCastHitInteract; //event for telling GM player interact
+    public event EventHandler<OverLapHitInteract> OnOverLapHitInteract;
     public class RayCastHitInteract :EventArgs
     {
         public GameObject lookAtInteract;
+    }
+    public class OverLapHitInteract : EventArgs
+    {
+        public GameObject overLapHit;
     }
 
     [Header("Melee")]
@@ -30,7 +35,7 @@ public class PlayerMelee : MonoBehaviour
     
     [SerializeField] float interactRayCastDist = 4f;
     private GameObject storedRayHit =null;
-    //private GameObject storedShereHit; //for to hold object from sphere hitm when/if set up
+    private GameObject storedShereHit; //for to hold object from sphere hitm when/if set up
 
     private void Start()
     {
@@ -77,7 +82,8 @@ public class PlayerMelee : MonoBehaviour
     {
         //Player HOLD E
         //Debug.Log("MOZZERELLA!");
-        Debug.Log(storedRayHit);
+        Debug.Log("stored ray hit: "+ storedRayHit);
+        Debug.Log("stored sphere hit: " + storedShereHit);
         if (storedRayHit != null)
         {
             //package the object data and send to GM
@@ -85,6 +91,10 @@ public class PlayerMelee : MonoBehaviour
 
             OnRayCastHitInteract?.Invoke(this, new RayCastHitInteract { lookAtInteract = storedRayHit });
 
+        }
+        else if(storedShereHit != null)
+        {
+            OnOverLapHitInteract?.Invoke(this,new OverLapHitInteract { overLapHit = storedShereHit });
         }
 
     }
@@ -96,13 +106,24 @@ public class PlayerMelee : MonoBehaviour
         {
             //Debug.Log(raycastHit.transform);
             storedRayHit = raycastHit.transform.gameObject;
+            storedShereHit = null;
         }
         else
         {
-            //stored item= null
-            storedRayHit = null;
+            Collider[] sphereHits = Physics.OverlapSphere(transform.position, sphereRadius);
+
+            storedRayHit = null; // clear ray so you don't accidentally double interact
+
+            foreach (var hit in sphereHits)
+            {
+                if (hit != null) // optional: filter by tag/layer here
+                {
+                    storedShereHit = hit.gameObject;
+                    break;
+                }
+            }
         }
-        
+
 
 
         //Debug.DrawRay(transform.position, transform.forward, Color.red);
