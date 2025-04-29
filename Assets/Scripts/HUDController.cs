@@ -3,9 +3,15 @@ using TMPro;
 
 public class HUDController : MonoBehaviour
 {
+    public static HUDController Instance { get; private set; }
     public TextMeshProUGUI ammoText;
     public TextMeshProUGUI scoreText;
     public WeaponManager weaponManager;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     void Update()
     {
@@ -31,6 +37,6 @@ public class HUDController : MonoBehaviour
 
     public void UpdateScore(int score)
     {
-        scoreText.text = $"Score: {score}";
+        scoreText.text = $"{score}";
     }
 }

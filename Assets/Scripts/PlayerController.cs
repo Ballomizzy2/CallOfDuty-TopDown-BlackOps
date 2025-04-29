@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
         inputActions.Player.Enable();
         //subscribe to interact event
         inputActions.Player.Interact.performed += Interact_performed;
+
+        HUDController.Instance.UpdateScore(currentPoints); // call this to set points to 0?
     }
 
     private void Update()
@@ -178,6 +180,7 @@ public class PlayerController : MonoBehaviour
     public void SetPoints(int score)
     {
         currentPoints = score;
+        HUDController.Instance.UpdateScore(currentPoints);
     }
 
     //weapon management
