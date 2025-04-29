@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
         HP -= damage;
         if (HP <= 0)
         {
+            PowerUpManager.Instance.TryDropPowerUp(transform.position);
             SoundMng.Instance.zombieChannel.PlayOneShot(SoundMng.Instance.zombieDeath);
             int randomValue = Random.Range(0, 2);
             if (randomValue == 0){
