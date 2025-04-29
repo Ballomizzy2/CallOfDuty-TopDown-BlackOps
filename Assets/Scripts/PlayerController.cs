@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
 
     private void Interactions()
     {
-        //turn objects that hold an SO into interface?
+        // these should wake up respective UI for objects hit e.g. Press [KEY] to interact
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit raycastHit, interactRayCastDist))
         {
             //Debug.Log(raycastHit.transform);

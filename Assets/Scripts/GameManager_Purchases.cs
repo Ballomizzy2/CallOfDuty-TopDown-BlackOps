@@ -7,11 +7,9 @@ using UnityEngine.InputSystem.LowLevel;
 public class GameManager_Purchases : MonoBehaviour
 {
 
-    //player inv: perks, load out
     //map items: doors, wall guns, box, perks
     //logic for buying stuff?
-    //logic for waves
-    [SerializeField] private List<PerkSodasSO> mapPerkSodas;
+    [SerializeField] private List<PerkSodasSO> mapPerkSodas; //doesn't do anything
 
     ///player var
     private int perkCount = 0;
@@ -23,6 +21,8 @@ public class GameManager_Purchases : MonoBehaviour
     private const int WALLBUY_LAYER = 7;
     private const int DOOR_LAYER = 8;
     private const int BOX_LAYER = 9;
+    [SerializeField] bool powerOn = true; //when Power made, default to false and listen to an Event flip
+    //[SerializeField] bool fireSaleActive; //
 
     private void Awake()
     {
@@ -46,6 +46,7 @@ public class GameManager_Purchases : MonoBehaviour
                 HandleDoorPurchase(e.overLapHit, playerScore,player);
                 break;
             case BOX_LAYER:
+                HandleMysterBoxPurchase(e.overLapHit,playerScore,player);
                 break;
 
         }
@@ -58,10 +59,19 @@ public class GameManager_Purchases : MonoBehaviour
         switch (e.lookAtInteract.layer)
         {
             case PERK_LAYER:
-                HandlePerkPurchase(e.lookAtInteract, playerScore,player); //pass the game object
-                break;
+                if (powerOn)
+                {
+                    HandlePerkPurchase(e.lookAtInteract, playerScore, player); //pass the game object
+                }
+                else
+                {
+                    Debug.Log("NO POWWWWER!");
+                }
+
+                    break;
             case WALLBUY_LAYER:
-                //wall buy
+                HandleWallBuyPurchase(e.lookAtInteract, playerScore, player);
+                
                 break;
             case DOOR_LAYER:
                 HandleDoorPurchase(e.lookAtInteract, playerScore, player);
@@ -81,6 +91,32 @@ public class GameManager_Purchases : MonoBehaviour
             
         }
         
+    }
+    private void HandleWallBuyPurchase(GameObject item, int playerScore, PlayerController player)
+    {
+        //TODO edit gun SO
+       //edit weapon SO to have a price?
+       //int tempPrice= item.GetComponent<GunSOHolder>.GetHeldGun();
+       //do same thing as perks
+
+    }
+    private void HandleMysterBoxPurchase(GameObject item,int playerScore,PlayerController player)
+    {
+        //TODO make MysteryBox to finish this
+        int mysteryBoxPrice = 1500;
+        
+        if(playerScore >= mysteryBoxPrice)
+        {
+            //mysterybox should have methods for all these. e.g item.RollGuns();
+            //put all gun SO in an array that put it in random 
+            //spawn gun(with collider), hide box collider, move gun down for x sec, then close box
+            //if player interacts w/ gun, equip and close box
+        }
+        else
+        {
+            Debug.Log("No monies...");
+        }
+
     }
 
     private void HandlePerkPurchase(GameObject item, int playerScore, PlayerController player)
@@ -139,10 +175,15 @@ public class GameManager_Purchases : MonoBehaviour
                 PlayerMovement.Instance.maxStamina = tempStamina;
                 break;
             case PerkID.DoubleTap:
+                //TODO edit Gun.cs to finish rest
+                //access player's weapon manager-> add an increase fire rate variable-> pass into equipped Gun.cs
                 break;
             case PerkID.SpeedCola:
+                //access player's weapon manager->add a x2 variable->pass it into equipped Gun.cs line 138 ...(gunData.reloadTime/speedCola)
                 break;
             case PerkID.MuleKick:
+                //optional soda
+                //make da array 3 in weaponManager :) 
                 break;
 
 

@@ -442,6 +442,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1dc0582cfd73bfc43af7189e05fcf232, type: 3}
+--- !u!1001 &410249854
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5530017986005753574, guid: aa2ff152aea446547ae63225f7c62607, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 5530017986005753574, guid: aa2ff152aea446547ae63225f7c62607, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5530017986005753574, guid: aa2ff152aea446547ae63225f7c62607, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5530017986005753574, guid: aa2ff152aea446547ae63225f7c62607, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5530017986005753574, guid: aa2ff152aea446547ae63225f7c62607, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5530017986005753574, guid: aa2ff152aea446547ae63225f7c62607, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5530017986005753574, guid: aa2ff152aea446547ae63225f7c62607, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5530017986005753574, guid: aa2ff152aea446547ae63225f7c62607, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5530017986005753574, guid: aa2ff152aea446547ae63225f7c62607, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5530017986005753574, guid: aa2ff152aea446547ae63225f7c62607, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8786093866720693054, guid: aa2ff152aea446547ae63225f7c62607, type: 3}
+      propertyPath: m_Name
+      value: PerkMachine_SpeedCola
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aa2ff152aea446547ae63225f7c62607, type: 3}
 --- !u!1 &433438913
 GameObject:
   m_ObjectHideFlags: 0
@@ -1049,6 +1106,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 7587804145474311844, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
+      propertyPath: powerOn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7587804145474311844, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
       propertyPath: playerScore
       value: 5000
       objectReference: {fileID: 0}
@@ -1242,3 +1303,4 @@ SceneRoots:
   - {fileID: 942443125}
   - {fileID: 107867374}
   - {fileID: 407956798}
+  - {fileID: 410249854}
