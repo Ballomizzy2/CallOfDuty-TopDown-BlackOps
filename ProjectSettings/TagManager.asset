@@ -9,7 +9,8 @@ TagManager:
   - Waypoints
   - Window
   - ZombieInteracts
-  - Enemy
+  - SpawnPoint
+  - WallBuy
   layers:
   - Default
   - TransparentFX
