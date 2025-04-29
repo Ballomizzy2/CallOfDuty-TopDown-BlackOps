@@ -19,12 +19,20 @@ public class DoorsHandler : MonoBehaviour
         
     }
     //listen for a successful purchase from GM then:
-    //door A move -90 deg y
-    //door B move +90 deg y
     //disable collider
     //
     public int GetPrice()
     {
         return price;
+    }
+    public void AnimateDoors()
+    {
+        boxCollider.enabled = false;
+        // Instantly rotate Door A -90° around Y
+        doorA.transform.localRotation = Quaternion.Euler(0f, -90f, 0f);
+
+        // Instantly rotate Door B +90° around Y
+        doorB.transform.localRotation = Quaternion.Euler(0f, -90f, 0f);
+
     }
 }

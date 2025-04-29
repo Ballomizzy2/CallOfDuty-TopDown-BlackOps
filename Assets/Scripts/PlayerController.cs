@@ -38,7 +38,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int hp = 3;
     private bool isHurt = false;
     private float hurtInterval = 3;
-   
+
+    private const int POWER_LAYER = 11;
 
     private void Awake()
     {
@@ -110,6 +111,10 @@ public class PlayerController : MonoBehaviour
 
 
             OnRayCastHitInteract?.Invoke(this, new RayCastHitInteract { lookAtInteract = storedRayHit });
+            if(storedRayHit.layer == POWER_LAYER)
+            {
+                PowerSwitchController.Instance.ActivatePower();
+            }
 
         }
         else if (storedShereHit != null)

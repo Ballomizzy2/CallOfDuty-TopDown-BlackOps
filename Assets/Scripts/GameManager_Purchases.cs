@@ -21,7 +21,7 @@ public class GameManager_Purchases : MonoBehaviour
     private const int WALLBUY_LAYER = 7;
     private const int DOOR_LAYER = 8;
     private const int BOX_LAYER = 9;
-    [SerializeField] bool powerOn = true; //when Power made, default to false and listen to an Event flip
+    [SerializeField] bool powerOn = false;
     //[SerializeField] bool fireSaleActive; //
 
     private void Awake()
@@ -31,11 +31,18 @@ public class GameManager_Purchases : MonoBehaviour
     private void Start()
     {
         //listen to the interact lookat event
-        PlayerController.Instance.OnRayCastHitInteract += PlayerMelee_OnRayCastHitInteract;
-        PlayerController.Instance.OnOverLapHitInteract += PlayerMelee_OnOverLapHitInteract;
+        PlayerController.Instance.OnRayCastHitInteract += PlayerController_OnRayCastHitInteract;
+        PlayerController.Instance.OnOverLapHitInteract += PlayerController_OnOverLapHitInteract;
+        PowerSwitchController.Instance.OnLeverFlipped += PowerSwitchController_OnLeverFlipped;
     }
 
-    private void PlayerMelee_OnOverLapHitInteract(object sender, PlayerController.OverLapHitInteract e)
+    private void PowerSwitchController_OnLeverFlipped(object sender, System.EventArgs e)
+    {
+        powerOn = true;
+        Debug.Log("ZZZZZTT!");
+    }
+
+    private void PlayerController_OnOverLapHitInteract(object sender, PlayerController.OverLapHitInteract e)
     {
         PlayerController player = sender as PlayerController;
         int playerScore = player.GetPoints();
@@ -52,7 +59,7 @@ public class GameManager_Purchases : MonoBehaviour
         }
     }
 
-    private void PlayerMelee_OnRayCastHitInteract(object sender, PlayerController.RayCastHitInteract e)
+    private void PlayerController_OnRayCastHitInteract(object sender, PlayerController.RayCastHitInteract e)
     {
         PlayerController player = sender as PlayerController;
         int playerScore = player.GetPoints();
@@ -86,8 +93,7 @@ public class GameManager_Purchases : MonoBehaviour
         if(playerScore >= tempPrice)
         {
            player.SetPoints(playerScore-tempPrice);
-            item.GetComponent<BoxCollider>().enabled = false;
-            item.SetActive(false);//todo have the doors do the comment in DoorsHandler
+            item.GetComponent<DoorsHandler>().AnimateDoors();
             
         }
         
