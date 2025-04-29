@@ -21,6 +21,7 @@ public class GameManager_Purchases : MonoBehaviour
     private const int WALLBUY_LAYER = 7;
     private const int DOOR_LAYER = 8;
     private const int BOX_LAYER = 9;
+    private const int PACK_A_PUNCH_LAYER = 12;
     [SerializeField] bool powerOn = false;
     //[SerializeField] bool fireSaleActive; //
 
@@ -82,6 +83,9 @@ public class GameManager_Purchases : MonoBehaviour
                 break;
             case DOOR_LAYER:
                 HandleDoorPurchase(e.lookAtInteract, playerScore, player);
+                break;
+            case PACK_A_PUNCH_LAYER:
+                //todo make a pack A punch
                 break;
         }
     }
