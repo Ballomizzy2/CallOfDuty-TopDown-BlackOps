@@ -33,6 +33,11 @@ public class PlayerController : MonoBehaviour
 
     public float sphereRadius = 1f;
     public float castDistance = 5f;
+
+    [Header("Health")]
+    [SerializeField] private int hp = 3;
+    private bool isHurt = false;
+    private float hurtInterval = 3;
     //points
 
     private void Awake()
@@ -49,6 +54,47 @@ public class PlayerController : MonoBehaviour
     {
         //interactions w/ world objs
         Interactions();
+
+        //hp regen timer
+        HurtCountDown();
+    }
+
+    ///hp related methods
+    public int GetPlayerHP()
+    {
+        return hp;
+    }
+    public void SetPlayerHP(int hp)
+    {
+        this.hp = hp;
+    }
+    public void isHurtOn()
+    {
+        hp--;
+        Debug.Log("ow: " + hp);
+        isHurt = true;
+    }
+
+    private void HurtCountDown()
+    {
+        if (isHurt)
+        {
+            if (hp <= 0)
+            {
+                gameObject.SetActive(false);
+            }
+
+            //if hp=0 then GAMEOVER
+            hurtInterval -= Time.deltaTime;
+            if (hurtInterval < 0)
+            {
+                //if count down finishes reset variables n give back hp
+                hp = 3;
+                isHurt = false;
+                hurtInterval = 3;
+                Debug.Log("Timer Done. HP restored: " + hp);
+            }
+        }
     }
 
     ///interact related methods

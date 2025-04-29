@@ -13,7 +13,7 @@ public class TestDummyDamageTest : MonoBehaviour
         if(other.gameObject == player && damageReady)
         {
             damageReady = false;
-            player.GetComponent<PlayerMelee>().isHurtOn();
+            player.GetComponent<PlayerController>().isHurtOn();
         }
     }
     private void Update()

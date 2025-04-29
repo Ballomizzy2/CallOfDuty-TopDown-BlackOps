@@ -116,7 +116,7 @@ public class GameManager_Purchases : MonoBehaviour
         switch (perkSoda.perkID)
         {
             case PerkID.Juggernog:
-                PlayerMelee.Instance.SetPlayerHP((int)(perkSoda.statModifiers[0].value + PlayerMelee.Instance.GetPlayerHP()));
+                PlayerController.Instance.SetPlayerHP((int)(perkSoda.statModifiers[0].value + PlayerController.Instance.GetPlayerHP()));
                 break;
             case PerkID.StaminUp:
                 //PlayerMovement: speed +0.7%, stamina x2

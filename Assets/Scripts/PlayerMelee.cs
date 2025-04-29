@@ -17,10 +17,7 @@ public class PlayerMelee : MonoBehaviour
     private InputSystem_Actions inputActions;
 
 
-    [Header("Health")]
-    [SerializeField] private int hp = 3;
-    private bool isHurt = false;
-    private float hurtInterval = 3;
+  
 
    
 
@@ -56,22 +53,14 @@ public class PlayerMelee : MonoBehaviour
         //timer to disable the actived melee hitbox
         MeleeHitBoxReset();
 
-        //hp regen timer
-        HurtCountDown();
+
 
 
     }
 
 
 
-    public int GetPlayerHP()
-    {
-        return hp;
-    }
-    public void SetPlayerHP(int hp)
-    {
-        this.hp = hp;
-    }
+
 
 
 
@@ -137,35 +126,8 @@ public class PlayerMelee : MonoBehaviour
         }
     }
 
-    ///Health relaated methods
-    public void isHurtOn()
-    {
-        hp--;
-        Debug.Log("ow: " + hp);
-        isHurt =true;
-    }
+    
 
-    private void HurtCountDown()
-    {
-        if (isHurt)
-        {
-            if (hp <= 0)
-            {
-                gameObject.SetActive(false);
-            }
-
-            //if hp=0 then GAMEOVER
-            hurtInterval -= Time.deltaTime;
-            if (hurtInterval < 0)
-            {
-                //if count down finishes reset variables n give back hp
-                hp = 3;
-                isHurt = false;
-                hurtInterval = 3;
-                Debug.Log("Timer Done. HP restored: " + hp);
-            }
-        }
-    }
 
 
 
