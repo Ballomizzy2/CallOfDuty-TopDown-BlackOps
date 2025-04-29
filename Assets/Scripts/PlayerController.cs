@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int hp = 3;
     private bool isHurt = false;
     private float hurtInterval = 3;
-    //points
+   
 
     private void Awake()
     {
@@ -164,6 +164,15 @@ public class PlayerController : MonoBehaviour
         }
 
         return false;
+    }
+
+    public int GetPoints()
+    {
+        return currentPoints;
+    }
+    public void SetPoints(int score)
+    {
+        currentPoints = score;
     }
 
     //weapon management

@@ -6,20 +6,20 @@ using static MeleeHitBoxHandler;
 public class PlayerMelee : MonoBehaviour
 {
     public static PlayerMelee Instance { get; private set; }
-    public event EventHandler OnMeleeAction; 
+    public event EventHandler OnMeleeAction;
 
 
 
     [Header("Melee")]
     [SerializeField] private GameObject playerMeleeHitBox;
-    [SerializeField] private float meleeTimer= 0.1f;
+    [SerializeField] private float meleeTimer = 0.1f;
     private bool meleeBoxIsActive = false;
     private InputSystem_Actions inputActions;
 
 
-  
 
-   
+
+
 
     private void Start()
     {
@@ -38,14 +38,14 @@ public class PlayerMelee : MonoBehaviour
         //subscribing to events from input system
         inputActions.Player.Melee.performed += Melee_performed;
 
-        
+
 
         //subscribing to an event from itself
         OnMeleeAction += PlayerMelee_OnMeleeAction;
 
         MeleeHitBoxHandler.Instance.OnMeleeContact += MeleeHitBoxHandler_OnMeleeContact;
 
-      
+
     }
 
     private void Update()
@@ -91,9 +91,9 @@ public class PlayerMelee : MonoBehaviour
         if (hitObject != null)
         {
             //Debug.Log("Hit: " + hitObject.name);
-            Destroy(hitObject );
+            Destroy(hitObject);
         }
-        
+
 
     }
 
@@ -101,14 +101,14 @@ public class PlayerMelee : MonoBehaviour
     {
         Debug.Log("swish!");
         playerMeleeHitBox.SetActive(true);
-        meleeBoxIsActive=true;
+        meleeBoxIsActive = true;
     }
 
     private void Melee_performed(InputAction.CallbackContext obj)
     {
         //firing event when 'F' key is pressed
-        OnMeleeAction?.Invoke(this,EventArgs.Empty);
-        
+        OnMeleeAction?.Invoke(this, EventArgs.Empty);
+
     }
 
     private void MeleeHitBoxReset()
@@ -126,7 +126,7 @@ public class PlayerMelee : MonoBehaviour
         }
     }
 
-    
+
 
 
 

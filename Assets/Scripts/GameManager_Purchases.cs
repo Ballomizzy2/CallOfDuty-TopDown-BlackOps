@@ -16,7 +16,7 @@ public class GameManager_Purchases : MonoBehaviour
     ///player var
     private int perkCount = 0;
     private int perkMax = 2;
-    public int playerScore;
+    
 
     [SerializeField] List<PerkSodasSO> playerPerkList;
     private const int PERK_LAYER = 6;
@@ -37,11 +37,13 @@ public class GameManager_Purchases : MonoBehaviour
 
     private void PlayerMelee_OnOverLapHitInteract(object sender, PlayerController.OverLapHitInteract e)
     {
-        //unlike ray case, go stright to filter bc i didnt think of it then....
+        PlayerController player = sender as PlayerController;
+        int playerScore = player.GetPoints();
         switch (e.overLapHit.layer)
         {
             case DOOR_LAYER:
-                HandleDoorPurchase(e.overLapHit);
+                //pass the object hit, the players score, the player object for access to additional methods if needed
+                HandleDoorPurchase(e.overLapHit, playerScore,player);
                 break;
             case BOX_LAYER:
                 break;
@@ -51,39 +53,41 @@ public class GameManager_Purchases : MonoBehaviour
 
     private void PlayerMelee_OnRayCastHitInteract(object sender, PlayerController.RayCastHitInteract e)
     {
+        PlayerController player = sender as PlayerController;
+        int playerScore = player.GetPoints();
         switch (e.lookAtInteract.layer)
         {
             case PERK_LAYER:
-                HandlePerkPurchase(e.lookAtInteract); //pass the game object
+                HandlePerkPurchase(e.lookAtInteract, playerScore,player); //pass the game object
                 break;
             case WALLBUY_LAYER:
                 //wall buy
                 break;
         }
     }
-    private void HandleDoorPurchase(GameObject item)
+    private void HandleDoorPurchase(GameObject item,int playerScore, PlayerController player)
     {
         
         int tempPrice= item.GetComponent<DoorsHandler>().GetPrice();
-        if(playerScore>=tempPrice)
+        if(playerScore >= tempPrice)
         {
-            playerScore-=tempPrice;
+           player.SetPoints(playerScore-tempPrice);
             
         }
         
     }
 
-    private void HandlePerkPurchase(GameObject item)
+    private void HandlePerkPurchase(GameObject item, int playerScore, PlayerController player)
     {
         PerkSodasSO tempPerkSO = item.GetComponent<PerkSodaSOHolder>().GetHeldPerkSodaSO();
         if (!HasPerk(tempPerkSO) && playerScore >= tempPerkSO.price && perkCount < perkMax)
         {
             perkCount++;
-            playerScore -= tempPerkSO.price;
-            playerPerkList.Add(tempPerkSO);
+            player.SetPoints(playerScore -= tempPerkSO.price);
+            playerPerkList.Add(tempPerkSO);//move this to playerController later
             //call method to do handle stats...
             HandlePerkSodaModifierAllocation(tempPerkSO);
-            Debug.Log($"-{playerScore}, you got {tempPerkSO.perkID}");
+            Debug.Log($"-{player.GetPoints()}, you got {tempPerkSO.perkID}");
             for (int i = 0; i < tempPerkSO.statModifiers.Count; i++)
             {
                 Debug.Log($"stat affected:{tempPerkSO.statModifiers[i].statType}\n" +
