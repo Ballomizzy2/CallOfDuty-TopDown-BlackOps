@@ -18,7 +18,7 @@ public class GameManager_Purchases : MonoBehaviour
     private int perkMax = 2;
     
 
-    [SerializeField] List<PerkSodasSO> playerPerkList;
+    [SerializeField] List<PerkSodasSO> playerPerkList; //move this to PlayerController ahhhhhhhhh
     private const int PERK_LAYER = 6;
     private const int WALLBUY_LAYER = 7;
     private const int DOOR_LAYER = 8;
@@ -63,15 +63,21 @@ public class GameManager_Purchases : MonoBehaviour
             case WALLBUY_LAYER:
                 //wall buy
                 break;
+            case DOOR_LAYER:
+                HandleDoorPurchase(e.lookAtInteract, playerScore, player);
+                break;
         }
     }
     private void HandleDoorPurchase(GameObject item,int playerScore, PlayerController player)
     {
+        //already have access to door, just open it here :]
         
         int tempPrice= item.GetComponent<DoorsHandler>().GetPrice();
         if(playerScore >= tempPrice)
         {
            player.SetPoints(playerScore-tempPrice);
+            item.GetComponent<BoxCollider>().enabled = false;
+            item.SetActive(false);//todo have the doors do the comment in DoorsHandler
             
         }
         

@@ -796,7 +796,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b009fbfcbd2d5614cac697a8a1d1c563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPoints: 1000
+  currentPoints: 5000
   weaponHolder: {fileID: 0}
   interactRayCastDist: 4
   sphereRadius: 1
