@@ -9,6 +9,7 @@ TagManager:
   - Waypoints
   - Window
   - ZombieInteracts
+  - Enemy
   layers:
   - Default
   - TransparentFX
