@@ -198,4 +198,8 @@ public class PlayerController : MonoBehaviour
     {
         return currentWeapon != null;
     }
+    private void OnDestroy()
+    {
+        inputActions.Player.Interact.performed -= Interact_performed;
+    }
 }

@@ -127,7 +127,15 @@ public class PlayerMelee : MonoBehaviour
     }
 
 
+    private void OnDestroy()
+    {
+        //unsubscribe
+        inputActions.Player.Melee.performed -= Melee_performed;
 
+        OnMeleeAction -= PlayerMelee_OnMeleeAction;
+
+        MeleeHitBoxHandler.Instance.OnMeleeContact -= MeleeHitBoxHandler_OnMeleeContact;
+    }
 
 
 

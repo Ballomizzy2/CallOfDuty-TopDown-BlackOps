@@ -196,4 +196,11 @@ public class GameManager_Purchases : MonoBehaviour
         }
 
     }
+    private void OnDestroy()
+    {
+        //unsubscribe
+        PlayerController.Instance.OnRayCastHitInteract -= PlayerController_OnRayCastHitInteract;
+        PlayerController.Instance.OnOverLapHitInteract -= PlayerController_OnOverLapHitInteract;
+        PowerSwitchController.Instance.OnLeverFlipped -= PowerSwitchController_OnLeverFlipped;
+    }
 }
