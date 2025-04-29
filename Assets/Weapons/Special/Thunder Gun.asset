@@ -17,7 +17,7 @@ MonoBehaviour:
   reserveAmmo: 12
   reloadTime: 3.25
   fireDelay: 0.38
-  bulletSpeed: 55
+  bulletSpeed: 80
   damage: 2147483647
   bulletPrefab: {fileID: 4975807448933526346, guid: 506ac5dad945e874b890e9a2eccb3719, type: 3}
   muzzleFlashPrefab: {fileID: 0}

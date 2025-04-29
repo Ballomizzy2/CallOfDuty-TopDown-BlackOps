@@ -604,7 +604,11 @@ PrefabInstance:
     - target: {fileID: 3085064108381781860, guid: cba0fb39ed0ab09489c1c63a8d85ed66, type: 3}
       propertyPath: gunData
       value: 
-      objectReference: {fileID: 11400000, guid: 7d5f79ecae620cb4e8b897aff287676a, type: 2}
+      objectReference: {fileID: 11400000, guid: 041ea1fc3a5002140afbca57756e438d, type: 2}
+    - target: {fileID: 3085064108381781860, guid: cba0fb39ed0ab09489c1c63a8d85ed66, type: 3}
+      propertyPath: bulletTrailPrefab
+      value: 
+      objectReference: {fileID: 3012940702422412535, guid: add04530ffae0e74c8cab8aeb115bbe8, type: 3}
     - target: {fileID: 3568044715479011512, guid: cba0fb39ed0ab09489c1c63a8d85ed66, type: 3}
       propertyPath: m_Name
       value: Player Prefab
@@ -668,7 +672,11 @@ PrefabInstance:
     - target: {fileID: 7871798969999380686, guid: cba0fb39ed0ab09489c1c63a8d85ed66, type: 3}
       propertyPath: gunData
       value: 
-      objectReference: {fileID: 11400000, guid: 41b2d4ce874bff14eab12bd0e873d33a, type: 2}
+      objectReference: {fileID: 11400000, guid: 2e95c4aa2a5bc0a4eab03c23dcc6d231, type: 2}
+    - target: {fileID: 7871798969999380686, guid: cba0fb39ed0ab09489c1c63a8d85ed66, type: 3}
+      propertyPath: bulletTrailPrefab
+      value: 
+      objectReference: {fileID: 3012940702422412535, guid: add04530ffae0e74c8cab8aeb115bbe8, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -894,10 +902,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1898264225661483899, guid: 0e02a41ecc5ae404abeddb6f75816ddb, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 36a5a00ff008e3e4a9bd8c38feaaa1d0, type: 3}
     - target: {fileID: 2638552870255152328, guid: 0e02a41ecc5ae404abeddb6f75816ddb, type: 3}
       propertyPath: m_LocalPosition.x
       value: -17.185324

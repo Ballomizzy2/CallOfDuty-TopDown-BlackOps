@@ -5,6 +5,7 @@ public class Gun : MonoBehaviour
 {
     public GunData gunData; // Drag the ScriptableObject into this field
     [SerializeField] private Transform gunMuzzle;
+    [SerializeField] private GameObject bulletTrailPrefab;
 
     private int currentAmmo;
     private int reserveAmmo;
@@ -149,7 +150,6 @@ public class Gun : MonoBehaviour
     private void RaycastShoot()
     {
         Vector3 shootDirection = gunMuzzle.forward;
-
         float currentSpread = isAiming ? gunData.adsSpreadAngle : gunData.hipfireSpreadAngle;
 
         if (currentSpread > 0f)
@@ -158,16 +158,34 @@ public class Gun : MonoBehaviour
         }
 
         Ray ray = new Ray(gunMuzzle.position, shootDirection);
-        Debug.DrawRay(ray.origin, ray.direction * gunData.raycastRange, Color.red, 0.5f);
+        Vector3 hitPoint = ray.origin + ray.direction * gunData.raycastRange; // default endpoint if no hit
 
         if (Physics.Raycast(ray, out RaycastHit hit, gunData.raycastRange))
         {
+            hitPoint = hit.point;
+
             if (hit.collider.CompareTag("Zombie"))
             {
                 Destroy(hit.collider.gameObject);
             }
         }
+
+        // Now spawn the bullet trail
+        if (bulletTrailPrefab)
+        {
+            GameObject trailObj = Instantiate(bulletTrailPrefab, gunMuzzle.position, Quaternion.identity);
+            BulletTrail trail = trailObj.GetComponent<BulletTrail>();
+
+            if (trail != null)
+            {
+                trail.Initialize(gunMuzzle.position, hitPoint);
+            }
+        }
+
+        Debug.DrawRay(ray.origin, ray.direction * gunData.raycastRange, Color.red, 0.5f);
     }
+
+
 
     private void ShotgunRaycastShoot()
     {

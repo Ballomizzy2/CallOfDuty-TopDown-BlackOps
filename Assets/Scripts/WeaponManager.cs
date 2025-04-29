@@ -3,9 +3,13 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour
 {
     [Header("Grenade Settings")]
-    [SerializeField] private GameObject grenadePrefab; // Grenade GameObject to throw
+    [SerializeField] private GameObject grenadePrefab;
     [SerializeField] private float throwForce = 15f;
-    [SerializeField] private Transform grenadeSpawnPoint; // Where the grenade spawns from
+    [SerializeField] private Transform grenadeSpawnPoint;
+
+    [Header("Grenade Count")]
+    public int maxGrenades = 4;
+    public int currentGrenades;
 
     public Gun[] weapons; // Should contain 2 weapons in the array
     private int currentWeaponIndex = 0;
@@ -13,7 +17,9 @@ public class WeaponManager : MonoBehaviour
     void Start()
     {
         EquipWeapon(currentWeaponIndex);
+        currentGrenades = maxGrenades;
     }
+
 
     void Update()
     {
@@ -79,20 +85,25 @@ public class WeaponManager : MonoBehaviour
     {
         if (grenadePrefab == null || grenadeSpawnPoint == null) return;
 
-        // Spawn grenade at player position
-        GameObject grenade = Instantiate(grenadePrefab, transform.position + Vector3.up * 1.5f, Quaternion.identity);
+        if (currentGrenades <= 0)
+        {
+            Debug.Log("No grenades left!");
+            return;
+        }
 
+        // Create grenade
+        GameObject grenade = Instantiate(grenadePrefab, transform.position + Vector3.up * 1.5f, Quaternion.identity);
         Rigidbody rb = grenade.GetComponent<Rigidbody>();
         if (rb != null)
         {
             Vector3 throwDirection = (grenadeSpawnPoint.position - (transform.position + Vector3.up * 1.5f)).normalized;
-
-            // Add some upward arc if you want a nicer grenade throw
-            Vector3 finalThrowDirection = (throwDirection + Vector3.up * 0.3f).normalized;
-
+            Vector3 finalThrowDirection = (throwDirection + Vector3.up * 0.5f).normalized;
             rb.AddForce(finalThrowDirection * throwForce, ForceMode.Impulse);
         }
+
+        currentGrenades--; // Reduce grenade count
     }
+
 
     public void ReplaceCurrentWeapon(GunData newGunData)
     {
