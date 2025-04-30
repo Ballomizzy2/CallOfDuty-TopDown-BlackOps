@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4230573108002953818}
   - component: {fileID: 6688322269098011461}
   - component: {fileID: 7694897011752896473}
+  - component: {fileID: 7750351584683632802}
   m_Layer: 0
   m_Name: Spawn Point (5)
   m_TagString: Untagged
@@ -108,6 +109,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7750351584683632802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431411907116027481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701fe20a504f508439ee21a57be03f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaCollider: {fileID: 0}
+  prefabToSpawn: {fileID: 935753900411941629, guid: e528f273faeab3f4b9bb37641b2e0baf, type: 3}
+  spawnCount: 5
 --- !u!1 &2038337440378245208
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,6 +136,7 @@ GameObject:
   - component: {fileID: 3177684776781934524}
   - component: {fileID: 4533537540293080975}
   - component: {fileID: 7986248855920764012}
+  - component: {fileID: 63921094720101987}
   m_Layer: 0
   m_Name: Spawn Point (7)
   m_TagString: Untagged
@@ -216,6 +233,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &63921094720101987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038337440378245208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701fe20a504f508439ee21a57be03f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaCollider: {fileID: 0}
+  prefabToSpawn: {fileID: 935753900411941629, guid: e528f273faeab3f4b9bb37641b2e0baf, type: 3}
+  spawnCount: 5
 --- !u!1 &2976621294016443717
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,6 +260,7 @@ GameObject:
   - component: {fileID: 7396403777005208320}
   - component: {fileID: 2550553729900958142}
   - component: {fileID: 6328324891784493260}
+  - component: {fileID: 6109808854447935070}
   m_Layer: 0
   m_Name: Spawn Point
   m_TagString: Untagged
@@ -324,6 +357,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6109808854447935070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2976621294016443717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701fe20a504f508439ee21a57be03f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaCollider: {fileID: 0}
+  prefabToSpawn: {fileID: 935753900411941629, guid: e528f273faeab3f4b9bb37641b2e0baf, type: 3}
+  spawnCount: 5
 --- !u!1 &3078171723831240157
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +384,7 @@ GameObject:
   - component: {fileID: 1630051447896192548}
   - component: {fileID: 8849353913790418791}
   - component: {fileID: 4978939419435726356}
+  - component: {fileID: 3057255696927568886}
   m_Layer: 0
   m_Name: Spawn Point (2)
   m_TagString: Untagged
@@ -432,6 +481,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3057255696927568886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3078171723831240157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701fe20a504f508439ee21a57be03f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaCollider: {fileID: 0}
+  prefabToSpawn: {fileID: 935753900411941629, guid: e528f273faeab3f4b9bb37641b2e0baf, type: 3}
+  spawnCount: 5
 --- !u!1 &3785618565815840148
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,6 +508,7 @@ GameObject:
   - component: {fileID: 2241354984928449793}
   - component: {fileID: 1767129376110335758}
   - component: {fileID: 5172335448770824267}
+  - component: {fileID: 757033014106353830}
   m_Layer: 0
   m_Name: Spawn Point (4)
   m_TagString: Untagged
@@ -540,6 +605,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &757033014106353830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3785618565815840148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701fe20a504f508439ee21a57be03f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaCollider: {fileID: 0}
+  prefabToSpawn: {fileID: 935753900411941629, guid: e528f273faeab3f4b9bb37641b2e0baf, type: 3}
+  spawnCount: 5
 --- !u!1 &4514908240085943898
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,6 +632,7 @@ GameObject:
   - component: {fileID: 7963674119262638263}
   - component: {fileID: 7874624617098996577}
   - component: {fileID: 7696422798925004932}
+  - component: {fileID: 6041904371871304325}
   m_Layer: 0
   m_Name: Spawn Point (3)
   m_TagString: Untagged
@@ -648,6 +729,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6041904371871304325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4514908240085943898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701fe20a504f508439ee21a57be03f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaCollider: {fileID: 0}
+  prefabToSpawn: {fileID: 935753900411941629, guid: e528f273faeab3f4b9bb37641b2e0baf, type: 3}
+  spawnCount: 5
 --- !u!1 &5108893592628297828
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,6 +756,7 @@ GameObject:
   - component: {fileID: 7194174848027527638}
   - component: {fileID: 6472699338076400085}
   - component: {fileID: 6543684443860537698}
+  - component: {fileID: 1513126997156840071}
   m_Layer: 0
   m_Name: Spawn Point (1)
   m_TagString: Untagged
@@ -756,6 +853,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1513126997156840071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5108893592628297828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701fe20a504f508439ee21a57be03f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaCollider: {fileID: 0}
+  prefabToSpawn: {fileID: 935753900411941629, guid: e528f273faeab3f4b9bb37641b2e0baf, type: 3}
+  spawnCount: 5
 --- !u!1 &5310510895644590645
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,6 +880,7 @@ GameObject:
   - component: {fileID: 7976662984935020081}
   - component: {fileID: 2858154668283284169}
   - component: {fileID: 7820944929499233991}
+  - component: {fileID: 567199096063774863}
   m_Layer: 0
   m_Name: Spawn Point (6)
   m_TagString: Untagged
@@ -864,6 +977,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &567199096063774863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5310510895644590645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 701fe20a504f508439ee21a57be03f7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  areaCollider: {fileID: 0}
+  prefabToSpawn: {fileID: 935753900411941629, guid: e528f273faeab3f4b9bb37641b2e0baf, type: 3}
+  spawnCount: 5
 --- !u!1 &6519172545153095950
 GameObject:
   m_ObjectHideFlags: 0
@@ -875,7 +1003,7 @@ GameObject:
   - component: {fileID: 2132129016263259333}
   m_Layer: 0
   m_Name: Spawn Points
-  m_TagString: Untagged
+  m_TagString: Waypoints
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
