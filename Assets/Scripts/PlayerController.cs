@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerController : MonoBehaviour
@@ -82,7 +83,9 @@ public class PlayerController : MonoBehaviour
         {
             if (hp <= 0)
             {
-                gameObject.SetActive(false);
+                // Game Ends
+                Destroy(gameObject);
+                SceneManager.LoadScene(0);
             }
 
             //if hp=0 then GAMEOVER
@@ -154,6 +157,11 @@ public class PlayerController : MonoBehaviour
         //Debug.DrawRay(transform.position, transform.forward, Color.red);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Hand") && hp > 0)
+            isHurtOn();
+    }
     public void AddPoints(int amount)
     {
         currentPoints += amount;

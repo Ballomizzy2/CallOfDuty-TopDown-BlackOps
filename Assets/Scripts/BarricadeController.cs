@@ -1,16 +1,18 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class BarricadeController : MonoBehaviour
 {
-    public GameObject[] boards;
+    public List<GameObject> boards;
     private int currentHits = 0;
     public bool isBreached = false;
 
     private void Start()
     {
-        foreach (GameObject board in boards) //all boards visible
-            board.SetActive(true);
-
+        for(int i = 0; i < transform.childCount; i++)
+        {
+            boards.Add(transform.GetChild(i).gameObject);
+        } 
         currentHits = 0;
         isBreached = false;
     }
@@ -19,13 +21,13 @@ public class BarricadeController : MonoBehaviour
     {
         if (isBreached) return;
 
-        if (currentHits < boards.Length)
+        if (currentHits < boards.Count)
         {
             boards[currentHits].SetActive(false);
             currentHits++;
         }
 
-        if (currentHits == boards.Length)
+        if (currentHits == boards.Count)
         {
             isBreached = true;
             Debug.Log("Barricade breached!");
@@ -35,7 +37,7 @@ public class BarricadeController : MonoBehaviour
 
     public bool RepairOneBoard()
     {
-        if (currentHits <= 0 || currentHits > boards.Length)
+        if (currentHits <= 0 || currentHits > boards.Count)
             return false;
 
         currentHits--;

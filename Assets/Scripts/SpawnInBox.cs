@@ -7,6 +7,10 @@ public class SpawnInBox : MonoBehaviour
     public GameObject prefabToSpawn;      // 要生成的 prefab
     public int spawnCount = 5;            // 生成的数量
 
+    private void Awake()
+    {
+        areaCollider = GetComponent<BoxCollider>();
+    }
     void Start()
     {
         if (areaCollider == null || prefabToSpawn == null)
