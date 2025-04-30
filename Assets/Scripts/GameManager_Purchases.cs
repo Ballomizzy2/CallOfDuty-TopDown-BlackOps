@@ -2,7 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.InputSystem.LowLevel;
-//handles Game logic
+//handles Game point spending logic
 
 public class GameManager_Purchases : MonoBehaviour
 {
@@ -113,7 +113,7 @@ public class GameManager_Purchases : MonoBehaviour
     private void HandleMysterBoxPurchase(GameObject item,int playerScore,PlayerController player)
     {
         //TODO make MysteryBox to finish this
-        int mysteryBoxPrice = 1500;
+        int mysteryBoxPrice = 950;
         
         if(playerScore >= mysteryBoxPrice)
         {
