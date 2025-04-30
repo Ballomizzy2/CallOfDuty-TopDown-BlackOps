@@ -6,7 +6,7 @@ public class TestDummyDamageTest : MonoBehaviour
     [SerializeField] private GameObject player;
     private float damageCooldown = 1.5f;
     private bool damageReady = true;
-    private bool hitAlready=false;
+    
 
     private void OnTriggerEnter(Collider other)
     {
