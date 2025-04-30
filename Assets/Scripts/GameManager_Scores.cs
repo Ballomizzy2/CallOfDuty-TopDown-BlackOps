@@ -15,14 +15,35 @@ public class GameManager_Scores : MonoBehaviour
     [SerializeField] private int multiplier=1;
     [SerializeField] private bool doublePointsTimer;
 
-    [SerializeField] private Gun gunScript;
+    [SerializeField] private WeaponManager weaponManagerScript;
     private void Awake()
     {
-        gunScript.OnBulletHitZombie += Gun_OnBulletHitZombie;
+        //weaponManager, get current gun-> gun.cs, subscribe to that event
+        weaponManagerScript.GetCurrentWeapon().OnBulletHitZombie += CurrentGun_OnBulletHitZombie;
+        weaponManagerScript.OnWeaponSwap += WeaponManagerScript_OnWeaponSwap;
     }
 
-    private void Gun_OnBulletHitZombie(object sender, System.EventArgs e)
+    private void WeaponManagerScript_OnWeaponSwap(object sender, WeaponManager.WeaponSwap e)
     {
+        //usubscribe to old gun
+        weaponManagerScript.GetCurrentWeapon().OnBulletHitZombie -= CurrentGun_OnBulletHitZombie;
+
+        //subscribe to new gun
+        e.currentWeapon.OnBulletHitZombie += WeaponSwap_OnBulletHitZombie;
+    }
+
+    private void WeaponSwap_OnBulletHitZombie(object sender, System.EventArgs e)
+    {
+        //updated event for weapon swaping?
+        int pointsEarned = 10;
+        //hit a zombie +10 points
+        PointCalulation(pointsEarned);
+        Debug.Log("Here in GM_Scores!");
+    }
+
+    private void CurrentGun_OnBulletHitZombie(object sender, System.EventArgs e)
+    {
+        //default event
         int pointsEarned = 10;
         //hit a zombie +10 points
         PointCalulation(pointsEarned);
@@ -50,6 +71,11 @@ public class GameManager_Scores : MonoBehaviour
     private void PointCalulation(int pointsToAdd)
     {
         PlayerController.Instance.AddPoints(pointsToAdd * multiplier);
+    }
+
+    private void OnDestroy()
+    {
+        weaponManagerScript.GetCurrentWeapon().OnBulletHitZombie -= CurrentGun_OnBulletHitZombie;
     }
 
 }

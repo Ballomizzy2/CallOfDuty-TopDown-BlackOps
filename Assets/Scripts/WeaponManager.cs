@@ -1,7 +1,15 @@
+using System;
 using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
+    public event EventHandler<WeaponSwap> OnWeaponSwap;
+
+    public class WeaponSwap: EventArgs
+    {
+        public Gun currentWeapon;
+    }
+
     public Gun[] weapons; // Should contain 2 weapons in the array
     private int currentWeaponIndex = 0;
 
@@ -47,6 +55,7 @@ public class WeaponManager : MonoBehaviour
     {
         int nextIndex = (currentWeaponIndex + 1) % weapons.Length;
         EquipWeapon(nextIndex);
+        OnWeaponSwap?.Invoke(this, new WeaponSwap { currentWeapon = weapons[nextIndex] });
     }
 
     void EquipWeapon(int index)
@@ -57,6 +66,7 @@ public class WeaponManager : MonoBehaviour
         }
 
         currentWeaponIndex = index;
+
         Debug.Log("Switched to weapon: " + weapons[currentWeaponIndex].gunData.gunName);
     }
 
