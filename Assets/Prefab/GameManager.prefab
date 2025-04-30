@@ -62,6 +62,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03c6689552021ce48be3b75940771083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplier: 0
-  doublePointsTimer: 0
-  gunScript: {fileID: 0}
+  multiplier: 1
+  doublePointsTime: 5
+  weaponManagerScript: {fileID: 0}

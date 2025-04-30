@@ -114,7 +114,7 @@ public class Gun : MonoBehaviour
             {
                 hit.collider.GetComponent<Enemy>().TakeDamage(gunData.damage); // Replace with proper damage system later
                 //send an event to GameManager_Scores for x2
-                OnBulletHitZombie?.Invoke(this, EventArgs.Empty);
+                OnBulletHitZombie?.Invoke(this, EventArgs.Empty); //tell GM_score that player hit zombie
             }
 
             // Optional: Visual impact point
