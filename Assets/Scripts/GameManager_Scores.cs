@@ -19,37 +19,10 @@ public class GameManager_Scores : MonoBehaviour
     private void Awake()
     {
         //weaponManager, get current gun-> gun.cs, subscribe to that event
-        weaponManagerScript.GetCurrentWeapon().OnBulletHitZombie += CurrentGun_OnRayCastBulletHitZombie;
-        weaponManagerScript.OnWeaponSwap += WeaponManagerScript_OnWeaponSwap;
+        //weaponManagerScript.GetCurrentWeapon().OnBulletHitZombie += CurrentGun_OnRayCastBulletHitZombie;
+        //weaponManagerScript.OnWeaponSwap += WeaponManagerScript_OnWeaponSwap;
     }
 
-    private void WeaponManagerScript_OnWeaponSwap(object sender, WeaponManager.WeaponSwap e)
-    {
-        //bullet variant- lol i forgot object can call these methods directly...
-        //usubscribe to old gun
-        weaponManagerScript.GetCurrentWeapon().OnBulletHitZombie -= CurrentGun_OnRayCastBulletHitZombie;
-
-        //subscribe to new gun
-        e.currentWeapon.OnBulletHitZombie += WeaponSwap_OnRayCastBulletHitZombie;
-    }
-
-    private void WeaponSwap_OnRayCastBulletHitZombie(object sender, System.EventArgs e)
-    {
-        //updated event for weapon swaping?
-        int pointsEarned = 10;
-        //hit a zombie +10 points
-        PointCalulation(pointsEarned);
-        Debug.Log("Here in GM_Scores!");
-    }
-
-    private void CurrentGun_OnRayCastBulletHitZombie(object sender, System.EventArgs e)
-    {
-        //default event
-        int pointsEarned = 10;
-        //hit a zombie +10 points
-        PointCalulation(pointsEarned);
-        Debug.Log("Here in GM_Scores!");
-    }
 
     private void Start()
     {
@@ -75,14 +48,12 @@ public class GameManager_Scores : MonoBehaviour
         }
         
     }
-    public void PointCalulation(int pointsToAdd)
+    public void PointsPerHit()
     {
+        int pointsToAdd = 10;
         PlayerController.Instance.AddPoints(pointsToAdd * multiplier);
     }
 
-    private void OnDestroy()
-    {
-        weaponManagerScript.GetCurrentWeapon().OnBulletHitZombie -= CurrentGun_OnRayCastBulletHitZombie;
-    }
+
 
 }

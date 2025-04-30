@@ -4,7 +4,6 @@ using System;
 
 public class Gun : MonoBehaviour
 {
-    public event EventHandler OnBulletHitZombie;
 
     public GunData gunData; // Assign in Inspector
     [SerializeField] private Transform gunMuzzle;
@@ -115,9 +114,8 @@ public class Gun : MonoBehaviour
             if (hit.collider.CompareTag(ZOMBIE_TAG))
             {
                 hit.collider.GetComponent<Enemy>().TakeDamage(gunData.damage); // Replace with proper damage system later
-                //send an event to GameManager_Scores for x2
-                //OnBulletHitZombie?.Invoke(this, EventArgs.Empty); //tell GM_score that player hit zombie
-                gm_score.PointCalulation(10);
+                
+                gm_score.PointsPerHit();
             }
 
             // Optional: Visual impact point

@@ -30,8 +30,8 @@ public class Bullet : MonoBehaviour
         {
             // Apply damage logic here (for now just destroy the bullet)
             other.GetComponent<Enemy>().TakeDamage(damage);
-            int pointPerHit = 10;
-            gm_score.PointCalulation(pointPerHit);
+            
+            gm_score.PointsPerHit();
             Destroy(gameObject);
         }
     }
