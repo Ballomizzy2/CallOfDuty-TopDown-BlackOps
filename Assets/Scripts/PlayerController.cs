@@ -19,7 +19,9 @@ public class PlayerController : MonoBehaviour
     }
 
     [Header("Points")]
-    public int currentPoints = 1000;
+    public int currentPoints = 0;
+    [SerializeField] private int totalPoints = 0;
+    [SerializeField] private int totalKills = 0;
 
     [Header("Inventory")]
     public Transform weaponHolder;
@@ -42,6 +44,9 @@ public class PlayerController : MonoBehaviour
 
     private const int POWER_LAYER = 11;
 
+    [Header("HUD")]
+    [SerializeField] private HUDController hudControllerObject;
+
     private void Awake()
     {
         Instance = this;
@@ -51,7 +56,7 @@ public class PlayerController : MonoBehaviour
         //subscribe to interact event
         inputActions.Player.Interact.performed += Interact_performed;
 
-        HUDController.Instance.UpdateScore(currentPoints); // call this to set points to 0?
+        hudControllerObject.UpdateScore(currentPoints); // call this to set points to 0?
     }
 
     private void Update()
@@ -166,10 +171,12 @@ public class PlayerController : MonoBehaviour
     }
     public void AddPoints(int amount)
     {
+        //the object calling this does math (addition) and passes it into this method
         currentPoints += amount;
-        //ui update later
+        totalPoints += amount;
+        HUDController.Instance.UpdateScore(currentPoints);
+       
     }
-
     public bool SpendPoints(int amount)
     {
         if (currentPoints >= amount)
@@ -187,6 +194,7 @@ public class PlayerController : MonoBehaviour
     }
     public void SetPoints(int score)
     {
+        //the object that is calling this does math (subtract) and passes the result into this method
         currentPoints = score;
         HUDController.Instance.UpdateScore(currentPoints);
     }

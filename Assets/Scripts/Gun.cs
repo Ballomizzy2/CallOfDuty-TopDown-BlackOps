@@ -1,11 +1,15 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class Gun : MonoBehaviour
 {
+    public event EventHandler OnBulletHitZombie;
+
     public GunData gunData; // Assign in Inspector
     [SerializeField] private Transform gunMuzzle;
     [SerializeField] private GameObject hitEffectPrefab;
+    private const string ZOMBIE_TAG = "Zombie";
 
     private int currentAmmo;
     private int reserveAmmo;
@@ -17,6 +21,8 @@ public class Gun : MonoBehaviour
 
     public enum WeaponSlot { Primary, Secondary }
     public WeaponSlot slot = WeaponSlot.Primary;
+
+
 
     private void Start()
     {
@@ -86,7 +92,7 @@ public class Gun : MonoBehaviour
             AudioSource tempAudio = gameObject.AddComponent<AudioSource>();
             tempAudio.clip = gunData.shootSound;
             tempAudio.volume = 1f;
-            tempAudio.pitch = Random.Range(0.95f, 1.05f);
+            tempAudio.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
             tempAudio.spatialBlend = 0f;
             tempAudio.Play();
             Destroy(tempAudio, gunData.shootSound.length);
@@ -104,9 +110,11 @@ public class Gun : MonoBehaviour
         {
             Debug.Log("Hit: " + hit.collider.name);
 
-            if (hit.collider.CompareTag("Zombie"))
+            if (hit.collider.CompareTag(ZOMBIE_TAG))
             {
                 hit.collider.GetComponent<Enemy>().TakeDamage(gunData.damage); // Replace with proper damage system later
+                //send an event to GameManager_Scores for x2
+                OnBulletHitZombie?.Invoke(this, EventArgs.Empty);
             }
 
             // Optional: Visual impact point
@@ -129,7 +137,7 @@ public class Gun : MonoBehaviour
             AudioSource tempAudio = gameObject.AddComponent<AudioSource>();
             tempAudio.clip = gunData.reloadSound;
             tempAudio.volume = 1f;
-            tempAudio.pitch = Random.Range(0.95f, 1.05f);
+            tempAudio.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
             tempAudio.spatialBlend = 0f;
             tempAudio.Play();
             Destroy(tempAudio, gunData.reloadSound.length);

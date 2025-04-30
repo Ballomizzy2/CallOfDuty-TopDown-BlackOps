@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8587732932215012876}
   - component: {fileID: 7587804145474311844}
+  - component: {fileID: 6019503315905068125}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -47,5 +48,20 @@ MonoBehaviour:
   mapPerkSodas:
   - {fileID: 11400000, guid: d46a745a95e567343abf4fe2daf13cba, type: 2}
   - {fileID: 11400000, guid: 0d7b89bf58a506746bd297af0dcf1317, type: 2}
-  playerScore: 0
   playerPerkList: []
+  powerOn: 0
+--- !u!114 &6019503315905068125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8764083847979849072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03c6689552021ce48be3b75940771083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  multiplier: 0
+  doublePointsTimer: 0
+  gunScript: {fileID: 0}

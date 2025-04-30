@@ -798,6 +798,7 @@ GameObject:
   - component: {fileID: 6156621790287322436}
   - component: {fileID: 5758543873034698734}
   - component: {fileID: 2822473256594858661}
+  - component: {fileID: 8810231561074202333}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1111,6 +1112,24 @@ MonoBehaviour:
   weapons:
   - {fileID: 3085064108381781860}
   - {fileID: 7871798969999380686}
+--- !u!114 &8810231561074202333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6008505149739264911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b009fbfcbd2d5614cac697a8a1d1c563, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPoints: 5000
+  weaponHolder: {fileID: 0}
+  interactRayCastDist: 4
+  sphereRadius: 1
+  castDistance: 5
+  hp: 3
 --- !u!1 &6258007117591553193
 GameObject:
   m_ObjectHideFlags: 0
