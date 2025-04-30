@@ -8,12 +8,16 @@ public class TestDummyDamageTest : MonoBehaviour
     private bool damageReady = true;
     private bool hitAlready=false;
 
+    private void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject == player && damageReady)
         {
             damageReady = false;
-            player.GetComponent<PlayerMelee>().isHurtOn();
+            player.GetComponent<PlayerController>().isHurtOn();
         }
     }
     private void Update()

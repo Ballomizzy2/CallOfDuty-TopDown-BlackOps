@@ -106,7 +106,7 @@ public class Gun : MonoBehaviour
 
             if (hit.collider.CompareTag("Zombie"))
             {
-                Destroy(hit.collider.gameObject); // Replace with proper damage system later
+                hit.collider.GetComponent<Enemy>().TakeDamage(gunData.damage); // Replace with proper damage system later
             }
 
             // Optional: Visual impact point
