@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private int HP = 100;
+    [SerializeField] private int HP = 150;
     private Animator animator;
 
     private NavMeshAgent agent;
