@@ -27,6 +27,7 @@ public class Bullet : MonoBehaviour
         if (other.CompareTag("Zombie"))
         {
             // Apply damage logic here (for now just destroy the bullet)
+            other.GetComponent<Enemy>().TakeDamage(damage);
             Destroy(gameObject);
         }
     }

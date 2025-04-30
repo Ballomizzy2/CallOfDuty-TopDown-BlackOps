@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class ZombieInteracts : MonoBehaviour
 {
+
+    public int hitCount = 10;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Barricade"))
+        if (other.CompareTag("Hand"))
         {
-            BarricadeController barricade = other.GetComponent<BarricadeController>();
-            if (barricade != null && !barricade.isBreached)
-            {
-                barricade.RegisterHit();
-            }
+
+            hitCount--;
+            if(hitCount == 0)
+                Destroy(gameObject);
         }
     }
 }
