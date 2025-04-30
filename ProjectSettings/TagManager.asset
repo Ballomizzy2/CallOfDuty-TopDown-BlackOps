@@ -9,6 +9,8 @@ TagManager:
   - Waypoints
   - Window
   - ZombieInteracts
+  - SpawnPoint
+  - WallBuy
   layers:
   - Default
   - TransparentFX
@@ -16,13 +18,13 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - PerkMachine
+  - WallBuys
+  - Doors
+  - Barriers
+  - MysteryBox
+  - PowerSwitch
+  - Pack-A-Punch
   - 
   - 
   - 
