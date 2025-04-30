@@ -113,7 +113,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0.62}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &1925640766122401743
 BoxCollider:
@@ -134,7 +134,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.5, y: 1, z: 0.61}
+  m_Size: {x: 2.5, y: 1, z: 1.1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1410534328434621386
 MonoBehaviour:
@@ -592,7 +592,7 @@ GameObject:
   - component: {fileID: 3620727815497304177}
   - component: {fileID: 8453347102144866843}
   m_Layer: 0
-  m_Name: Zombie Interact Sample
+  m_Name: Zombie Interact Sample 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -627,8 +627,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SerializedVersion: 0
-  m_Size: {x: 1, y: 15, z: 11.59}
-  m_Center: {x: 0, y: -3.01, z: 0}
+  m_Size: {x: 1, y: 8, z: 19.125}
+  m_Center: {x: 0, y: 0, z: 0}
   m_Area: 3
   m_AffectedAgents: ffffffff
 --- !u!1 &9119044027209873057

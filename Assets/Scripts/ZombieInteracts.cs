@@ -2,29 +2,18 @@ using UnityEngine;
 
 public class ZombieInteracts : MonoBehaviour
 {
-<<<<<<< HEAD
-
-    public int hitCount = 10;
+    
+    public int hitCount = 5;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Hand"))
+        if (other.gameObject.CompareTag("Hand"))
         {
-
             hitCount--;
-            if(hitCount == 0)
-                Destroy(gameObject);
-=======
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Barricade"))
-        {
-            BarricadeController barricade = other.GetComponent<BarricadeController>();
-            if (barricade != null && !barricade.isBreached)
+            if (hitCount == 0)
             {
-                barricade.RegisterHit();
+                Destroy(gameObject);
             }
->>>>>>> origin/Lester_D
         }
     }
 }

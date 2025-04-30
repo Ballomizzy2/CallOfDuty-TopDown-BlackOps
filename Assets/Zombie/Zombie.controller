@@ -73,7 +73,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Standard Run
-  m_Speed: 1.5
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 425232040103842925}
@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5504b9bf2df58a74da28d5a37cb8482e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseSpeed: 4
+  chaseSpeed: 0.5
   stopChasingDistance: 45
   attackRange: 2.5
 --- !u!1102 &-2018431231061275180
@@ -555,7 +555,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patrolTime: 2
   detectionRange: 40
-  patrolSpeed: 2
+  patrolSpeed: 0.5
 --- !u!1102 &7835134379014847215
 AnimatorState:
   serializedVersion: 6
@@ -564,7 +564,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Cross Punch
-  m_Speed: 3
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -7781733389827913273}
