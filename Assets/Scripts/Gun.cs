@@ -22,6 +22,8 @@ public class Gun : MonoBehaviour
     public enum WeaponSlot { Primary, Secondary }
     public WeaponSlot slot = WeaponSlot.Primary;
 
+    [SerializeField] private GameManager_Scores gm_score;
+
 
 
     private void Start()
@@ -83,7 +85,7 @@ public class Gun : MonoBehaviour
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             if (bulletScript != null)
             {
-                bulletScript.SetBulletStats(gunData.bulletSpeed, gunData.damage);
+                bulletScript.SetBulletStats(gunData.bulletSpeed, gunData.damage, gm_score);
             }
         }
 
@@ -114,7 +116,8 @@ public class Gun : MonoBehaviour
             {
                 hit.collider.GetComponent<Enemy>().TakeDamage(gunData.damage); // Replace with proper damage system later
                 //send an event to GameManager_Scores for x2
-                OnBulletHitZombie?.Invoke(this, EventArgs.Empty); //tell GM_score that player hit zombie
+                //OnBulletHitZombie?.Invoke(this, EventArgs.Empty); //tell GM_score that player hit zombie
+                gm_score.PointCalulation(10);
             }
 
             // Optional: Visual impact point

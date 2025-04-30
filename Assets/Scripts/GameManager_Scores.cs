@@ -25,9 +25,7 @@ public class GameManager_Scores : MonoBehaviour
 
     private void WeaponManagerScript_OnWeaponSwap(object sender, WeaponManager.WeaponSwap e)
     {
-        //bullet variant
-
-        //ray cast variants
+        //bullet variant- lol i forgot object can call these methods directly...
         //usubscribe to old gun
         weaponManagerScript.GetCurrentWeapon().OnBulletHitZombie -= CurrentGun_OnRayCastBulletHitZombie;
 
@@ -77,7 +75,7 @@ public class GameManager_Scores : MonoBehaviour
         }
         
     }
-    private void PointCalulation(int pointsToAdd)
+    public void PointCalulation(int pointsToAdd)
     {
         PlayerController.Instance.AddPoints(pointsToAdd * multiplier);
     }
