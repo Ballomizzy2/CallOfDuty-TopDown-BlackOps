@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2143593270022689438}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.687, y: 0.747, z: 0}
+  m_LocalPosition: {x: -1.7646317, y: 0, z: -6.5925035}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41a11a56011fc924eacd43e7bbbb338d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pinPullSound: {fileID: 8300000, guid: 5a5f9bac4b8613243a894345dce7ef47, type: 3}
   fuseTime: 3
   explosionPrefab: {fileID: 4329595302272027103, guid: 183f7f974ab621a4fb5c26d6b17f0c7c, type: 3}
 --- !u!1 &2664128584133478037

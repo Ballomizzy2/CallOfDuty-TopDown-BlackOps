@@ -10,6 +10,9 @@ public class WeaponManager : MonoBehaviour
     [Header("Grenade Count")]
     public int maxGrenades = 4;
     public int currentGrenades;
+    private bool isCooking = false;
+    private float cookTimer = 0f;
+    [SerializeField] private float grenadeFuseTime = 3f;
 
     public Gun[] weapons; // Should contain 2 weapons in the array
     private int currentWeaponIndex = 0;
@@ -20,32 +23,50 @@ public class WeaponManager : MonoBehaviour
         currentGrenades = maxGrenades;
     }
 
-
     void Update()
     {
+        // Start cooking when G is pressed
         if (Input.GetKeyDown(KeyCode.G))
         {
-            ThrowGrenade();
-        }
-
-        // Switch with Q key
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            if (!weapons[currentWeaponIndex].IsReloading)
+            if (currentGrenades > 0 && !isCooking)
             {
-                SwitchWeapon();
+                StartCookingGrenade();
             }
         }
 
-        // Optionally allow switching via number keys
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        // Throw grenade when G is released
+        if (Input.GetKeyUp(KeyCode.G))
         {
-            TryEquipWeapon(0);
+            if (isCooking)
+            {
+                ThrowCookedGrenade();
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+
+        if (isCooking)
         {
-            TryEquipWeapon(1);
+            cookTimer += Time.deltaTime;
+
+            if (cookTimer >= grenadeFuseTime)
+            {
+                Debug.Log("BOOM! Grenade cooked too long.");
+
+                isCooking = false;
+                currentGrenades--;
+
+                // Explode at player's position
+                Instantiate(grenadePrefab.GetComponent<Grenade>().explosionPrefab, transform.position, Quaternion.identity);
+            }
         }
+
+        // Switch weapons
+        if (Input.GetKeyDown(KeyCode.Q) && !weapons[currentWeaponIndex].IsReloading)
+        {
+            SwitchWeapon();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1)) TryEquipWeapon(0);
+        if (Input.GetKeyDown(KeyCode.Alpha2)) TryEquipWeapon(1);
     }
 
     void TryEquipWeapon(int index)
@@ -81,45 +102,18 @@ public class WeaponManager : MonoBehaviour
         return weapons[currentWeaponIndex];
     }
 
-    private void ThrowGrenade()
-    {
-        if (grenadePrefab == null || grenadeSpawnPoint == null) return;
-
-        if (currentGrenades <= 0)
-        {
-            Debug.Log("No grenades left!");
-            return;
-        }
-
-        // Create grenade
-        GameObject grenade = Instantiate(grenadePrefab, transform.position + Vector3.up * 1.5f, Quaternion.identity);
-        Rigidbody rb = grenade.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            Vector3 throwDirection = (grenadeSpawnPoint.position - (transform.position + Vector3.up * 1.5f)).normalized;
-            Vector3 finalThrowDirection = (throwDirection + Vector3.up * 0.5f).normalized;
-            rb.AddForce(finalThrowDirection * throwForce, ForceMode.Impulse);
-        }
-
-        currentGrenades--; // Reduce grenade count
-    }
-
-
     public void ReplaceCurrentWeapon(GunData newGunData)
     {
-        // First, check if the player already has this weapon
         foreach (Gun gun in weapons)
         {
             if (gun.gunData == newGunData)
             {
                 Debug.Log("Already have this weapon! Cannot buy again.");
-                return; // Stop, don't replace
+                return;
             }
         }
 
-        // If not owned, replace the current weapon
         Gun currentGun = weapons[currentWeaponIndex];
-
         if (currentGun != null)
         {
             currentGun.gunData = newGunData;
@@ -127,7 +121,40 @@ public class WeaponManager : MonoBehaviour
         }
     }
 
+    private void StartCookingGrenade()
+    {
+        isCooking = true;
+        cookTimer = 0f;
+        Debug.Log("Started cooking grenade...");
+        // Optional: Play pin sound here if not tied to grenade object
+    }
 
+    private void ThrowCookedGrenade()
+    {
+        isCooking = false;
+        currentGrenades--;
 
+        float timeLeft = grenadeFuseTime - cookTimer;
+        timeLeft = Mathf.Max(0.1f, timeLeft);
+
+        GameObject grenade = Instantiate(grenadePrefab, transform.position + Vector3.up * 1.5f, Quaternion.identity);
+        Rigidbody rb = grenade.GetComponent<Rigidbody>();
+
+        if (rb != null)
+        {
+            Vector3 throwDirection = (grenadeSpawnPoint.position - (transform.position + Vector3.up * 1.5f)).normalized;
+            Vector3 finalThrowDirection = (throwDirection + Vector3.up * 0.5f).normalized;
+            rb.AddForce(finalThrowDirection * throwForce, ForceMode.Impulse);
+        }
+
+        Grenade grenadeScript = grenade.GetComponent<Grenade>();
+        if (grenadeScript != null)
+        {
+            grenadeScript.fuseTime = timeLeft;
+            grenadeScript.PlayPinPullSound(); // Optional
+            grenadeScript.BeginFuse();
+        }
+
+        Debug.Log($"Threw grenade with {timeLeft:F2}s fuse remaining");
+    }
 }
-
