@@ -143,7 +143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da26137f22fde94ba6c6cccf4b16524, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitCount: 5
 --- !u!1 &8775659157864987962
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +155,7 @@ GameObject:
   - component: {fileID: 8453347102144866843}
   m_Layer: 0
   m_Name: Zombie Interact Sample
-  m_TagString: Untagged
+  m_TagString: ZombieInteracts
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
