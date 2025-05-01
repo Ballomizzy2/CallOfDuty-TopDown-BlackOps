@@ -58,6 +58,10 @@ public class PlayerController : MonoBehaviour
 
         hudControllerObject.UpdateScore(currentPoints); // call this to set points to 0?
     }
+    private void Start()
+    {
+        
+    }
 
     private void Update()
     {

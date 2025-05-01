@@ -22,6 +22,7 @@ public class GameManager_Purchases : MonoBehaviour
     private const int DOOR_LAYER = 8;
     private const int BOX_LAYER = 9;
     private const int PACK_A_PUNCH_LAYER = 12;
+    private const int TRAP_SWITCH_LAYER = 13;
     [SerializeField] bool powerOn = false;
     //[SerializeField] bool fireSaleActive; //
 
@@ -57,6 +58,7 @@ public class GameManager_Purchases : MonoBehaviour
                 HandleMysterBoxPurchase(e.overLapHit,playerScore,player);
                 break;
 
+
         }
     }
 
@@ -86,6 +88,18 @@ public class GameManager_Purchases : MonoBehaviour
                 break;
             case PACK_A_PUNCH_LAYER:
                 //todo make a pack A punch
+                break;
+            case TRAP_SWITCH_LAYER:
+                if (powerOn)
+                {
+                    
+                    HandleTrapPurchase(e.lookAtInteract, playerScore, player);
+                }
+                else
+                {
+                    Debug.Log("NO POWWWWER!");
+                }
+
                 break;
         }
     }
@@ -129,6 +143,26 @@ public class GameManager_Purchases : MonoBehaviour
 
     }
 
+
+
+    private void HandleTrapPurchase(GameObject item, int playerScore, PlayerController player)
+    {
+        int price = 300;
+        if (playerScore >= price)
+        {
+            //- points
+            //call trapOn
+            player.SetPoints(playerScore -= price);
+            item.GetComponent<TrapSwitchController>().TrapActivate();
+
+        }
+        else
+        {
+            //oof noise
+            Debug.Log("broke...");
+        }
+    }
+    //perk stuff
     private void HandlePerkPurchase(GameObject item, int playerScore, PlayerController player)
     {
         PerkSodasSO tempPerkSO = item.GetComponent<PerkSodaSOHolder>().GetHeldPerkSodaSO();
@@ -152,7 +186,6 @@ public class GameManager_Purchases : MonoBehaviour
         }
 
     }
-
     private bool HasPerk(PerkSodasSO perkSoda)
     {
         //iterate thu player list to see if they have said perk
