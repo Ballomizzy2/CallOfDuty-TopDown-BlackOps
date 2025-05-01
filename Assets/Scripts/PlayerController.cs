@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
             {
                 // Game Ends
                 Destroy(gameObject);
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene("Main Menu");
             }
 
             //if hp=0 then GAMEOVER
