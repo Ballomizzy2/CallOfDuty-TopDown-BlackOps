@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class Gun : MonoBehaviour
@@ -6,6 +6,9 @@ public class Gun : MonoBehaviour
     public GunData gunData; // Drag the ScriptableObject into this field
     [SerializeField] private Transform gunMuzzle;
     [SerializeField] private GameObject bulletTrailPrefab;
+    private GameObject weaponModelInstance;
+    [SerializeField] private Transform modelHolder;
+
 
     private int currentAmmo;
     private int reserveAmmo;
@@ -19,6 +22,7 @@ public class Gun : MonoBehaviour
 
     private void Start()
     {
+        ReinitializeWeapon();
         currentAmmo = gunData.magazineSize;
         reserveAmmo = gunData.reserveAmmo;
         audioSource = GetComponent<AudioSource>();
@@ -192,7 +196,6 @@ public class Gun : MonoBehaviour
         for (int i = 0; i < gunData.pelletsPerShot; i++)
         {
             Vector3 pelletDirection = gunMuzzle.forward;
-
             float currentSpread = isAiming ? gunData.adsSpreadAngle : gunData.hipfireSpreadAngle;
 
             if (currentSpread > 0f)
@@ -201,17 +204,34 @@ public class Gun : MonoBehaviour
             }
 
             Ray ray = new Ray(gunMuzzle.position, pelletDirection);
-            Debug.DrawRay(ray.origin, ray.direction * gunData.raycastRange, Color.yellow, 0.2f);
+            Vector3 hitPoint = ray.origin + ray.direction * gunData.raycastRange;
 
             if (Physics.Raycast(ray, out RaycastHit hit, gunData.raycastRange))
             {
+                hitPoint = hit.point;
+
                 if (hit.collider.CompareTag("Zombie"))
                 {
                     Destroy(hit.collider.gameObject);
                 }
             }
+
+            // Spawn trail for each pellet
+            if (bulletTrailPrefab)
+            {
+                GameObject trailObj = Instantiate(bulletTrailPrefab, gunMuzzle.position, Quaternion.identity);
+                BulletTrail trail = trailObj.GetComponent<BulletTrail>();
+
+                if (trail != null)
+                {
+                    trail.Initialize(gunMuzzle.position, hitPoint);
+                }
+            }
+
+            Debug.DrawRay(ray.origin, ray.direction * gunData.raycastRange, Color.yellow, 0.2f);
         }
     }
+
 
     private Vector3 ApplySpread(Vector3 direction, float spreadAngle)
     {
@@ -240,7 +260,24 @@ public class Gun : MonoBehaviour
     {
         currentAmmo = gunData.magazineSize;
         reserveAmmo = gunData.reserveAmmo;
+
+        if (weaponModelInstance != null)
+        {
+            Destroy(weaponModelInstance);
+        }
+
+        if (gunData.weaponModelPrefab != null && modelHolder != null)
+        {
+            weaponModelInstance = Instantiate(
+                gunData.weaponModelPrefab,
+                modelHolder.position,
+                modelHolder.rotation,
+                modelHolder
+            );
+        }
     }
+
+
 
     private void HandleADSMovement()
     {

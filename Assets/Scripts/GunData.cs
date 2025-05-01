@@ -49,4 +49,8 @@ public class GunData : ScriptableObject
 
     [Header("UI Settings")]
     public Sprite weaponIcon;
+
+    [Header("3D Model")]
+    public GameObject weaponModelPrefab;
+
 }

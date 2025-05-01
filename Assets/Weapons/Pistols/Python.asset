@@ -35,3 +35,4 @@ MonoBehaviour:
   isShotgun: 0
   pelletsPerShot: 8
   weaponIcon: {fileID: 0}
+  weaponModelPrefab: {fileID: 118026619411760981, guid: 28d4fad9e1b7f944986a75f7e2ff19ab, type: 3}
