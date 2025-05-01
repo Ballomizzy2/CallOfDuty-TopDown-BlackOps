@@ -16,11 +16,11 @@ public class GameManager_Scores : MonoBehaviour
     [SerializeField] private float doublePointsTime=5f;
 
     [SerializeField] private WeaponManager weaponManagerScript;
+    int pointsToAdd = 10;
+    public static GameManager_Scores Instance {  get; private set; }
     private void Awake()
     {
-        //weaponManager, get current gun-> gun.cs, subscribe to that event
-        //weaponManagerScript.GetCurrentWeapon().OnBulletHitZombie += CurrentGun_OnRayCastBulletHitZombie;
-        //weaponManagerScript.OnWeaponSwap += WeaponManagerScript_OnWeaponSwap;
+      Instance = this;
     }
 
 
@@ -50,10 +50,27 @@ public class GameManager_Scores : MonoBehaviour
     }
     public void PointsPerHit()
     {
-        int pointsToAdd = 10;
+        pointsToAdd = 10;
         PlayerController.Instance.AddPoints(pointsToAdd * multiplier);
     }
 
+    public void PointsPerKill(bool isKnife)
+    {
+        if(isKnife)
+        {
+            //knife kills
+            pointsToAdd = 130;
+        }
+        else
+        {
+            //every other kill
+            pointsToAdd = 60;
+
+
+        }
+        PlayerController.Instance.AddPoints(pointsToAdd * multiplier);
+
+    }
 
 
 }

@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, bool isKnife)
     {
         HP -= damage;
         if (HP <= 0)
@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour
             }
             isDead = true;
             GetComponent<CapsuleCollider>().enabled = false;
+            GameManager_Scores.Instance.PointsPerKill(isKnife);
         }
         else
         {

@@ -113,7 +113,8 @@ public class Gun : MonoBehaviour
 
             if (hit.collider.CompareTag(ZOMBIE_TAG))
             {
-                hit.collider.GetComponent<Enemy>().TakeDamage(gunData.damage); // Replace with proper damage system later
+                bool isKnife = false;
+                hit.collider.GetComponent<Enemy>().TakeDamage(gunData.damage,isKnife); // Replace with proper damage system later
                 
                 gm_score.PointsPerHit();
             }
