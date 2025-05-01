@@ -76,6 +76,7 @@ public class TrapSwitchController : MonoBehaviour
         {
             TrapReady();
             coolDownTimer = 5f;
+            isCoolDown=false;
         }
     }
 

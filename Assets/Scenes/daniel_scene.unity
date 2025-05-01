@@ -917,7 +917,7 @@ PrefabInstance:
     - target: {fileID: 7213897446996863556, guid: bb2766ff0d4c2cf4eb75308f1e56d55d, type: 3}
       propertyPath: trapMech
       value: 
-      objectReference: {fileID: 866399972}
+      objectReference: {fileID: 866399975}
     - target: {fileID: 8414198168060815129, guid: bb2766ff0d4c2cf4eb75308f1e56d55d, type: 3}
       propertyPath: m_Name
       value: TrapSwitch
@@ -1021,6 +1021,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3025350228202669782, guid: 747f089664bb2a94c972d128e258f128, type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 647708395}
     - target: {fileID: 5301925906815918302, guid: 747f089664bb2a94c972d128e258f128, type: 3}
       propertyPath: m_Name
       value: TrapMechanism_shock
@@ -1078,9 +1082,14 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 747f089664bb2a94c972d128e258f128, type: 3}
---- !u!114 &866399972 stripped
+--- !u!65 &866399973 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 5638533018510169788, guid: 747f089664bb2a94c972d128e258f128, type: 3}
+  m_PrefabInstance: {fileID: 866399971}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &866399975 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8275539252180504022, guid: 747f089664bb2a94c972d128e258f128, type: 3}
+  m_CorrespondingSourceObject: {fileID: 3025350228202669782, guid: 747f089664bb2a94c972d128e258f128, type: 3}
   m_PrefabInstance: {fileID: 866399971}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -1089,11 +1098,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3554b0b697e0b14186bf17ff831c888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &866399973 stripped
-BoxCollider:
-  m_CorrespondingSourceObject: {fileID: 5638533018510169788, guid: 747f089664bb2a94c972d128e258f128, type: 3}
-  m_PrefabInstance: {fileID: 866399971}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &878458297
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1150,6 +1154,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8810231561074202333, guid: cba0fb39ed0ab09489c1c63a8d85ed66, type: 3}
+      propertyPath: hudControllerObject
+      value: 
+      objectReference: {fileID: 1651647965}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1581,6 +1589,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4869023314694487763, guid: cece3df2434623b4495ea944e2307028, type: 3}
   m_PrefabInstance: {fileID: 524101748}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1651647965 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7343154988224604962, guid: cece3df2434623b4495ea944e2307028, type: 3}
+  m_PrefabInstance: {fileID: 524101748}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf991afd36a668547a7165bccedf13eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1721056935
 PrefabInstance:
   m_ObjectHideFlags: 0
