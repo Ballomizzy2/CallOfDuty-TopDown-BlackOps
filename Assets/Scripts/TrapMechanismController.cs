@@ -36,6 +36,9 @@ public class TrapMechanismController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //remember who got hurt and their speed
+        //slow them down (1/2)
+        //after x sec,  return their speed
         if(other.CompareTag(ZOMBIE_TAG))
         {
             bool isKnife = false;
