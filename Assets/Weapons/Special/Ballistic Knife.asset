@@ -29,3 +29,13 @@ MonoBehaviour:
   burstDelay: 0.1
   useRaycast: 0
   raycastRange: 100
+<<<<<<< HEAD
+=======
+  hipfireSpreadAngle: 0
+  adsSpreadAngle: 0
+  adsSpeedMultiplier: 0.6
+  isShotgun: 0
+  pelletsPerShot: 8
+  weaponIcon: {fileID: 0}
+  weaponModelPrefab: {fileID: 699438150171819443, guid: 098935d572bbdd24bb645193f00b35df, type: 3}
+>>>>>>> origin/Lester_D

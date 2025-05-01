@@ -29,3 +29,10 @@ MonoBehaviour:
   burstDelay: 0.1
   useRaycast: 1
   raycastRange: 100
+  hipfireSpreadAngle: 40
+  adsSpreadAngle: 5
+  adsSpeedMultiplier: 0.4
+  isShotgun: 0
+  pelletsPerShot: 8
+  weaponIcon: {fileID: 0}
+  weaponModelPrefab: {fileID: 2140536284103667934, guid: 8b7b286ac0801704dad2736cef748617, type: 3}

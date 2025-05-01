@@ -17,9 +17,13 @@ MonoBehaviour:
   reserveAmmo: 12
   reloadTime: 3.25
   fireDelay: 0.38
-  bulletSpeed: 55
+  bulletSpeed: 80
   damage: 2147483647
+<<<<<<< HEAD
   bulletPrefab: {fileID: 323053151204081425, guid: 34ff0326bc0e0634990ec62cef286d8b, type: 3}
+=======
+  bulletPrefab: {fileID: 4975807448933526346, guid: 506ac5dad945e874b890e9a2eccb3719, type: 3}
+>>>>>>> origin/Lester_D
   muzzleFlashPrefab: {fileID: 0}
   shootSound: {fileID: 8300000, guid: 9926826883f20924cac7d3cb945633f5, type: 3}
   reloadSound: {fileID: 8300000, guid: 9c672165b7c8aae40a1074393d44bb68, type: 3}
@@ -29,3 +33,13 @@ MonoBehaviour:
   burstDelay: 0.1
   useRaycast: 0
   raycastRange: 100
+<<<<<<< HEAD
+=======
+  hipfireSpreadAngle: 0
+  adsSpreadAngle: 0
+  adsSpeedMultiplier: 0.5
+  isShotgun: 0
+  pelletsPerShot: 8
+  weaponIcon: {fileID: 0}
+  weaponModelPrefab: {fileID: 609635592407738363, guid: a0ea81d11fa857d4e8ed49e11523c0ef, type: 3}
+>>>>>>> origin/Lester_D

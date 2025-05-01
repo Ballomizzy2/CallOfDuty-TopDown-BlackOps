@@ -1,33 +1,43 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class Gun : MonoBehaviour
 {
-    public GunData gunData; // Assign in Inspector
+    public GunData gunData; // Drag the ScriptableObject into this field
     [SerializeField] private Transform gunMuzzle;
-    [SerializeField] private GameObject hitEffectPrefab;
+    [SerializeField] private GameObject bulletTrailPrefab;
+    private GameObject weaponModelInstance;
+    [SerializeField] private Transform modelHolder;
+
 
     private int currentAmmo;
     private int reserveAmmo;
-    public int GetCurrentAmmo() => currentAmmo;
-    public int GetReserveAmmo() => reserveAmmo;
     private float nextFireTime = 0f;
     private bool isReloading = false;
     private AudioSource audioSource;
-
-    public enum WeaponSlot { Primary, Secondary }
-    public WeaponSlot slot = WeaponSlot.Primary;
+    private bool isAiming = false;
+    private PlayerMovement playerMovement;
+    private float originalMoveSpeed;
+    private bool adsSlowed = false;
 
     private void Start()
     {
+        ReinitializeWeapon();
         currentAmmo = gunData.magazineSize;
         reserveAmmo = gunData.reserveAmmo;
         audioSource = GetComponent<AudioSource>();
+        playerMovement = FindObjectOfType<PlayerMovement>();
+        originalMoveSpeed = playerMovement.speed;
     }
 
     void Update()
     {
+        isAiming = Input.GetMouseButton(1); // Right-click to aim
+
+        HandleADSMovement();
+
         if (isReloading) return;
+        isAiming = Input.GetMouseButton(1); // Right-click = Aim Down Sights
 
         if (gunData.isAutomatic)
         {
@@ -69,7 +79,10 @@ public class Gun : MonoBehaviour
 
         if (gunData.useRaycast)
         {
-            RaycastShoot();
+            if (gunData.isShotgun)
+                ShotgunRaycastShoot();
+            else
+                RaycastShoot();
         }
         else if (gunData.bulletPrefab)
         {
@@ -93,6 +106,7 @@ public class Gun : MonoBehaviour
         }
     }
 
+<<<<<<< HEAD
     private void RaycastShoot()
     {
         Ray ray = new Ray(gunMuzzle.position, gunMuzzle.forward);
@@ -119,6 +133,8 @@ public class Gun : MonoBehaviour
 
 
 
+=======
+>>>>>>> origin/Lester_D
     private IEnumerator Reload()
     {
         isReloading = true;
@@ -164,11 +180,149 @@ public class Gun : MonoBehaviour
         }
     }
 
-    // For weapon switching
+    private void RaycastShoot()
+    {
+        Vector3 shootDirection = gunMuzzle.forward;
+        float currentSpread = isAiming ? gunData.adsSpreadAngle : gunData.hipfireSpreadAngle;
+
+        if (currentSpread > 0f)
+        {
+            shootDirection = ApplySpread(shootDirection, currentSpread);
+        }
+
+        Ray ray = new Ray(gunMuzzle.position, shootDirection);
+        Vector3 hitPoint = ray.origin + ray.direction * gunData.raycastRange; // default endpoint if no hit
+
+        if (Physics.Raycast(ray, out RaycastHit hit, gunData.raycastRange))
+        {
+            hitPoint = hit.point;
+
+            if (hit.collider.CompareTag("Zombie"))
+            {
+                Destroy(hit.collider.gameObject);
+            }
+        }
+
+        // Now spawn the bullet trail
+        if (bulletTrailPrefab)
+        {
+            GameObject trailObj = Instantiate(bulletTrailPrefab, gunMuzzle.position, Quaternion.identity);
+            BulletTrail trail = trailObj.GetComponent<BulletTrail>();
+
+            if (trail != null)
+            {
+                trail.Initialize(gunMuzzle.position, hitPoint);
+            }
+        }
+
+        Debug.DrawRay(ray.origin, ray.direction * gunData.raycastRange, Color.red, 0.5f);
+    }
+
+
+
+    private void ShotgunRaycastShoot()
+    {
+        for (int i = 0; i < gunData.pelletsPerShot; i++)
+        {
+            Vector3 pelletDirection = gunMuzzle.forward;
+            float currentSpread = isAiming ? gunData.adsSpreadAngle : gunData.hipfireSpreadAngle;
+
+            if (currentSpread > 0f)
+            {
+                pelletDirection = ApplySpread(pelletDirection, currentSpread);
+            }
+
+            Ray ray = new Ray(gunMuzzle.position, pelletDirection);
+            Vector3 hitPoint = ray.origin + ray.direction * gunData.raycastRange;
+
+            if (Physics.Raycast(ray, out RaycastHit hit, gunData.raycastRange))
+            {
+                hitPoint = hit.point;
+
+                if (hit.collider.CompareTag("Zombie"))
+                {
+                    Destroy(hit.collider.gameObject);
+                }
+            }
+
+            // Spawn trail for each pellet
+            if (bulletTrailPrefab)
+            {
+                GameObject trailObj = Instantiate(bulletTrailPrefab, gunMuzzle.position, Quaternion.identity);
+                BulletTrail trail = trailObj.GetComponent<BulletTrail>();
+
+                if (trail != null)
+                {
+                    trail.Initialize(gunMuzzle.position, hitPoint);
+                }
+            }
+
+            Debug.DrawRay(ray.origin, ray.direction * gunData.raycastRange, Color.yellow, 0.2f);
+        }
+    }
+
+
+    private Vector3 ApplySpread(Vector3 direction, float spreadAngle)
+    {
+        float spreadRadius = Mathf.Tan(spreadAngle * Mathf.Deg2Rad / 2f);
+
+        // Only randomize along the X-axis (left-right)
+        float randomX = Random.Range(-spreadRadius, spreadRadius);
+
+        Vector3 spreadDirection = direction + (gunMuzzle.right * randomX);
+        return spreadDirection.normalized;
+    }
+
+
+    // Weapon Manager access
     public void SetActive(bool isActive)
     {
         gameObject.SetActive(isActive);
     }
 
     public bool IsReloading => isReloading;
+
+    public int GetCurrentAmmo() => currentAmmo;
+    public int GetReserveAmmo() => reserveAmmo;
+
+    public void ReinitializeWeapon()
+    {
+        currentAmmo = gunData.magazineSize;
+        reserveAmmo = gunData.reserveAmmo;
+
+        if (weaponModelInstance != null)
+        {
+            Destroy(weaponModelInstance);
+        }
+
+        if (gunData.weaponModelPrefab != null && modelHolder != null)
+        {
+            weaponModelInstance = Instantiate(
+                gunData.weaponModelPrefab,
+                modelHolder.position,
+                modelHolder.rotation,
+                modelHolder
+            );
+        }
+    }
+
+
+
+    private void HandleADSMovement()
+    {
+        if (playerMovement == null) return;
+
+        if (isAiming && !adsSlowed)
+        {
+            playerMovement.speed = originalMoveSpeed * gunData.adsSpeedMultiplier;
+            adsSlowed = true;
+        }
+        else if (!isAiming && adsSlowed)
+        {
+            playerMovement.speed = originalMoveSpeed;
+            adsSlowed = false;
+        }
+    }
+
+
 }

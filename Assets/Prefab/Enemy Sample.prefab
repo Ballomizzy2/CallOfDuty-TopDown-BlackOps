@@ -208,7 +208,10 @@ GameObject:
   - component: {fileID: 6198527398901612730}
   - component: {fileID: 8504044579603520441}
   - component: {fileID: 9106090271872068089}
+<<<<<<< HEAD
   - component: {fileID: 4611394314170651176}
+=======
+>>>>>>> origin/Lester_D
   m_Layer: 0
   m_Name: Enemy Sample
   m_TagString: Zombie
@@ -368,6 +371,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+<<<<<<< HEAD
 --- !u!114 &4611394314170651176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,6 +385,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+=======
+>>>>>>> origin/Lester_D
 --- !u!1 &1075069427475031067
 GameObject:
   m_ObjectHideFlags: 0

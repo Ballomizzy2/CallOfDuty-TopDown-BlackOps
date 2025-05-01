@@ -21,8 +21,12 @@ public class Enemy : MonoBehaviour
         HP -= damage;
         if (HP <= 0)
         {
+<<<<<<< HEAD
             agent.isStopped = true;
             //SoundMng.Instance.zombieChannel.PlayOneShot(SoundMng.Instance.zombieDeath);
+=======
+            SoundMng.Instance.zombieChannel.PlayOneShot(SoundMng.Instance.zombieDeath);
+>>>>>>> origin/Lester_D
             int randomValue = Random.Range(0, 2);
             if (randomValue == 0){
                 animator.SetTrigger("DIE2");
