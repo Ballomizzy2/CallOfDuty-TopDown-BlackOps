@@ -121,10 +121,7 @@ public class PlayerController : MonoBehaviour
 
 
             OnRayCastHitInteract?.Invoke(this, new RayCastHitInteract { lookAtInteract = storedRayHit });
-            if(storedRayHit.layer == POWER_LAYER)
-            {
-                PowerSwitchController.Instance.ActivatePower();
-            }
+            MiscInteractions(storedRayHit);
 
         }
         else if (storedShereHit != null)
@@ -164,18 +161,31 @@ public class PlayerController : MonoBehaviour
         //Debug.DrawRay(transform.position, transform.forward, Color.red);
     }
 
+    private void MiscInteractions(GameObject thingHit)
+    {
+        //if you guys want the player to interact w/ random stuff
+        //assign the object a layer and this should work
+        switch (thingHit.layer)
+        {
+            case POWER_LAYER:
+                PowerSwitchController.Instance.ActivatePower();
+                break;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Hand") && hp > 0)
             isHurtOn();
     }
+    // points 
     public void AddPoints(int amount)
     {
         //the object calling this does math (addition) and passes it into this method
         currentPoints += amount;
         totalPoints += amount;
         HUDController.Instance.UpdateScore(currentPoints);
-       
+
     }
     public bool SpendPoints(int amount)
     {
