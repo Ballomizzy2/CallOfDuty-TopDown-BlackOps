@@ -11,7 +11,7 @@ public class NukeBlast : MonoBehaviour
         
         foreach (Collider hit in hits)
         {
-            if (hit.CompareTag("Enemy"))
+            if (hit.CompareTag("Enemy") || hit.CompareTag("Zombie"))
             {
                 Enemy enemy = hit.GetComponent<Enemy>();
                 if (enemy != null)

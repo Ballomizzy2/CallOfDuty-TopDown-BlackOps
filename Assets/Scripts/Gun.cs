@@ -27,6 +27,19 @@ public class Gun : MonoBehaviour
 
     void Update()
     {
+        if ((float)reserveAmmo / gunData.reserveAmmo < 0.30f && reserveAmmo > 0 && PlayerVoicelineManager.Instance.hasreloaded && PlayerVoicelineManager.Instance.canSpeak)
+        {
+            PlayerVoicelineManager.Instance.PlayVoiceline(PlayerVoicelineManager.Instance.lowAmmoClips);
+            //Debug.Log((float)reserveAmmo / gunData.reserveAmmo);
+            PlayerVoicelineManager.Instance.hasreloaded = false;
+        }
+
+        if (reserveAmmo <= 0 && !PlayerVoicelineManager.Instance.outOfAmmoSaid && PlayerVoicelineManager.Instance.canSpeak)
+        {
+            PlayerVoicelineManager.Instance.PlayVoiceline(PlayerVoicelineManager.Instance.outOfAmmoClips);
+            PlayerVoicelineManager.Instance.outOfAmmoSaid = true;
+        }
+        
         if (isReloading) return;
 
         if (gunData.isAutomatic)
@@ -143,6 +156,8 @@ public class Gun : MonoBehaviour
         reserveAmmo -= ammoToReload;
 
         isReloading = false;
+        
+        PlayerVoicelineManager.Instance.hasreloaded = true;
     }
 
     private IEnumerator BurstFire()

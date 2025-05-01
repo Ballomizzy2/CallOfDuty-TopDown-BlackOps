@@ -6,7 +6,6 @@ public class PowerUp : MonoBehaviour
     public PowerUpType type;
     public GameObject nukeBlastPrefab;
     public GameObject playerPrefab;
-    internal bool instaKillActive = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,45 +16,39 @@ public class PowerUp : MonoBehaviour
             if (type == PowerUpType.Nuke)
             {
                 Instantiate(nukeBlastPrefab, transform.position, Quaternion.identity);
+                PowerUpSoundManager.Instance.PlaySoundEffect(PowerUpSoundManager.Instance.nukeClip);
+                PlayerVoicelineManager.Instance.PlayVoiceline(PlayerVoicelineManager.Instance.pickupNukeClips);
             }
             else if (type == PowerUpType.MaxAmmo)
             {
                 playerPrefab.GetComponentInChildren<Gun>().reserveAmmo = playerPrefab.GetComponentInChildren<Gun>().gunData.reserveAmmo;
                 playerPrefab.GetComponentInChildren<Gun>().currentAmmo = playerPrefab.GetComponentInChildren<Gun>().gunData.magazineSize;
                 //figure out how to fill ammo for second weapon
+                PowerUpSoundManager.Instance.PlaySoundEffect(PowerUpSoundManager.Instance.maxAmmoClip);
+                PlayerVoicelineManager.Instance.PlayVoiceline(PlayerVoicelineManager.Instance.pickupMaxAmmoClips);
+                PlayerVoicelineManager.Instance.outOfAmmoSaid = false;
+
             }
             else if (type == PowerUpType.InstaKill)
             {
-                StartCoroutine(InstaKillRoutine(30));
+                PowerUpManager.Instance.instaKillEffect();
+                PowerUpSoundManager.Instance.PlaySoundEffect(PowerUpSoundManager.Instance.instaKillClip);
+                PlayerVoicelineManager.Instance.PlayVoiceline(PlayerVoicelineManager.Instance.pickupInstaKillClips);
             }
             else if (type == PowerUpType.DoublePoints)
             {
                 //GameManager_Scores.Instance.CountDownDoublePoints();
+                PowerUpSoundManager.Instance.PlaySoundEffect(PowerUpSoundManager.Instance.doublePointsClip);
+                PlayerVoicelineManager.Instance.PlayVoiceline(PlayerVoicelineManager.Instance.pickupDoublePointsClips);
             }
             else if (type == PowerUpType.Carpenter)
             {
                 //BarricadeController
+                //PowerUpSoundManager.Instance.PlaySoundEffect(PowerUpSoundManager.Instance.carpenterClip);
+                //PlayerVoiceManager.Instance.PlayVoiceline(PlayerVoiceManager.Instance.pickupCarpenterClips);
             }
             
             Destroy(gameObject);
         }
-    }
-
-    private IEnumerator InstaKillRoutine(float duration)
-    {
-        instaKillActive = true;
-        
-        yield return new WaitForSeconds(duration);
-
-        instaKillActive = false;
-    }
-
-    private void instaKillEffect()
-    {
-        playerPrefab.GetComponentInChildren<Gun>().gunData.damage = 2147483647;
-        //change melee and grenade damage
-        
-        //Put all of this inside a manager object and call the object.instance.isInstaKillActive in enemy.takedamage
-        //if instakill is active, make zombie take 2147483647 damage
     }
 }

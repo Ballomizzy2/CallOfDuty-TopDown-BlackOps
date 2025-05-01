@@ -18,11 +18,18 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if (PowerUpManager.Instance.instaKillActive)
+        {
+            damage = 2147483647;
+        }
+        
         HP -= damage;
         if (HP <= 0)
         {
             agent.isStopped = true;
             //SoundMng.Instance.zombieChannel.PlayOneShot(SoundMng.Instance.zombieDeath);
+            PowerUpManager.Instance.TryDropPowerUp(transform.position);
+            PlayerVoicelineManager.Instance.PlayVoiceline(PlayerVoicelineManager.Instance.zombieKillClips);
             int randomValue = Random.Range(0, 2);
             if (randomValue == 0){
                 animator.SetTrigger("DIE2");
