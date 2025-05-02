@@ -5,10 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-<<<<<<< HEAD
     public static PlayerMovement Instance { get; private set; }
-=======
->>>>>>> origin/Lester_D
+
     [Header("Movement")]
     //player's movement speed variable
     public float speed = 10f;
@@ -35,10 +33,7 @@ public class PlayerMovement : MonoBehaviour
     {
         currentStamina = maxStamina;
         controller = GetComponent<CharacterController>();
-<<<<<<< HEAD
         Instance = this;
-=======
->>>>>>> origin/Lester_D
     }
 
     //This function gets the new input system settings and stores them in move

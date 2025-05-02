@@ -28,10 +28,8 @@ public class Bullet : MonoBehaviour
     {
         if (other.CompareTag("Zombie"))
         {
-<<<<<<< HEAD
             // Apply damage logic here (for now just destroy the bullet)
             other.GetComponent<Enemy>().TakeDamage(damage);
-=======
             if (impactEffectPrefab)
             {
                 Instantiate(impactEffectPrefab, transform.position, Quaternion.identity);
@@ -46,7 +44,6 @@ public class Bullet : MonoBehaviour
                 Instantiate(impactEffectPrefab, transform.position, Quaternion.identity);
             }
 
->>>>>>> origin/Lester_D
             Destroy(gameObject);
         }
     }

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,12 +18,6 @@ public class PlayerController : MonoBehaviour
         public GameObject overLapHit;
     }
 
-=======
-using UnityEngine;
-
-public class PlayerController : MonoBehaviour
-{
->>>>>>> origin/Lester_D
     [Header("Points")]
     public int currentPoints = 1000;
 
@@ -32,7 +25,6 @@ public class PlayerController : MonoBehaviour
     public Transform weaponHolder;
     private GameObject currentWeapon;
 
-<<<<<<< HEAD
     [Header("Interaction")]
     private InputSystem_Actions inputActions;
 
@@ -170,10 +162,7 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Hand") && hp > 0)
             isHurtOn();
     }
-=======
-    //points
 
->>>>>>> origin/Lester_D
     public void AddPoints(int amount)
     {
         currentPoints += amount;
@@ -191,7 +180,6 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-<<<<<<< HEAD
     public int GetPoints()
     {
         return currentPoints;
@@ -200,10 +188,6 @@ public class PlayerController : MonoBehaviour
     {
         currentPoints = score;
     }
-
-=======
->>>>>>> origin/Lester_D
-    //weapon management
 
     public void GiveWeapon(GameObject weaponPrefab)
     {
@@ -221,11 +205,9 @@ public class PlayerController : MonoBehaviour
     {
         return currentWeapon != null;
     }
-<<<<<<< HEAD
+
     private void OnDestroy()
     {
         inputActions.Player.Interact.performed -= Interact_performed;
     }
-=======
->>>>>>> origin/Lester_D
 }

@@ -106,7 +106,6 @@ public class Gun : MonoBehaviour
         }
     }
 
-<<<<<<< HEAD
     private void RaycastShoot()
     {
         Ray ray = new Ray(gunMuzzle.position, gunMuzzle.forward);
@@ -123,18 +122,14 @@ public class Gun : MonoBehaviour
                 hit.collider.GetComponent<Enemy>().TakeDamage(gunData.damage); // Replace with proper damage system later
             }
 
-            // Optional: Visual impact point
+            /*// Optional: Visual impact point
             if (hitEffectPrefab)
             {
                 Instantiate(hitEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
-            }
+            }*/
         }
     }
 
-
-
-=======
->>>>>>> origin/Lester_D
     private IEnumerator Reload()
     {
         isReloading = true;
