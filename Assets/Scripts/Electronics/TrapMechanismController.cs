@@ -57,8 +57,8 @@ public class TrapMechanismController : MonoBehaviour
         //after x sec,  return their speed
         if(other.CompareTag(ZOMBIE_TAG))
         {
-            bool isKnife = false;
-            other.gameObject.GetComponent<Enemy>().TakeDamage(shockDMG, isKnife);
+            
+            other.gameObject.GetComponent<Enemy>().TakeDamage(shockDMG, DamageType.Trap);
             //zombie ref, idk how speed is calculated...
         }
         else if(other.CompareTag(PLAYER_TAG))

@@ -86,7 +86,7 @@ public class PlayerMelee : MonoBehaviour
         {
             //Debug.Log("Hit: " + hitObject.name);
             bool isKnife = true;
-            hitObject.GetComponent<Enemy>().TakeDamage(knifeDamage, isKnife);
+            hitObject.GetComponent<Enemy>().TakeDamage(knifeDamage, DamageType.Knife);
         }
 
 

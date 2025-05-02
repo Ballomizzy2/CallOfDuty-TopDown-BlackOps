@@ -5,6 +5,7 @@ public enum DamageType
     Knife,
     Gun,
     Explosive,
-    Nuke
+    Nuke,
+    Trap
 
 }

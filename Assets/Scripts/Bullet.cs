@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
         {
             // Apply damage logic here (for now just destroy the bullet)
             bool isKnife = false;
-            other.GetComponent<Enemy>().TakeDamage(damage,isKnife);
+            other.GetComponent<Enemy>().TakeDamage(damage,DamageType.Gun);
             
             gm_score.PointsPerHit();
             Destroy(gameObject);

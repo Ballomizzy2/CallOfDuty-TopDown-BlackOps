@@ -192,7 +192,7 @@ public class Gun : MonoBehaviour
             if (hit.collider.CompareTag("Zombie"))
             {
                 bool isKnife = false;
-                hit.collider.GetComponent<Enemy>().TakeDamage(gunData.damage,isKnife);
+                hit.collider.GetComponent<Enemy>().TakeDamage(gunData.damage,DamageType.Gun);
             }
         }
 
