@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
@@ -84,6 +85,7 @@ public class WeaponManager : MonoBehaviour
     {
         int nextIndex = (currentWeaponIndex + 1) % weapons.Length;
         EquipWeapon(nextIndex);
+        OnWeaponSwap?.Invoke(this, new WeaponSwap { currentWeapon = weapons[nextIndex] });
     }
 
     void EquipWeapon(int index)
@@ -94,6 +96,7 @@ public class WeaponManager : MonoBehaviour
         }
 
         currentWeaponIndex = index;
+
         Debug.Log("Switched to weapon: " + weapons[currentWeaponIndex].gunData.gunName);
     }
 

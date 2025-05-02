@@ -19,7 +19,9 @@ public class PlayerController : MonoBehaviour
     }
 
     [Header("Points")]
-    public int currentPoints = 1000;
+    public int currentPoints = 0;
+    [SerializeField] private int totalPoints = 0;
+    [SerializeField] private int totalKills = 0;
 
     [Header("Inventory")]
     public Transform weaponHolder;
@@ -42,6 +44,9 @@ public class PlayerController : MonoBehaviour
 
     private const int POWER_LAYER = 11;
 
+    [Header("HUD")]
+    [SerializeField] private HUDController hudControllerObject;
+
     private void Awake()
     {
         Instance = this;
@@ -50,6 +55,12 @@ public class PlayerController : MonoBehaviour
         inputActions.Player.Enable();
         //subscribe to interact event
         inputActions.Player.Interact.performed += Interact_performed;
+
+        hudControllerObject.UpdateScore(currentPoints); // call this to set points to 0?
+    }
+    private void Start()
+    {
+        
     }
 
     private void Update()
@@ -85,7 +96,7 @@ public class PlayerController : MonoBehaviour
             {
                 // Game Ends
                 Destroy(gameObject);
-                SceneManager.LoadScene("Main Menu");
+                SceneManager.LoadScene(0);
             }
 
             //if hp=0 then GAMEOVER
@@ -114,10 +125,7 @@ public class PlayerController : MonoBehaviour
 
 
             OnRayCastHitInteract?.Invoke(this, new RayCastHitInteract { lookAtInteract = storedRayHit });
-            if(storedRayHit.layer == POWER_LAYER)
-            {
-                PowerSwitchController.Instance.ActivatePower();
-            }
+            MiscInteractions(storedRayHit);
 
         }
         else if (storedShereHit != null)
@@ -157,18 +165,32 @@ public class PlayerController : MonoBehaviour
         //Debug.DrawRay(transform.position, transform.forward, Color.red);
     }
 
+    private void MiscInteractions(GameObject thingHit)
+    {
+        //if you guys want the player to interact w/ random stuff
+        //assign the object a layer and this should work
+        switch (thingHit.layer)
+        {
+            case POWER_LAYER:
+                PowerSwitchController.Instance.ActivatePower();
+                break;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Hand") && hp > 0)
             isHurtOn();
     }
-
+    // points 
     public void AddPoints(int amount)
     {
+        //the object calling this does math (addition) and passes it into this method
         currentPoints += amount;
-        //ui update later
-    }
+        totalPoints += amount;
+        HUDController.Instance.UpdateScore(currentPoints);
 
+    }
     public bool SpendPoints(int amount)
     {
         if (currentPoints >= amount)
@@ -186,8 +208,12 @@ public class PlayerController : MonoBehaviour
     }
     public void SetPoints(int score)
     {
+        //the object that is calling this does math (subtract) and passes the result into this method
         currentPoints = score;
+        HUDController.Instance.UpdateScore(currentPoints);
     }
+
+    //weapon management
 
     public void GiveWeapon(GameObject weaponPrefab)
     {
@@ -205,7 +231,6 @@ public class PlayerController : MonoBehaviour
     {
         return currentWeapon != null;
     }
-
     private void OnDestroy()
     {
         inputActions.Player.Interact.performed -= Interact_performed;

@@ -4,6 +4,7 @@ using UnityEngine;
 public class MeleeHitBoxHandler : MonoBehaviour
 {
     public event EventHandler<MeleeHitEventArgs> OnMeleeContact;
+    private const string ZOMBIE_TAG = "Zombie";
     //custom event thing to pass gameobject data
     public class MeleeHitEventArgs : EventArgs
     {
@@ -19,7 +20,7 @@ public class MeleeHitBoxHandler : MonoBehaviour
     {
         //detects object w/rigid bodies
         //todo- change this to only detect zombies (layers?)
-        if(other.gameObject!= player && other.gameObject != nose)
+        if(other.GetComponent<Collider>().CompareTag(ZOMBIE_TAG))
         {
             OnMeleeContact?.Invoke(this, new MeleeHitEventArgs { hitObject= other.gameObject});
         }

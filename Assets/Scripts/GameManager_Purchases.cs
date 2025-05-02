@@ -2,7 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.InputSystem.LowLevel;
-//handles Game logic
+//handles Game point spending logic
 
 public class GameManager_Purchases : MonoBehaviour
 {
@@ -22,6 +22,7 @@ public class GameManager_Purchases : MonoBehaviour
     private const int DOOR_LAYER = 8;
     private const int BOX_LAYER = 9;
     private const int PACK_A_PUNCH_LAYER = 12;
+    private const int TRAP_SWITCH_LAYER = 13;
     [SerializeField] bool powerOn = false;
     //[SerializeField] bool fireSaleActive; //
 
@@ -57,6 +58,7 @@ public class GameManager_Purchases : MonoBehaviour
                 HandleMysterBoxPurchase(e.overLapHit,playerScore,player);
                 break;
 
+
         }
     }
 
@@ -87,6 +89,18 @@ public class GameManager_Purchases : MonoBehaviour
             case PACK_A_PUNCH_LAYER:
                 //todo make a pack A punch
                 break;
+            case TRAP_SWITCH_LAYER:
+                if (powerOn)
+                {
+                    
+                    HandleTrapPurchase(e.lookAtInteract, playerScore, player);
+                }
+                else
+                {
+                    Debug.Log("NO POWWWWER!");
+                }
+
+                break;
         }
     }
     private void HandleDoorPurchase(GameObject item,int playerScore, PlayerController player)
@@ -113,7 +127,7 @@ public class GameManager_Purchases : MonoBehaviour
     private void HandleMysterBoxPurchase(GameObject item,int playerScore,PlayerController player)
     {
         //TODO make MysteryBox to finish this
-        int mysteryBoxPrice = 1500;
+        int mysteryBoxPrice = 950;
         
         if(playerScore >= mysteryBoxPrice)
         {
@@ -129,6 +143,26 @@ public class GameManager_Purchases : MonoBehaviour
 
     }
 
+
+
+    private void HandleTrapPurchase(GameObject item, int playerScore, PlayerController player)
+    {
+        int price = 300;
+        if (playerScore >= price)
+        {
+            //- points
+            //call trapOn
+            player.SetPoints(playerScore -= price);
+            item.GetComponent<TrapSwitchController>().TrapActivate();
+
+        }
+        else
+        {
+            //oof noise
+            Debug.Log("broke...");
+        }
+    }
+    //perk stuff
     private void HandlePerkPurchase(GameObject item, int playerScore, PlayerController player)
     {
         PerkSodasSO tempPerkSO = item.GetComponent<PerkSodaSOHolder>().GetHeldPerkSodaSO();
@@ -152,7 +186,6 @@ public class GameManager_Purchases : MonoBehaviour
         }
 
     }
-
     private bool HasPerk(PerkSodasSO perkSoda)
     {
         //iterate thu player list to see if they have said perk
