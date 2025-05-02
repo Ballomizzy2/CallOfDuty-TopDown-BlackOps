@@ -9,13 +9,14 @@ public class TrapMechanismController : MonoBehaviour
     [SerializeField] private int shockDMG = 100;
     private const string PLAYER_TAG= "Player";
     private const string ZOMBIE_TAG = "Zombie";
+    private bool beenHit = false; //to prevent object from stcking up speed loss
+    private float tempSpeed;
     //dot timer
     [SerializeField] private float slowedTimer = 2f;
     [SerializeField] private bool isSlowed = false;
     //player ref?
     private PlayerMovement pm;
     private float pm_originalSpeed;
-    private float pm_tempSpeed;
 
     //zombie ref?
 
@@ -70,17 +71,27 @@ public class TrapMechanismController : MonoBehaviour
 
     private void DamageSpeed(GameObject other)
     {
-        if (other.CompareTag(ZOMBIE_TAG))
+        if (other.CompareTag(ZOMBIE_TAG) )
         {
             //slow da zombie
         }
         else if (other.CompareTag(PLAYER_TAG))
         {
+            
             isSlowed = true;
-            //remember base speed
-            pm_originalSpeed = pm.speed;
-            //half it
-            pm.speed *= 0.5f;
+           
+            if (!beenHit)//prevent object from stacking slow
+            {
+                
+                beenHit = true;
+                //remember base speed
+                pm_originalSpeed = pm.speed;
+                //half it
+                tempSpeed= pm.speed * 0.5f;
+            }
+            slowedTimer = 2f;
+            pm.speed = tempSpeed;
+         
         }
     }
     private void ResetSpeed()
@@ -90,6 +101,7 @@ public class TrapMechanismController : MonoBehaviour
         {
             isSlowed = false;
             pm.speed = pm_originalSpeed;
+            beenHit = false;
         }
     }
 }
