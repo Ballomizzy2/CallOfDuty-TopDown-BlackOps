@@ -16,11 +16,12 @@ public class NukeBlast : MonoBehaviour
                 Enemy enemy = hit.GetComponent<Enemy>();
                 if (enemy != null)
                 {
-                    enemy.TakeDamage(damage);
+
+                    enemy.TakeDamage(damage,DamageType.Nuke);
                 }
             }
         }
-
+        GameManager_Scores.Instance.NukePoints();
         //Maybe stop the spawning of zombies for a few seconds
         //Give 400 points to the player
         //Play sound effect and visual effect

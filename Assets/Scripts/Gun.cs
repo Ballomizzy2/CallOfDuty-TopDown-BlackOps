@@ -14,8 +14,8 @@ public class Gun : MonoBehaviour
 
     internal int currentAmmo;
     internal int reserveAmmo;
-    public int GetCurrentAmmo() => currentAmmo;
-    public int GetReserveAmmo() => reserveAmmo;
+    //public int GetCurrentAmmo() => currentAmmo;
+    //public int GetReserveAmmo() => reserveAmmo;
     private float nextFireTime = 0f;
     private bool isReloading = false;
     private AudioSource audioSource;

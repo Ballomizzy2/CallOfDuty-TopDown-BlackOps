@@ -54,22 +54,32 @@ public class GameManager_Scores : MonoBehaviour
         PlayerController.Instance.AddPoints(pointsToAdd * multiplier);
     }
 
-    public void PointsPerKill(bool isKnife)
+    public void PointsPerKill(DamageType killType)
     {
-        if(isKnife)
+        switch (killType)
         {
-            //knife kills
-            pointsToAdd = 130;
-        }
-        else
-        {
-            //every other kill
-            pointsToAdd = 60;
+            case DamageType.Knife:
+                pointsToAdd = 130;
+                break;
+            case DamageType.Gun:
+                pointsToAdd = 60;
+                break;
+            case DamageType.Explosive:
+                //place holder, prob not gonna make is :-:
+                break;
+            case DamageType.Nuke:
+                pointsToAdd = 400;
+                break;
 
-
         }
+        
         PlayerController.Instance.AddPoints(pointsToAdd * multiplier);
 
+    }
+    public void NukePoints()
+    {
+        pointsToAdd = 400;
+        PlayerController.Instance.AddPoints(pointsToAdd * multiplier);
     }
 
 

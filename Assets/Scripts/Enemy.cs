@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
 
-    public void TakeDamage(int damage, bool isKnife)
+    public void TakeDamage(int damage, DamageType dmgType)
     {
         if (PowerUpManager.Instance.instaKillActive)
         {
@@ -42,7 +42,17 @@ public class Enemy : MonoBehaviour
             }
             isDead = true;
             GetComponent<CapsuleCollider>().enabled = false;
-            GameManager_Scores.Instance.PointsPerKill(isKnife);
+            //this switch gives points
+            //Nuke is isolated bc we don't want 400 points PER zombie on map. lol
+            if(dmgType != DamageType.Nuke)
+            {
+
+            }
+            else
+            {
+                GameManager_Scores.Instance.PointsPerKill(dmgType);
+            }
+            
         }
         else
         {
