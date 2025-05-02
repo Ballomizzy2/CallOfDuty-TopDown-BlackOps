@@ -29,12 +29,9 @@ MonoBehaviour:
   burstDelay: 0.1
   useRaycast: 0
   raycastRange: 100
-<<<<<<< HEAD
-=======
   hipfireSpreadAngle: 5
   adsSpreadAngle: 1
   adsSpeedMultiplier: 0.5
   isShotgun: 0
   pelletsPerShot: 8
   weaponIcon: {fileID: 0}
->>>>>>> origin/Lester_D
