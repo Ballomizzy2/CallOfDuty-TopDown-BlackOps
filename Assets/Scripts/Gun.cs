@@ -106,30 +106,6 @@ public class Gun : MonoBehaviour
         }
     }
 
-    private void RaycastShoot()
-    {
-        Ray ray = new Ray(gunMuzzle.position, gunMuzzle.forward);
-
-        // Draw a visible line in the Scene view
-        Debug.DrawRay(ray.origin, ray.direction * gunData.raycastRange, Color.red, 0.5f);
-
-        if (Physics.Raycast(ray, out RaycastHit hit, gunData.raycastRange))
-        {
-            Debug.Log("Hit: " + hit.collider.name);
-
-            if (hit.collider.CompareTag("Zombie"))
-            {
-                hit.collider.GetComponent<Enemy>().TakeDamage(gunData.damage); // Replace with proper damage system later
-            }
-
-            /*// Optional: Visual impact point
-            if (hitEffectPrefab)
-            {
-                Instantiate(hitEffectPrefab, hit.point, Quaternion.LookRotation(hit.normal));
-            }*/
-        }
-    }
-
     private IEnumerator Reload()
     {
         isReloading = true;
@@ -194,7 +170,7 @@ public class Gun : MonoBehaviour
 
             if (hit.collider.CompareTag("Zombie"))
             {
-                Destroy(hit.collider.gameObject);
+                hit.collider.GetComponent<Enemy>().TakeDamage(gunData.damage);
             }
         }
 
