@@ -12,8 +12,10 @@ public class Gun : MonoBehaviour
     [SerializeField] private GameManager_Scores gm_score;
 
 
-    private int currentAmmo;
-    private int reserveAmmo;
+    internal int currentAmmo;
+    internal int reserveAmmo;
+    public int GetCurrentAmmo() => currentAmmo;
+    public int GetReserveAmmo() => reserveAmmo;
     private float nextFireTime = 0f;
     private bool isReloading = false;
     private AudioSource audioSource;
@@ -39,6 +41,19 @@ public class Gun : MonoBehaviour
 
         HandleADSMovement();
 
+        if ((float)reserveAmmo / gunData.reserveAmmo < 0.30f && reserveAmmo > 0 && PlayerVoicelineManager.Instance.hasreloaded && PlayerVoicelineManager.Instance.canSpeak)
+        {
+            PlayerVoicelineManager.Instance.PlayVoiceline(PlayerVoicelineManager.Instance.lowAmmoClips);
+            //Debug.Log((float)reserveAmmo / gunData.reserveAmmo);
+            PlayerVoicelineManager.Instance.hasreloaded = false;
+        }
+
+        if (reserveAmmo <= 0 && !PlayerVoicelineManager.Instance.outOfAmmoSaid && PlayerVoicelineManager.Instance.canSpeak)
+        {
+            PlayerVoicelineManager.Instance.PlayVoiceline(PlayerVoicelineManager.Instance.outOfAmmoClips);
+            PlayerVoicelineManager.Instance.outOfAmmoSaid = true;
+        }
+        
         if (isReloading) return;
         isAiming = Input.GetMouseButton(1); // Right-click = Aim Down Sights
 
@@ -134,6 +149,8 @@ public class Gun : MonoBehaviour
         reserveAmmo -= ammoToReload;
 
         isReloading = false;
+        
+        PlayerVoicelineManager.Instance.hasreloaded = true;
     }
 
     private IEnumerator BurstFire()
