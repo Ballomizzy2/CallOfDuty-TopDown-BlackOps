@@ -37,6 +37,10 @@ public class Bullet : MonoBehaviour
                 Instantiate(impactEffectPrefab, transform.position, Quaternion.identity);
             }
 
+            other.GetComponent<Enemy>().TakeDamage(damage, DamageType.Gun);
+
+            gm_score.PointsPerHit();
+
             Destroy(gameObject);
         }
         else
@@ -46,10 +50,7 @@ public class Bullet : MonoBehaviour
                 Instantiate(impactEffectPrefab, transform.position, Quaternion.identity);
             }
 
-           
-            other.GetComponent<Enemy>().TakeDamage(damage, DamageType.Gun);
 
-            gm_score.PointsPerHit();
             Destroy(gameObject);
         }
     }

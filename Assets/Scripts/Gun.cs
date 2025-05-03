@@ -8,6 +8,7 @@ public class Gun : MonoBehaviour
     public GunData gunData; // Assign in Inspector
     [SerializeField] private Transform gunMuzzle;
     [SerializeField] private GameObject hitEffectPrefab;
+    [SerializeField] private GameObject bulletTrailPrefab;
     private const string ZOMBIE_TAG = "Zombie";
     private GameObject weaponModelInstance;
     [SerializeField] private Transform modelHolder;
