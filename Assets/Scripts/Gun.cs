@@ -1,21 +1,22 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class Gun : MonoBehaviour
 {
-    public GunData gunData; // Drag the ScriptableObject into this field
+
+    public GunData gunData; // Assign in Inspector
     [SerializeField] private Transform gunMuzzle;
-    [SerializeField] private GameObject bulletTrailPrefab;
+    [SerializeField] private GameObject hitEffectPrefab;
+    private const string ZOMBIE_TAG = "Zombie";
     private GameObject weaponModelInstance;
     [SerializeField] private Transform modelHolder;
-
-    [SerializeField] private GameManager_Scores gm_score;
 
 
     internal int currentAmmo;
     internal int reserveAmmo;
-    //public int GetCurrentAmmo() => currentAmmo;
-    //public int GetReserveAmmo() => reserveAmmo;
+    // public int GetCurrentAmmo() => currentAmmo;
+    // public int GetReserveAmmo() => reserveAmmo;
     private float nextFireTime = 0f;
     private bool isReloading = false;
     private AudioSource audioSource;
@@ -23,6 +24,9 @@ public class Gun : MonoBehaviour
     private PlayerMovement playerMovement;
     private float originalMoveSpeed;
     private bool adsSlowed = false;
+
+    [SerializeField] private GameManager_Scores gm_score;
+
 
 
     private void Start()
@@ -53,7 +57,7 @@ public class Gun : MonoBehaviour
             PlayerVoicelineManager.Instance.PlayVoiceline(PlayerVoicelineManager.Instance.outOfAmmoClips);
             PlayerVoicelineManager.Instance.outOfAmmoSaid = true;
         }
-        
+
         if (isReloading) return;
         isAiming = Input.GetMouseButton(1); // Right-click = Aim Down Sights
 
@@ -108,7 +112,6 @@ public class Gun : MonoBehaviour
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             if (bulletScript != null)
             {
-                //pass gm_score ref so bullet
                 bulletScript.SetBulletStats(gunData.bulletSpeed, gunData.damage, gm_score);
             }
         }
@@ -118,7 +121,7 @@ public class Gun : MonoBehaviour
             AudioSource tempAudio = gameObject.AddComponent<AudioSource>();
             tempAudio.clip = gunData.shootSound;
             tempAudio.volume = 1f;
-            tempAudio.pitch = Random.Range(0.95f, 1.05f);
+            tempAudio.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
             tempAudio.spatialBlend = 0f;
             tempAudio.Play();
             Destroy(tempAudio, gunData.shootSound.length);
@@ -135,7 +138,7 @@ public class Gun : MonoBehaviour
             AudioSource tempAudio = gameObject.AddComponent<AudioSource>();
             tempAudio.clip = gunData.reloadSound;
             tempAudio.volume = 1f;
-            tempAudio.pitch = Random.Range(0.95f, 1.05f);
+            tempAudio.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
             tempAudio.spatialBlend = 0f;
             tempAudio.Play();
             Destroy(tempAudio, gunData.reloadSound.length);
@@ -149,7 +152,7 @@ public class Gun : MonoBehaviour
         reserveAmmo -= ammoToReload;
 
         isReloading = false;
-        
+
         PlayerVoicelineManager.Instance.hasreloaded = true;
     }
 
@@ -191,8 +194,7 @@ public class Gun : MonoBehaviour
 
             if (hit.collider.CompareTag("Zombie"))
             {
-                bool isKnife = false;
-                hit.collider.GetComponent<Enemy>().TakeDamage(gunData.damage,DamageType.Gun);
+                hit.collider.GetComponent<Enemy>().TakeDamage(gunData.damage);
             }
         }
 
