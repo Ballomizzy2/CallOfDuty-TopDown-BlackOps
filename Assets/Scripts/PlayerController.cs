@@ -213,6 +213,10 @@ public class PlayerController : MonoBehaviour
         HUDController.Instance.UpdateScore(currentPoints);
     }
 
+    public void AddKillCount()
+    {
+        totalKills++;
+    }
     //weapon management
 
     public void GiveWeapon(GameObject weaponPrefab)

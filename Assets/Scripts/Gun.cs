@@ -244,6 +244,7 @@ public class Gun : MonoBehaviour
 
                 if (hit.collider.CompareTag("Zombie"))
                 {
+                    hit.collider.GetComponent<Enemy>().TakeDamage(gunData.damage, DamageType.Gun);
                     Destroy(hit.collider.gameObject);
                 }
             }

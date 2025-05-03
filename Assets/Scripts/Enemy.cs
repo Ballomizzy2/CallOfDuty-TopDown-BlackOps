@@ -22,7 +22,7 @@ public class Enemy : MonoBehaviour
         {
             damage = 2147483647;
         }
-        
+
         HP -= damage;
         if (HP <= 0)
         {
@@ -33,25 +33,18 @@ public class Enemy : MonoBehaviour
             int randomValue = Random.Range(0, 2);
             if (randomValue == 0){
                 animator.SetTrigger("DIE2");
+                PointsForDeath(dmgType);
                 Destroy(gameObject, 3f);
             }
             else
             {
                 animator.SetTrigger("DIE1");
+                PointsForDeath(dmgType);
                 Destroy(gameObject, 3f);
             }
             isDead = true;
             GetComponent<CapsuleCollider>().enabled = false;
-            //this switch gives points
-            //Nuke is isolated bc we don't want 400 points PER zombie on map. lol
-            if(dmgType != DamageType.Nuke)
-            {
 
-            }
-            else
-            {
-                GameManager_Scores.Instance.PointsPerKill(dmgType);
-            }
             
         }
         else
@@ -148,4 +141,19 @@ public class Enemy : MonoBehaviour
     //         // Handle collision with player (e.g., stop moving, play attack animation, etc.)
     //     }
     // }
+
+    private void PointsForDeath(DamageType dmgType)
+    {
+        //this switch gives points
+        //Nuke is isolated bc we don't want 400 points PER zombie on map. lol
+        if (dmgType == DamageType.Nuke)
+        {
+
+        }
+        else
+        {
+            Debug.Log("ded");
+            GameManager_Scores.Instance.PointsPerKill(dmgType);
+        }
+    }
 }

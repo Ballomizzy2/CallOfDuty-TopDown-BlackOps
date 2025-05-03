@@ -72,7 +72,7 @@ public class GameManager_Scores : MonoBehaviour
                 break;
 
         }
-        
+        PlayerController.Instance.AddKillCount();
         PlayerController.Instance.AddPoints(pointsToAdd * multiplier);
 
     }
