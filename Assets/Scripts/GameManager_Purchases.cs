@@ -2,6 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.InputSystem.LowLevel;
+using System;
 //handles Game point spending logic
 
 public class GameManager_Purchases : MonoBehaviour
@@ -9,6 +10,8 @@ public class GameManager_Purchases : MonoBehaviour
 
     //map items: doors, wall guns, box, perks
     //logic for buying stuff?
+    public static GameManager_Purchases Instance {  get; private set; }
+    public event EventHandler OnSpeedColaPurchase;
     [SerializeField] private List<PerkSodasSO> mapPerkSodas; //doesn't do anything
 
     ///player var
@@ -28,7 +31,7 @@ public class GameManager_Purchases : MonoBehaviour
 
     private void Awake()
     {
-
+        Instance = this;
     }
     private void Start()
     {
@@ -222,6 +225,7 @@ public class GameManager_Purchases : MonoBehaviour
                 //access player's weapon manager-> add an increase fire rate variable-> pass into equipped Gun.cs
                 break;
             case PerkID.SpeedCola:
+                OnSpeedColaPurchase?.Invoke(this,EventArgs.Empty); 
                 //access player's weapon manager->add a x2 variable->pass it into equipped Gun.cs line 138 ...(gunData.reloadTime/speedCola)
                 break;
             case PerkID.MuleKick:

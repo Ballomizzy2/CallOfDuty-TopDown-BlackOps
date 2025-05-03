@@ -27,6 +27,7 @@ public class Gun : MonoBehaviour
     private bool adsSlowed = false;
 
     [SerializeField] private GameManager_Scores gm_score;
+    private float speedCola = 1f;
 
 
 
@@ -38,6 +39,12 @@ public class Gun : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         playerMovement = FindObjectOfType<PlayerMovement>();
         originalMoveSpeed = playerMovement.speed;
+        GameManager_Purchases.Instance.OnSpeedColaPurchase += GameManager_Purchases_OnSpeedColaPurchase;
+    }
+
+    private void GameManager_Purchases_OnSpeedColaPurchase(object sender, EventArgs e)
+    {
+        speedCola = 0.5f;
     }
 
     void Update()
@@ -145,7 +152,7 @@ public class Gun : MonoBehaviour
             Destroy(tempAudio, gunData.reloadSound.length);
         }
 
-        yield return new WaitForSeconds(gunData.reloadTime);
+        yield return new WaitForSeconds(gunData.reloadTime * speedCola);
 
         int ammoNeeded = gunData.magazineSize - currentAmmo;
         int ammoToReload = Mathf.Min(ammoNeeded, reserveAmmo);
