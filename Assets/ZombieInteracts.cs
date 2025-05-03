@@ -3,14 +3,14 @@ using UnityEngine;
 public class ZombieInteracts : MonoBehaviour
 {
     
-    public int hitCount = 5;
+    public int hitCounts = 5;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Hand"))
         {
-            hitCount--;
-            if (hitCount == 0)
+            hitCounts--;
+            if (hitCounts == 0)
             {
                 Destroy(gameObject);
             }
