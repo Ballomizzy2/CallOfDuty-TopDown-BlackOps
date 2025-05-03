@@ -194,7 +194,7 @@ public class Gun : MonoBehaviour
 
             if (hit.collider.CompareTag("Zombie"))
             {
-                hit.collider.GetComponent<Enemy>().TakeDamage(gunData.damage);
+                hit.collider.GetComponent<Enemy>().TakeDamage(gunData.damage,DamageType.Gun);
             }
         }
 
@@ -262,7 +262,7 @@ public class Gun : MonoBehaviour
         float spreadRadius = Mathf.Tan(spreadAngle * Mathf.Deg2Rad / 2f);
 
         // Only randomize along the X-axis (left-right)
-        float randomX = Random.Range(-spreadRadius, spreadRadius);
+        float randomX = UnityEngine.Random.Range(-spreadRadius, spreadRadius);
 
         Vector3 spreadDirection = direction + (gunMuzzle.right * randomX);
         return spreadDirection.normalized;

@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour
         if (other.CompareTag("Zombie"))
         {
             // Apply damage logic here (for now just destroy the bullet)
-            other.GetComponent<Enemy>().TakeDamage(damage);
+            other.GetComponent<Enemy>().TakeDamage(damage, DamageType.Gun);
             if (impactEffectPrefab)
             {
                 Instantiate(impactEffectPrefab, transform.position, Quaternion.identity);
@@ -46,8 +46,8 @@ public class Bullet : MonoBehaviour
                 Instantiate(impactEffectPrefab, transform.position, Quaternion.identity);
             }
 
-            bool isKnife = false;
-            other.GetComponent<Enemy>().TakeDamage(damage, isKnife);
+           
+            other.GetComponent<Enemy>().TakeDamage(damage, DamageType.Gun);
 
             gm_score.PointsPerHit();
             Destroy(gameObject);
