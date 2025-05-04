@@ -19,6 +19,7 @@ public class MysteryBox : MonoBehaviour
     [SerializeField] private GameObject weaponModelParent;
     private Dictionary<string, GameObject> modelLookup;
     private GunData tempWeapon;
+    private GameObject currentSpawnedModel;
 
     private void Awake()
     {
@@ -64,6 +65,10 @@ public class MysteryBox : MonoBehaviour
         {
             weaponManager.ReplaceCurrentWeapon(randomGun);
             ToggleLid();
+            if (currentSpawnedModel != null)
+            {
+                Destroy(currentSpawnedModel);
+            }
             Debug.Log("Mystery Box gave you: " + randomGun.gunName);
         }
     }
@@ -95,9 +100,13 @@ public class MysteryBox : MonoBehaviour
             Debug.LogWarning($"Weapon model not found: {weaponKey} Model");
             return;
         }
+  
 
-        // 3. Instantiate it at the spawn point
-        Instantiate(modelPrefab, weaponSpawnReference.position, Quaternion.identity);
+        // Instantiate and store new one
+        currentSpawnedModel = Instantiate(modelPrefab, weaponSpawnReference.position, Quaternion.identity);
+       
+        currentSpawnedModel.transform.localRotation = Quaternion.Euler(0f, 90f, 0f); 
+
 
 
         // TODO: Animate the weapon float-up here
