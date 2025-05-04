@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 514013759598274754}
   m_Layer: 0
-  m_Name: Thundergun Model
+  m_Name: Thunder Gun Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

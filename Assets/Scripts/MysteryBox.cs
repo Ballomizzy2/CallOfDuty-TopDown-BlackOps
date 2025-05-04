@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MysteryBox : MonoBehaviour
@@ -20,6 +21,7 @@ public class MysteryBox : MonoBehaviour
     private Dictionary<string, GameObject> modelLookup;
     private GunData tempWeapon;
     private GameObject currentSpawnedModel;
+    private int boxPrice = 950;
 
     private void Awake()
     {
@@ -43,11 +45,12 @@ public class MysteryBox : MonoBehaviour
 
         float distance = Vector3.Distance(player.position, transform.position);
 
-        if (distance <= interactDistance && Input.GetKeyDown(interactKey) && !isOpen)
+        if (distance <= interactDistance && Input.GetKeyDown(interactKey) && !isOpen && PlayerController.Instance.GetPoints()>boxPrice)
         {
             //GiveRandomWeapon();
             ToggleLid();
             SpawnWeapon();
+            PlayerController.Instance.SetPoints(PlayerController.Instance.GetPoints()-boxPrice);
             //spawn item and move it up
         }
         else if(distance <= interactDistance && Input.GetKeyDown(interactKey) && isOpen)
@@ -100,7 +103,7 @@ public class MysteryBox : MonoBehaviour
             Debug.LogWarning($"Weapon model not found: {weaponKey} Model");
             return;
         }
-  
+
 
         // Instantiate and store new one
         currentSpawnedModel = Instantiate(modelPrefab, weaponSpawnReference.position, Quaternion.identity);
