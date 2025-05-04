@@ -127,3 +127,6 @@ MonoBehaviour:
   interactionKey: 101
   buySound: {fileID: 8300000, guid: 866cec09a8e094a408855dea9c4740a7, type: 3}
   deniedSound: {fileID: 8300000, guid: 1d5548f9d40258e41a4f2da848cfee33, type: 3}
+  wallBuyCanvas: {fileID: 0}
+  weaponIconImage: {fileID: 0}
+  costText: {fileID: 0}
