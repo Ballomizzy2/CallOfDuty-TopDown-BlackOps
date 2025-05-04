@@ -12,6 +12,25 @@ public class MysteryBox : MonoBehaviour
 
     private Transform player;
 
+    [Header("GameObjectReferences")]
+    [SerializeField] private GameObject lid;
+    private bool isOpen=false;
+    [SerializeField] private Transform weaponSpawnReference;
+    [SerializeField] private GameObject weaponModelParent;
+    private Dictionary<string, GameObject> modelLookup;
+    private GunData tempWeapon;
+
+    private void Awake()
+    {
+        modelLookup = new Dictionary<string, GameObject>();
+
+        // Search under a parent GameObject like "WeaponModels"
+        foreach (Transform model in weaponModelParent.transform)
+        {
+            string cleanName = model.name.Replace(" Model", "").Trim();
+            modelLookup[cleanName] = model.gameObject;
+        }
+    }
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -23,13 +42,41 @@ public class MysteryBox : MonoBehaviour
 
         float distance = Vector3.Distance(player.position, transform.position);
 
-        if (distance <= interactDistance && Input.GetKeyDown(interactKey))
+        if (distance <= interactDistance && Input.GetKeyDown(interactKey) && !isOpen)
         {
-            GiveRandomWeapon();
+            //GiveRandomWeapon();
+            ToggleLid();
+            SpawnWeapon();
+            //spawn item and move it up
+        }
+        else if(distance <= interactDistance && Input.GetKeyDown(interactKey) && isOpen)
+        {
+            GiveRandomWeapon(tempWeapon);
         }
     }
 
-    void GiveRandomWeapon()
+    void GiveRandomWeapon(GunData randomGun)
+    {
+        
+
+        WeaponManager weaponManager = player.GetComponent<WeaponManager>();
+        if (weaponManager != null)
+        {
+            weaponManager.ReplaceCurrentWeapon(randomGun);
+            ToggleLid();
+            Debug.Log("Mystery Box gave you: " + randomGun.gunName);
+        }
+    }
+    
+    public void ToggleLid()
+    {
+        lid.transform.localRotation = isOpen
+            ? Quaternion.Euler(0f, 0f, 0f)
+            : Quaternion.Euler(90f, 0f, 0f);
+
+        isOpen = !isOpen;
+    }
+    public void SpawnWeapon()
     {
         if (possibleGuns.Count == 0)
         {
@@ -37,13 +84,22 @@ public class MysteryBox : MonoBehaviour
             return;
         }
 
+        // 1. Pick a random weapon
         GunData randomGun = possibleGuns[Random.Range(0, possibleGuns.Count)];
+        tempWeapon = randomGun;
+        string weaponKey = randomGun.gunName;
 
-        WeaponManager weaponManager = player.GetComponent<WeaponManager>();
-        if (weaponManager != null)
+        // 2. Lookup the matching model
+        if (!modelLookup.TryGetValue(weaponKey, out GameObject modelPrefab))
         {
-            weaponManager.ReplaceCurrentWeapon(randomGun);
-            Debug.Log("Mystery Box gave you: " + randomGun.gunName);
+            Debug.LogWarning($"Weapon model not found: {weaponKey} Model");
+            return;
         }
+
+        // 3. Instantiate it at the spawn point
+        Instantiate(modelPrefab, weaponSpawnReference.position, Quaternion.identity);
+
+
+        // TODO: Animate the weapon float-up here
     }
 }
