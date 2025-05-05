@@ -139,8 +139,9 @@ public class GameManager_Purchases : MonoBehaviour
     }
     private void HandleMysterBoxPurchase(GameObject item,int playerScore,PlayerController player)
     {
-        //TODO make MysteryBox to finish this
+        //HANDLED INSIDE MYSTERBOX PREFAB RN
         int mysteryBoxPrice = 950;
+       
         
         if(playerScore >= mysteryBoxPrice)
         {
@@ -155,7 +156,7 @@ public class GameManager_Purchases : MonoBehaviour
         else
         {
             //CanAfford_sound(canPayFor);
-         
+
         }
 
     }
@@ -177,7 +178,6 @@ public class GameManager_Purchases : MonoBehaviour
         }
         else
         {
-            //oof noise
             //canPayFor should default to false after calling noise
             CanAfford_sound(canPayFor);
         

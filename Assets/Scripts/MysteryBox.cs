@@ -45,23 +45,27 @@ public class MysteryBox : MonoBehaviour
 
         float distance = Vector3.Distance(player.position, transform.position);
 
-        if (CanAfford_n_lidClose(distance))
+
+        if (distance <= interactDistance && Input.GetKeyDown(interactKey))
         {
-           
-            //GiveRandomWeapon();
-            ToggleLid();
-            SpawnWeapon();
-            PlayerController.Instance.SetPoints(PlayerController.Instance.GetPoints()-boxPrice);
-            //spawn item and move it up
+            if (CanAfford_n_lidClose())
+            {
+                ToggleLid();
+                SpawnWeapon();
+                SoundMng.Instance.PlayBuySound();
+                PlayerController.Instance.SetPoints(PlayerController.Instance.GetPoints() - boxPrice);
+            }
+            else if (isOpen)
+            {
+                SoundMng.Instance.PlayAcceptSound();
+                GiveRandomWeapon(tempWeapon);
+            }
+            else
+            {
+                SoundMng.Instance.PlayDeniedSound();
+            }
         }
-        else if(Nearby_n_lidOpened(distance))
-        {
-            GiveRandomWeapon(tempWeapon);
-        }
-        else if(!CanAfford_n_lidClose(distance))
-        {
-            
-        }
+
     }
 
     void GiveRandomWeapon(GunData randomGun)
@@ -120,14 +124,10 @@ public class MysteryBox : MonoBehaviour
         // TODO: Animate the weapon float-up here
     }
 
-    private bool CanAfford_n_lidClose(float distance)
-    {
-        //SoundMng.Instance.PlayBuySound();
-        return distance <= interactDistance && Input.GetKeyDown(interactKey) && !isOpen && PlayerController.Instance.GetPoints() > boxPrice;
-    }
-    private bool Nearby_n_lidOpened(float distance)
+    private bool CanAfford_n_lidClose()
     {
         
-        return distance <= interactDistance && Input.GetKeyDown(interactKey) && isOpen;
+        return !isOpen && PlayerController.Instance.GetPoints() > boxPrice;
     }
+
 }
