@@ -20,6 +20,7 @@ public class GameManager_Purchases : MonoBehaviour
     
 
     [SerializeField] List<PerkSodasSO> playerPerkList; //move this to PlayerController ahhhhhhhhh
+    [SerializeField] private WallBuy wallBuy;
     private const int PERK_LAYER = 6;
     private const int WALLBUY_LAYER = 7;
     private const int DOOR_LAYER = 8;
@@ -135,6 +136,7 @@ public class GameManager_Purchases : MonoBehaviour
        //edit weapon SO to have a price?
        //int tempPrice= item.GetComponent<GunSOHolder>.GetHeldGun();
        //do same thing as perks
+       item.GetComponent<WallBuy>().AttemptPurchase();
 
     }
     private void HandleMysterBoxPurchase(GameObject item,int playerScore,PlayerController player)

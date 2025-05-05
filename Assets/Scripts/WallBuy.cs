@@ -6,9 +6,9 @@ public class WallBuy : MonoBehaviour
     public GunData weaponToGive;
     public int cost = 500; // Placeholder for future point system
 
-    [Header("Interaction Settings")]
-    public float interactionDistance = 3f; // How close the player needs to be
-    public KeyCode interactionKey = KeyCode.E;
+    //[Header("Interaction Settings")]
+    //public float interactionDistance = 3f; // How close the player needs to be
+    //public KeyCode interactionKey = KeyCode.E;
 
     [Header("Audio")]
     public AudioClip buySound;
@@ -41,22 +41,22 @@ public class WallBuy : MonoBehaviour
 
     private void Update()
     {
-        if (player == null) return;
+        //if (player == null) return;
 
-        float distance = Vector3.Distance(player.position, transform.position);
+        //float distance = Vector3.Distance(player.position, transform.position);
 
-        if (distance <= interactionDistance)
-        {
-            if (Input.GetKeyDown(interactionKey))
-            {
-                AttemptPurchase();
-            }
-        }
+        //if (distance <= interactionDistance)
+        //{
+        //    if (Input.GetKeyDown(interactionKey))
+        //    {
+        //        AttemptPurchase();
+        //    }
+        //}
     }
 
-    void AttemptPurchase()
+    public void AttemptPurchase()
     {
-        int playerPoints = 9999; // Placeholder
+        int playerPoints = PlayerController.Instance.GetPoints();
 
         WeaponManager weaponManager = player.GetComponent<WeaponManager>();
 
@@ -82,7 +82,7 @@ public class WallBuy : MonoBehaviour
                 PlayDeniedSound();
                 return;
             }
-
+            PlayerController.Instance.SetPoints(playerPoints-cost);
             // Otherwise, purchase successful
             weaponManager.ReplaceCurrentWeapon(weaponToGive);
             Debug.Log($"Player bought {weaponToGive.gunName} for {cost} points!");

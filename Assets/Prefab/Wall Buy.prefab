@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4794983414178716547}
   - component: {fileID: 8502612507506871021}
   - component: {fileID: 903395058658706011}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall Buy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,8 +123,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponToGive: {fileID: 11400000, guid: ae1cc55a771ccfb4fbe3e3b59daa2f09, type: 2}
   cost: 500
-  interactionDistance: 1.8
-  interactionKey: 101
   buySound: {fileID: 8300000, guid: 866cec09a8e094a408855dea9c4740a7, type: 3}
   deniedSound: {fileID: 8300000, guid: 1d5548f9d40258e41a4f2da848cfee33, type: 3}
   wallBuyCanvas: {fileID: 0}
