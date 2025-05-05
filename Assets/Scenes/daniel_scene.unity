@@ -769,6 +769,10 @@ PrefabInstance:
       propertyPath: weaponManager
       value: 
       objectReference: {fileID: 1442559384}
+    - target: {fileID: 8445088311133639788, guid: cece3df2434623b4495ea944e2307028, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -53.069946
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1735,6 +1739,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 866cec09a8e094a408855dea9c4740a7, type: 3}
     - target: {fileID: 3522690826308374241, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
+      propertyPath: roundEnd
+      value: 
+      objectReference: {fileID: 8300000, guid: 261978fb9b5d8c049965a7bf26854f7e, type: 3}
+    - target: {fileID: 3522690826308374241, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
+      propertyPath: roundStart
+      value: 
+      objectReference: {fileID: 8300000, guid: 5af082d4a2a4eae46b1be104e1496504, type: 3}
+    - target: {fileID: 3522690826308374241, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
       propertyPath: acceptSound
       value: 
       objectReference: {fileID: 8300000, guid: a8dbef26e72a0a44baaf7af910c9acb4, type: 3}
@@ -1746,6 +1758,10 @@ PrefabInstance:
       propertyPath: gunScript
       value: 
       objectReference: {fileID: 540157949}
+    - target: {fileID: 7587804145474311844, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
+      propertyPath: hudControllerObject
+      value: 
+      objectReference: {fileID: 1651647965}
     - target: {fileID: 8587732932215012876, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

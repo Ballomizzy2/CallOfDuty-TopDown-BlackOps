@@ -12,7 +12,10 @@ public class GameManager_Purchases : MonoBehaviour
     //logic for buying stuff?
     public static GameManager_Purchases Instance {  get; private set; }
     public event EventHandler OnSpeedColaPurchase;
+    public event EventHandler OnDoubleTapPurchase;
     [SerializeField] private List<PerkSodasSO> mapPerkSodas; //doesn't do anything
+    [Header("HUD")]
+    [SerializeField] private HUDController hudControllerObject; //for perks
 
     ///player var
     private int perkCount = 0;
@@ -20,7 +23,6 @@ public class GameManager_Purchases : MonoBehaviour
     
 
     [SerializeField] List<PerkSodasSO> playerPerkList; //move this to PlayerController ahhhhhhhhh
-    [SerializeField] private WallBuy wallBuy;
     private const int PERK_LAYER = 6;
     private const int WALLBUY_LAYER = 7;
     private const int DOOR_LAYER = 8;
@@ -228,6 +230,7 @@ public class GameManager_Purchases : MonoBehaviour
 
     private void HandlePerkSodaModifierAllocation(PerkSodasSO perkSoda)
     {
+        //in here, setActive respective perk from HUD thingy
 
         switch (perkSoda.perkID)
         {
@@ -245,8 +248,8 @@ public class GameManager_Purchases : MonoBehaviour
                 PlayerMovement.Instance.maxStamina = tempStamina;
                 break;
             case PerkID.DoubleTap:
-                //TODO edit Gun.cs to finish rest
-                //access player's weapon manager-> add an increase fire rate variable-> pass into equipped Gun.cs
+                //call an event to gun, first line in Fire() adjust the gun.fireRate delay, like speedCola
+                OnDoubleTapPurchase?.Invoke(this, EventArgs.Empty);
                 break;
             case PerkID.SpeedCola:
                 OnSpeedColaPurchase?.Invoke(this,EventArgs.Empty); 

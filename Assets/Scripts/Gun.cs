@@ -27,7 +27,8 @@ public class Gun : MonoBehaviour
     private bool adsSlowed = false;
 
     [SerializeField] private GameManager_Scores gm_score;
-    private float speedCola = 1f;
+    private float speedColaBuff = 1f;
+    private float doubleTapBuff = 1f;
 
 
 
@@ -40,11 +41,17 @@ public class Gun : MonoBehaviour
         playerMovement = FindObjectOfType<PlayerMovement>();
         originalMoveSpeed = playerMovement.speed;
         GameManager_Purchases.Instance.OnSpeedColaPurchase += GameManager_Purchases_OnSpeedColaPurchase;
+        GameManager_Purchases.Instance.OnDoubleTapPurchase += GameManager_Purchases_OnDoubleTapPurchase;
+    }
+
+    private void GameManager_Purchases_OnDoubleTapPurchase(object sender, EventArgs e)
+    {
+        doubleTapBuff = 0.5f;
     }
 
     private void GameManager_Purchases_OnSpeedColaPurchase(object sender, EventArgs e)
     {
-        speedCola = 0.5f;
+        speedColaBuff = 0.5f;
     }
 
     void Update()
@@ -102,6 +109,7 @@ public class Gun : MonoBehaviour
 
     private void Fire()
     {
+        //put doubleTapBuff here
         nextFireTime = Time.time + gunData.fireDelay;
         currentAmmo--;
 
@@ -146,13 +154,14 @@ public class Gun : MonoBehaviour
             AudioSource tempAudio = gameObject.AddComponent<AudioSource>();
             tempAudio.clip = gunData.reloadSound;
             tempAudio.volume = 1f;
-            tempAudio.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
-            tempAudio.spatialBlend = 0f;
+            // Speed Cola pitch adjustment
+            float pitchMultiplier = 1f / speedColaBuff; // e.g., 0.5x speedCola = 2x pitch
+            tempAudio.pitch = UnityEngine.Random.Range(0.95f, 1.05f) * pitchMultiplier;
             tempAudio.Play();
             Destroy(tempAudio, gunData.reloadSound.length);
         }
 
-        yield return new WaitForSeconds(gunData.reloadTime * speedCola);
+        yield return new WaitForSeconds(gunData.reloadTime * speedColaBuff);
 
         int ammoNeeded = gunData.magazineSize - currentAmmo;
         int ammoToReload = Mathf.Min(ammoNeeded, reserveAmmo);
@@ -326,6 +335,12 @@ public class Gun : MonoBehaviour
             playerMovement.speed = originalMoveSpeed;
             adsSlowed = false;
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameManager_Purchases.Instance.OnSpeedColaPurchase -= GameManager_Purchases_OnSpeedColaPurchase;
+        GameManager_Purchases.Instance.OnDoubleTapPurchase -= GameManager_Purchases_OnDoubleTapPurchase;
     }
 
 

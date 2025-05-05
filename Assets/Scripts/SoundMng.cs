@@ -19,6 +19,12 @@ public class SoundMng : MonoBehaviour
     public AudioClip deniedSound;
     public AudioClip acceptSound;
 
+    [Header("Round sfx")]
+    [SerializeField] private AudioClip roundStartJingle;
+    [SerializeField] private AudioClip roundEndJingle;
+    [SerializeField] private AudioClip gameOverJingle;
+    
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -76,5 +82,17 @@ public class SoundMng : MonoBehaviour
             tempAudio.Play();
             Destroy(tempAudio, deniedSound.length);
         }
+    }
+    public void PlayRoundStartJingle()
+    {
+        //add the src thingy
+    }
+    public void PlayRoundEndJingle()
+    {
+
+    }
+    public void PlayGameOverJingle()
+    {
+
     }
 }
