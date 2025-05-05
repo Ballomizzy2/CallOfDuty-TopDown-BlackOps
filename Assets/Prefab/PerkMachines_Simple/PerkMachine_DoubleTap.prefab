@@ -303,7 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1879126e4cb22534ba338eaac15a8570, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heldPerkSodaSO: {fileID: 11400000, guid: d46a745a95e567343abf4fe2daf13cba, type: 2}
+  heldPerkSodaSO: {fileID: 11400000, guid: 8148d7472f43a36429156807492c7271, type: 2}
 --- !u!1 &8691841302720101234
 GameObject:
   m_ObjectHideFlags: 0

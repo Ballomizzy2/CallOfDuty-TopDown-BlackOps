@@ -46,7 +46,7 @@ public class Gun : MonoBehaviour
 
     private void GameManager_Purchases_OnDoubleTapPurchase(object sender, EventArgs e)
     {
-        doubleTapBuff = 0.5f;
+        doubleTapBuff = 1- 0.3f;
     }
 
     private void GameManager_Purchases_OnSpeedColaPurchase(object sender, EventArgs e)
@@ -110,7 +110,7 @@ public class Gun : MonoBehaviour
     private void Fire()
     {
         //put doubleTapBuff here
-        nextFireTime = Time.time + gunData.fireDelay;
+        nextFireTime = Time.time + gunData.fireDelay *doubleTapBuff;
         currentAmmo--;
 
         Debug.Log("Fired " + gunData.gunName + " | Ammo: " + currentAmmo + "/" + reserveAmmo);
