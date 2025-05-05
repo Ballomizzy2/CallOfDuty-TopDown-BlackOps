@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8587732932215012876}
   - component: {fileID: 7587804145474311844}
   - component: {fileID: 6019503315905068125}
+  - component: {fileID: 3522690826308374241}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -65,3 +66,24 @@ MonoBehaviour:
   multiplier: 1
   doublePointsTime: 5
   weaponManagerScript: {fileID: 0}
+--- !u!114 &3522690826308374241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8764083847979849072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86972c4c7fc285a4fb9c9a2157f0cd33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zombieAttack: {fileID: 0}
+  zombieDeath: {fileID: 0}
+  zombieHurt: {fileID: 0}
+  zombieChannel: {fileID: 0}
+  playerChannel: {fileID: 0}
+  playerDeath: {fileID: 0}
+  playerHurt: {fileID: 0}
+  buySound: {fileID: 0}
+  deniedSound: {fileID: 0}

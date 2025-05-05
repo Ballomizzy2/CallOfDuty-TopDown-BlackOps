@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
         if (HP <= 0)
         {
             agent.isStopped = true;
-            //SoundMng.Instance.zombieChannel.PlayOneShot(SoundMng.Instance.zombieDeath);
+            SoundMng.Instance.zombieChannel.PlayOneShot(SoundMng.Instance.zombieDeath);
             PowerUpManager.Instance.TryDropPowerUp(transform.position);
             PlayerVoicelineManager.Instance.PlayVoiceline(PlayerVoicelineManager.Instance.zombieKillClips);
             int randomValue = Random.Range(0, 2);

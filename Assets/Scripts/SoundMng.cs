@@ -14,6 +14,11 @@ public class SoundMng : MonoBehaviour
     public AudioClip playerDeath;
     public AudioClip playerHurt;
 
+    [Header("Purchase sfx")]
+    public AudioClip buySound;
+    public AudioClip deniedSound;
+    public AudioClip acceptSound;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -23,6 +28,53 @@ public class SoundMng : MonoBehaviour
         else
         {
             Instance = this;
+        }
+    }
+
+    public void PlayBuySound()
+    {
+        if (buySound)
+        {
+            AudioSource tempAudio = gameObject.AddComponent<AudioSource>();
+            tempAudio.clip = buySound;
+            tempAudio.volume = 1f;
+            tempAudio.pitch = Random.Range(0.95f, 1.05f);
+            tempAudio.spatialBlend = 1f;
+            tempAudio.minDistance = 5f;
+            tempAudio.maxDistance = 30f;
+            tempAudio.Play();
+            Destroy(tempAudio, buySound.length);
+        }
+    }
+
+    public void PlayDeniedSound()
+    {
+        if (deniedSound)
+        {
+            AudioSource tempAudio = gameObject.AddComponent<AudioSource>();
+            tempAudio.clip = deniedSound;
+            tempAudio.volume = 1f;
+            tempAudio.pitch = Random.Range(0.95f, 1.05f);
+            tempAudio.spatialBlend = 1f;
+            tempAudio.minDistance = 5f;
+            tempAudio.maxDistance = 30f;
+            tempAudio.Play();
+            Destroy(tempAudio, deniedSound.length);
+        }
+    }
+    public void PlayAcceptSound()
+    {
+        if (deniedSound)
+        {
+            AudioSource tempAudio = gameObject.AddComponent<AudioSource>();
+            tempAudio.clip = deniedSound;
+            tempAudio.volume = 1f;
+            tempAudio.pitch = Random.Range(0.95f, 1.05f);
+            tempAudio.spatialBlend = 1f;
+            tempAudio.minDistance = 5f;
+            tempAudio.maxDistance = 30f;
+            tempAudio.Play();
+            Destroy(tempAudio, deniedSound.length);
         }
     }
 }

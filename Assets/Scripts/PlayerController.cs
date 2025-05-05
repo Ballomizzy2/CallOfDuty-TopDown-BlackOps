@@ -162,7 +162,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-        //Debug.DrawRay(transform.position, transform.forward, Color.red);
+        Debug.DrawRay(transform.position, transform.forward, Color.red);
     }
 
     private void MiscInteractions(GameObject thingHit)

@@ -47,6 +47,7 @@ public class MysteryBox : MonoBehaviour
 
         if (CanAfford_n_lidClose(distance))
         {
+           
             //GiveRandomWeapon();
             ToggleLid();
             SpawnWeapon();
@@ -56,6 +57,10 @@ public class MysteryBox : MonoBehaviour
         else if(Nearby_n_lidOpened(distance))
         {
             GiveRandomWeapon(tempWeapon);
+        }
+        else if(!CanAfford_n_lidClose(distance))
+        {
+            
         }
     }
 
@@ -117,10 +122,12 @@ public class MysteryBox : MonoBehaviour
 
     private bool CanAfford_n_lidClose(float distance)
     {
+        //SoundMng.Instance.PlayBuySound();
         return distance <= interactDistance && Input.GetKeyDown(interactKey) && !isOpen && PlayerController.Instance.GetPoints() > boxPrice;
     }
     private bool Nearby_n_lidOpened(float distance)
     {
+        
         return distance <= interactDistance && Input.GetKeyDown(interactKey) && isOpen;
     }
 }

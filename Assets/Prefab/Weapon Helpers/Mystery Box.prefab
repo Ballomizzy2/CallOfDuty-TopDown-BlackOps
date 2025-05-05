@@ -1654,7 +1654,7 @@ GameObject:
   - component: {fileID: 5360326749415202046}
   - component: {fileID: 8898432089255395065}
   - component: {fileID: 7956047568576604276}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Mystery Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}

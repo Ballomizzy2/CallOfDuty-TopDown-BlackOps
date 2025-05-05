@@ -14,6 +14,7 @@ public class GameManager_Scores : MonoBehaviour
      */
     [SerializeField] private int multiplier=1;
     [SerializeField] private float doublePointsTime=5f;
+    private int roundPoints = 0;
 
     [SerializeField] private WeaponManager weaponManagerScript;
     int pointsToAdd = 10;
@@ -79,6 +80,12 @@ public class GameManager_Scores : MonoBehaviour
     public void NukePoints()
     {
         pointsToAdd = 400;
+        PlayerController.Instance.AddPoints(pointsToAdd * multiplier);
+    }
+
+    public void PointsPerRound()
+    {
+        roundPoints += 50;
         PlayerController.Instance.AddPoints(pointsToAdd * multiplier);
     }
 

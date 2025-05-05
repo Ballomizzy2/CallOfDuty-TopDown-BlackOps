@@ -28,6 +28,7 @@ public class GameManager_Purchases : MonoBehaviour
     private const int TRAP_SWITCH_LAYER = 13;
     [SerializeField] bool powerOn = false;
     //[SerializeField] bool fireSaleActive; //
+    private bool canPayFor = false;
 
     private void Awake()
     {
@@ -78,6 +79,7 @@ public class GameManager_Purchases : MonoBehaviour
                 }
                 else
                 {
+                    CanAfford_sound(canPayFor);
                     Debug.Log("NO POWWWWER!");
                 }
 
@@ -100,6 +102,7 @@ public class GameManager_Purchases : MonoBehaviour
                 }
                 else
                 {
+                    CanAfford_sound(canPayFor);
                     Debug.Log("NO POWWWWER!");
                 }
 
@@ -111,11 +114,18 @@ public class GameManager_Purchases : MonoBehaviour
         //already have access to door, just open it here :]
         
         int tempPrice= item.GetComponent<DoorsHandler>().GetPrice();
-        if(playerScore >= tempPrice)
+        if (playerScore >= tempPrice)
         {
-           player.SetPoints(playerScore-tempPrice);
+            canPayFor = true;
+            CanAfford_sound(canPayFor);
+            player.SetPoints(playerScore - tempPrice);
             item.GetComponent<DoorsHandler>().AnimateDoors();
-            
+
+        }
+        else
+        {
+            //canPayFor should default to false after calling noise
+            CanAfford_sound(canPayFor);
         }
         
     }
@@ -138,10 +148,14 @@ public class GameManager_Purchases : MonoBehaviour
             //put all gun SO in an array that put it in random 
             //spawn gun(with collider), hide box collider, move gun down for x sec, then close box
             //if player interacts w/ gun, equip and close box
+            //canPayFor = true;
+            //CanAfford_sound(canPayFor);
+
         }
         else
         {
-            Debug.Log("No monies...");
+            //CanAfford_sound(canPayFor);
+         
         }
 
     }
@@ -155,6 +169,8 @@ public class GameManager_Purchases : MonoBehaviour
         {
             //- points
             //call trapOn
+            canPayFor = true;
+            CanAfford_sound(canPayFor);
             player.SetPoints(playerScore -= price);
             item.GetComponent<TrapSwitchController>().TrapActivate();
 
@@ -162,7 +178,9 @@ public class GameManager_Purchases : MonoBehaviour
         else
         {
             //oof noise
-            Debug.Log("broke...");
+            //canPayFor should default to false after calling noise
+            CanAfford_sound(canPayFor);
+        
         }
     }
     //perk stuff
@@ -171,21 +189,25 @@ public class GameManager_Purchases : MonoBehaviour
         PerkSodasSO tempPerkSO = item.GetComponent<PerkSodaSOHolder>().GetHeldPerkSodaSO();
         if (!HasPerk(tempPerkSO) && playerScore >= tempPerkSO.price && perkCount < perkMax)
         {
+            canPayFor = true;
+            CanAfford_sound(canPayFor);
             perkCount++;
             player.SetPoints(playerScore -= tempPerkSO.price);
             playerPerkList.Add(tempPerkSO);//move this to playerController later
             //call method to do handle stats...
             HandlePerkSodaModifierAllocation(tempPerkSO);
             Debug.Log($"-{player.GetPoints()}, you got {tempPerkSO.perkID}");
-            for (int i = 0; i < tempPerkSO.statModifiers.Count; i++)
-            {
-                Debug.Log($"stat affected:{tempPerkSO.statModifiers[i].statType}\n" +
-                    $" +{tempPerkSO.statModifiers[i].valType} {tempPerkSO.statModifiers[i].value} ");
-            }
+            //for (int i = 0; i < tempPerkSO.statModifiers.Count; i++)
+            //{
+            //    Debug.Log($"stat affected:{tempPerkSO.statModifiers[i].statType}\n" +
+            //        $" +{tempPerkSO.statModifiers[i].valType} {tempPerkSO.statModifiers[i].value} ");
+            //}
         }
         else
         {
-            Debug.Log("oof...");
+            //canPayFor should default to false after calling noise
+            CanAfford_sound(canPayFor);
+            //Debug.Log("oof...");
         }
 
     }
@@ -236,6 +258,19 @@ public class GameManager_Purchases : MonoBehaviour
 
         }
 
+    }
+    private void CanAfford_sound(bool canAfford)
+    {
+        if (canAfford)
+        {
+            SoundMng.Instance.PlayBuySound();
+        }
+        else
+        {
+            SoundMng.Instance.PlayDeniedSound();
+        }
+        //set to false
+        canPayFor = false;
     }
     private void OnDestroy()
     {
