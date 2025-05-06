@@ -21,6 +21,7 @@ public class TrapSwitchController : MonoBehaviour
     [SerializeField] private Color colorReady = Color.green;
     [SerializeField] private Color colorCooldown = Color.red;
     private bool isCoolDown=false;
+    private bool isActive = false;
     private void Update()
     {
         if (isCoolDown)
@@ -48,6 +49,7 @@ public class TrapSwitchController : MonoBehaviour
 
         //turn on trapMechanism
         trapMech.gameObject.SetActive(true);
+        
         trapMech.GetComponent<TrapMechanismController>().TrapMechActivate();
 
     }
@@ -77,7 +79,16 @@ public class TrapSwitchController : MonoBehaviour
             TrapReady();
             coolDownTimer = 5f;
             isCoolDown=false;
+            isActive = false;
         }
+    }
+    public bool GetIsActive()
+    {
+        return isActive;
+    }
+    public void SetActive()
+    {
+        isActive = true;
     }
 
 }

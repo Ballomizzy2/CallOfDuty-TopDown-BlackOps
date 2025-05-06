@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class TrapMechanismController : MonoBehaviour
 {
-    [SerializeField] private TrapSwitchController controller;
+    [SerializeField] private TrapSwitchController controllerA;
+    [SerializeField] private TrapSwitchController controllerB;
+
     [SerializeField] private GameObject shockHitBox;
     [SerializeField] private float activeTimer = 10f;
     [SerializeField] private bool isActive = false;
@@ -38,6 +40,8 @@ public class TrapMechanismController : MonoBehaviour
         activeTimer = 10f;
         isActive = true;
         shockHitBox.SetActive(true);
+        controllerA.SetActive();
+        controllerB.SetActive();
     }
     public void TrapHurtTime()
     {
@@ -46,7 +50,8 @@ public class TrapMechanismController : MonoBehaviour
         {
             isActive = false;
             shockHitBox.SetActive(false);
-            controller.TrapDeactivate();
+            controllerA.TrapDeactivate();
+            controllerB.TrapDeactivate();
         }
     }
 

@@ -169,8 +169,9 @@ public class GameManager_Purchases : MonoBehaviour
 
     private void HandleTrapPurchase(GameObject item, int playerScore, PlayerController player)
     {
+        bool canBuy = !item.GetComponent<TrapSwitchController>().GetIsActive();
         int price = 300;
-        if (playerScore >= price)
+        if (playerScore >= price && canBuy)
         {
             //- points
             //call trapOn
