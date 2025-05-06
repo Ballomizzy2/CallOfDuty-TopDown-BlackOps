@@ -350,6 +350,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6460866112440137062}
+  - component: {fileID: 8934994371932886195}
   m_Layer: 0
   m_Name: Jeep
   m_TagString: Untagged
@@ -374,6 +375,27 @@ Transform:
   - {fileID: 5545440585087543265}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8934994371932886195
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1432220251356595520}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.0410423, y: 3.2715561, z: 3}
+  m_Center: {x: 0.2520237, y: 1.1357781, z: 0}
 --- !u!1 &1742563130830394006
 GameObject:
   m_ObjectHideFlags: 0
