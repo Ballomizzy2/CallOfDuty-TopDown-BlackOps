@@ -117,7 +117,10 @@ public class MysteryBox : MonoBehaviour
         // Instantiate and store new one
         currentSpawnedModel = Instantiate(modelPrefab, weaponSpawnReference.position, Quaternion.identity);
        
-        currentSpawnedModel.transform.localRotation = Quaternion.Euler(0f, 90f, 0f); 
+ 
+            currentSpawnedModel.transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
+        
+        
 
 
 

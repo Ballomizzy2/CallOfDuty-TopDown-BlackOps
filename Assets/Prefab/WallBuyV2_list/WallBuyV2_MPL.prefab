@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &9119207592778696039
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 903395058658706011, guid: 921fbb9eebb072944b8297c457c795c3, type: 3}
+      propertyPath: cost
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 903395058658706011, guid: 921fbb9eebb072944b8297c457c795c3, type: 3}
+      propertyPath: weaponToGive
+      value: 
+      objectReference: {fileID: 11400000, guid: 106e0cc97a170b84fb78eba4e09da0b7, type: 2}
+    - target: {fileID: 903395058658706011, guid: 921fbb9eebb072944b8297c457c795c3, type: 3}
+      propertyPath: wallBuyCanvas
+      value: 
+      objectReference: {fileID: 9128960301053382612}
+    - target: {fileID: 5415629876332898063, guid: 921fbb9eebb072944b8297c457c795c3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415629876332898063, guid: 921fbb9eebb072944b8297c457c795c3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415629876332898063, guid: 921fbb9eebb072944b8297c457c795c3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415629876332898063, guid: 921fbb9eebb072944b8297c457c795c3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415629876332898063, guid: 921fbb9eebb072944b8297c457c795c3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415629876332898063, guid: 921fbb9eebb072944b8297c457c795c3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415629876332898063, guid: 921fbb9eebb072944b8297c457c795c3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415629876332898063, guid: 921fbb9eebb072944b8297c457c795c3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415629876332898063, guid: 921fbb9eebb072944b8297c457c795c3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415629876332898063, guid: 921fbb9eebb072944b8297c457c795c3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6643556789831968588, guid: 921fbb9eebb072944b8297c457c795c3, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0f614e0b83ab51b48b91fd8fd435b4ac, type: 3}
+    - target: {fileID: 6643556789831968588, guid: 921fbb9eebb072944b8297c457c795c3, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6919894329662675729, guid: 921fbb9eebb072944b8297c457c795c3, type: 3}
+      propertyPath: m_Name
+      value: WallBuyV2_MPL
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 921fbb9eebb072944b8297c457c795c3, type: 3}
+--- !u!223 &9128960301053382612 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 17306294640741043, guid: 921fbb9eebb072944b8297c457c795c3, type: 3}
+  m_PrefabInstance: {fileID: 9119207592778696039}
+  m_PrefabAsset: {fileID: 0}

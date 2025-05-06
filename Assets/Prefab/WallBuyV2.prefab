@@ -181,8 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36af5462840046343a163c231134d634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponToGive: {fileID: 11400000, guid: ae1cc55a771ccfb4fbe3e3b59daa2f09, type: 2}
-  cost: 500
+  weaponToGive: {fileID: 0}
+  cost: 0
   buySound: {fileID: 8300000, guid: 866cec09a8e094a408855dea9c4740a7, type: 3}
   deniedSound: {fileID: 8300000, guid: 1d5548f9d40258e41a4f2da848cfee33, type: 3}
   wallBuyCanvas: {fileID: 0}
