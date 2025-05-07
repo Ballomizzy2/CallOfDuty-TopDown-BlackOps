@@ -21,6 +21,8 @@ public class SceneLoader : MonoBehaviour
 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Main Scene");
 
+
+
         while (!asyncLoad.isDone)
         {
             yield return null;

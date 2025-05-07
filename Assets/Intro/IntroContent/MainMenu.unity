@@ -208,6 +208,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1364452549 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 731335022481594514, guid: e7c8cfc77c93ecc47a926976ed096a57, type: 3}
+  m_PrefabInstance: {fileID: 451179629480899485}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!82 &1416209639 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 7810832081030412776, guid: ee14fb5f0f790224a9c70183579235d8, type: 3}
@@ -221,6 +232,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 734313017362505161, guid: e7c8cfc77c93ecc47a926976ed096a57, type: 3}
+      propertyPath: m_TargetGraphic
+      value: 
+      objectReference: {fileID: 1364452549}
+    - target: {fileID: 734313017362505161, guid: e7c8cfc77c93ecc47a926976ed096a57, type: 3}
+      propertyPath: m_Colors.m_ColorMultiplier
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 734313017362505161, guid: e7c8cfc77c93ecc47a926976ed096a57, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -309,6 +328,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 420067605}
+    - target: {fileID: 6765123350463364536, guid: e7c8cfc77c93ecc47a926976ed096a57, type: 3}
+      propertyPath: m_Name
+      value: Start TMP
+      objectReference: {fileID: 0}
     - target: {fileID: 7622699746874587962, guid: e7c8cfc77c93ecc47a926976ed096a57, type: 3}
       propertyPath: m_Camera
       value: 
@@ -316,6 +339,10 @@ PrefabInstance:
     - target: {fileID: 7979003830340819202, guid: e7c8cfc77c93ecc47a926976ed096a57, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8709345998064990942, guid: e7c8cfc77c93ecc47a926976ed096a57, type: 3}
+      propertyPath: m_Name
+      value: Exit TMP
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -330,6 +357,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 38426260589978150, guid: ccc5e6eb03d211842b57871e1d392960, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1995695716750292081, guid: ccc5e6eb03d211842b57871e1d392960, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3836624840052519687, guid: ccc5e6eb03d211842b57871e1d392960, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5057990078222248269, guid: ccc5e6eb03d211842b57871e1d392960, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -412,6 +451,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7051093324765098472, guid: ccc5e6eb03d211842b57871e1d392960, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8397923628560527377, guid: ccc5e6eb03d211842b57871e1d392960, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
