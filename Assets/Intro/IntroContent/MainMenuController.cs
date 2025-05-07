@@ -25,8 +25,8 @@ public class MainMenuController : MonoBehaviour
 
     IEnumerator LoadSceneWithDelay()
     {
-        loadingScreen.SetActive(true); // Shows the loading UI
-        loadingBar.value = 0f;         // Reset progress just in case
+        loadingScreen.SetActive(true);
+        loadingBar.value = 0f;
 
         // Fade out menu
         yield return StartCoroutine(FadeCanvasGroup(menuCanvasGroup, 1, 0, fadeDuration));
@@ -34,7 +34,6 @@ public class MainMenuController : MonoBehaviour
         menuCanvasGroup.blocksRaycasts = false;
         menuCanvasGroup.gameObject.SetActive(false);
 
-        // Fade out scare image
         if (scareImageCanvasGroup != null)
         {
             yield return StartCoroutine(FadeCanvasGroup(scareImageCanvasGroup, 1, 0, fadeDuration));
@@ -43,28 +42,49 @@ public class MainMenuController : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
-        // Activate and fade in loading screen
+        // Show loading screen
         loadingScreen.SetActive(true);
         fadeCanvasGroup.alpha = 0;
         yield return StartCoroutine(FadeCanvasGroup(fadeCanvasGroup, 0, 1, fadeDuration));
 
-        // Load the scene asynchronously and show progress
+        // Begin async scene load (but don't allow activation yet)
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToLoad);
         asyncLoad.allowSceneActivation = false;
 
-        while (asyncLoad.progress < 0.9f) // Scene loads to 0.9 before activation
+        // Fake loading from 0% to 90%
+        float fakeProgress = 0f;
+        while (fakeProgress < 0.9f)
         {
-            loadingBar.value = asyncLoad.progress;
+            fakeProgress += Time.deltaTime * 0.5f; // adjust speed here
+            loadingBar.value = fakeProgress;
             yield return null;
         }
 
-        // Optional: fill to 100%
-        loadingBar.value = 1f;
-        yield return new WaitForSeconds(1f);
+        loadingBar.value = 0.9f;
 
-        // Activate the scene
+        // Wait for actual scene load to reach 90%
+        while (asyncLoad.progress < 0.9f)
+        {
+            yield return null;
+        }
+
+        // Animate from 90% to 100%
+        float t = 0f;
+        float duration = 1f;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            loadingBar.value = Mathf.Lerp(0.9f, 1f, t / duration);
+            yield return null;
+        }
+
+        loadingBar.value = 1f;
+        yield return new WaitForSeconds(0.5f);
+
+        // Activate scene
         asyncLoad.allowSceneActivation = true;
     }
+
 
 
     IEnumerator FadeCanvasGroup(CanvasGroup cg, float start, float end, float duration)
