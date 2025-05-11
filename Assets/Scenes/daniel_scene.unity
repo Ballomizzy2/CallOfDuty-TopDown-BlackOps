@@ -1650,6 +1650,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 1700812631378740018, guid: 1dc0582cfd73bfc43af7189e05fcf232, type: 3}
+      propertyPath: price
+      value: 3000
+      objectReference: {fileID: 0}
     - target: {fileID: 2823160885561044548, guid: 1dc0582cfd73bfc43af7189e05fcf232, type: 3}
       propertyPath: m_Layer
       value: 8
