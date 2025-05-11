@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7754129864447729851}
   - component: {fileID: 6642717341416236120}
   - component: {fileID: 4343460832509218774}
+  - component: {fileID: 2556511112640455660}
   m_Layer: 0
   m_Name: cabinet
   m_TagString: Untagged
@@ -88,6 +89,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2556511112640455660
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707270302346389440}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 0.99999994}
+  m_Center: {x: 0, y: -0.00000011920929, z: 0}
 --- !u!1 &862419705663450272
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,7 +237,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5550061326531823794}
-  - component: {fileID: 6274907510377708967}
   m_Layer: 0
   m_Name: FileCabinet
   m_TagString: Untagged
@@ -239,27 +260,6 @@ Transform:
   - {fileID: 5687174464803841428}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &6274907510377708967
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2009004793050063576}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.4297717, y: 7, z: 2.452156}
-  m_Center: {x: -0.07388866, y: 3, z: -0.07395548}
 --- !u!1 &2341912842699117567
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,6 +301,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5687174464803841428}
+  - component: {fileID: 9166458510154581680}
   m_Layer: 0
   m_Name: Visualholder
   m_TagString: Untagged
@@ -332,6 +333,27 @@ Transform:
   - {fileID: 6514387483762655021}
   m_Father: {fileID: 5550061326531823794}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &9166458510154581680
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2696564678260116215}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 7, z: 3}
+  m_Center: {x: 0, y: 3, z: 0}
 --- !u!1 &4013369672184071070
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,6 +709,7 @@ GameObject:
   - component: {fileID: 3156914751219996842}
   - component: {fileID: 671149700287210572}
   - component: {fileID: 7155060456013318296}
+  - component: {fileID: 7298375408054914302}
   m_Layer: 0
   m_Name: cabinet
   m_TagString: Untagged
@@ -764,6 +787,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7298375408054914302
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5253358094476955115}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 0.99999994}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6141469922767533880
 GameObject:
   m_ObjectHideFlags: 0
@@ -1409,6 +1453,7 @@ GameObject:
   - component: {fileID: 2268985277715386307}
   - component: {fileID: 7397834523795223582}
   - component: {fileID: 2744343137166320029}
+  - component: {fileID: 995230124113062528}
   m_Layer: 0
   m_Name: cabinet
   m_TagString: Untagged
@@ -1486,3 +1531,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &995230124113062528
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8892211879808176495}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 0.99999994}
+  m_Center: {x: 0, y: 0.00000023841858, z: 0}
