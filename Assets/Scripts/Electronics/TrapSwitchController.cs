@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TrapSwitchController : MonoBehaviour
+public class TrapSwitchController : MonoBehaviour,IInteract
 {
     /*this will:
      * make a reference to the trapMechism
@@ -22,6 +22,9 @@ public class TrapSwitchController : MonoBehaviour
     [SerializeField] private Color colorCooldown = Color.red;
     private bool isCoolDown=false;
     private bool isActive = false;
+
+    //shop variables
+    private bool canPayFor;
     private void Update()
     {
         if (isCoolDown)
@@ -89,6 +92,40 @@ public class TrapSwitchController : MonoBehaviour
     public void SetActive()
     {
         isActive = true;
+    }
+
+    //IInteract contract
+    public bool IsElectrical()
+    {
+        return true;
+    }
+    public void Interact(PlayerController player)
+    {
+        bool readyToBuy = !GetIsActive();
+        int price = 300;
+        int playerScore = player.currentPoints;
+        
+        if (playerScore >= price && readyToBuy)
+        {
+           
+            //- points
+            //call trapOn
+            canPayFor = true;
+           
+            player.SetPoints(playerScore -= price);
+            TrapActivate();
+
+        }
+        else
+        {
+            //despite the warning, this is here to reset
+            canPayFor = false;
+        }
+    }
+
+    public bool CanAfford()
+    {
+        return canPayFor;
     }
 
 }

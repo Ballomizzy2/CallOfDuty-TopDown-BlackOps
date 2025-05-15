@@ -27,8 +27,10 @@ public class GameManager_Purchases : MonoBehaviour
     private const int WALLBUY_LAYER = 7;
     private const int DOOR_LAYER = 8;
     private const int BOX_LAYER = 9;
+    private const int POWER_LAYER = 11;
     private const int PACK_A_PUNCH_LAYER = 12;
     private const int TRAP_SWITCH_LAYER = 13;
+
     [SerializeField] bool powerOn = false;
     //[SerializeField] bool fireSaleActive; //
     private bool canPayFor = false;
@@ -73,6 +75,7 @@ public class GameManager_Purchases : MonoBehaviour
     {
         PlayerController player = sender as PlayerController;
         int playerScore = player.GetPoints();
+        IInteract recepiant= e.lookAtInteract.GetComponent<IInteract>();  
         switch (e.lookAtInteract.layer)
         {
             case PERK_LAYER:
@@ -100,15 +103,23 @@ public class GameManager_Purchases : MonoBehaviour
             case TRAP_SWITCH_LAYER:
                 if (powerOn)
                 {
-                    
-                    HandleTrapPurchase(e.lookAtInteract, playerScore, player);
+
+                    //HandleTrapPurchase(e.lookAtInteract, playerScore, player);
+                    recepiant.Interact(player);
+                    CanAfford_sound(recepiant.CanAfford());
                 }
                 else
                 {
-                    CanAfford_sound(canPayFor);
+                    CanAfford_sound(recepiant.CanAfford());
                     Debug.Log("NO POWWWWER!");
                 }
 
+
+                break;
+            case POWER_LAYER:
+                
+                e.lookAtInteract.GetComponent<IInteract>().Interact(player);
+                
                 break;
         }
     }
@@ -167,27 +178,27 @@ public class GameManager_Purchases : MonoBehaviour
 
 
 
-    private void HandleTrapPurchase(GameObject item, int playerScore, PlayerController player)
-    {
-        bool canBuy = !item.GetComponent<TrapSwitchController>().GetIsActive();
-        int price = 300;
-        if (playerScore >= price && canBuy)
-        {
-            //- points
-            //call trapOn
-            canPayFor = true;
-            CanAfford_sound(canPayFor);
-            player.SetPoints(playerScore -= price);
-            item.GetComponent<TrapSwitchController>().TrapActivate();
+    //private void HandleTrapPurchase(GameObject item, int playerScore, PlayerController player)
+    //{
+    //    bool canBuy = !item.GetComponent<TrapSwitchController>().GetIsActive();
+    //    int price = 300;
+    //    if (playerScore >= price && canBuy)
+    //    {
+    //        //- points
+    //        //call trapOn
+    //        canPayFor = true;
+    //        CanAfford_sound(canPayFor);
+    //        player.SetPoints(playerScore -= price);
+    //        item.GetComponent<TrapSwitchController>().TrapActivate();
 
-        }
-        else
-        {
-            //canPayFor should default to false after calling noise
-            CanAfford_sound(canPayFor);
+    //    }
+    //    else
+    //    {
+    //        //canPayFor should default to false after calling noise
+    //        CanAfford_sound(canPayFor);
         
-        }
-    }
+    //    }
+    //}
     //perk stuff
     private void HandlePerkPurchase(GameObject item, int playerScore, PlayerController player)
     {

@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour
 
 
             OnRayCastHitInteract?.Invoke(this, new RayCastHitInteract { lookAtInteract = storedRayHit });
-            MiscInteractions(storedRayHit);
+            //MiscInteractions(storedRayHit);
 
         }
         else if (storedShereHit != null)
@@ -165,17 +165,17 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(transform.position, transform.forward, Color.red);
     }
 
-    private void MiscInteractions(GameObject thingHit)
-    {
-        //if you guys want the player to interact w/ random stuff
-        //assign the object a layer and this should work
-        switch (thingHit.layer)
-        {
-            case POWER_LAYER:
-                PowerSwitchController.Instance.ActivatePower();
-                break;
-        }
-    }
+    //private void MiscInteractions(GameObject thingHit)
+    //{
+    //    //if you guys want the player to interact w/ random stuff
+    //    //assign the object a layer and this should work
+    //    switch (thingHit.layer)
+    //    {
+    //        case POWER_LAYER:
+    //            PowerSwitchController.Instance.ActivatePower();
+    //            break;
+    //    }
+    //}
 
     private void OnTriggerEnter(Collider other)
     {

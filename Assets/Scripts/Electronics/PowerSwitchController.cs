@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PowerSwitchController : MonoBehaviour
+public class PowerSwitchController : MonoBehaviour, IInteract
 {
     public static PowerSwitchController Instance { get; private set; }
     public event EventHandler OnLeverFlipped;
@@ -19,5 +19,17 @@ public class PowerSwitchController : MonoBehaviour
         lever.transform.localPosition = newPos;
 
         OnLeverFlipped?.Invoke(this,EventArgs.Empty);
+    }
+    public bool IsElectrical()
+    {
+        return false;
+    }
+    public void Interact(PlayerController player)
+    {
+        ActivatePower();
+    }
+    public bool CanAfford()
+    {
+        return true;
     }
 }
