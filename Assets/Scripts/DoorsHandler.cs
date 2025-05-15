@@ -1,13 +1,14 @@
 using UnityEngine;
 
-public class DoorsHandler : MonoBehaviour
+public class DoorsHandler : MonoBehaviour, IInteract
 {
     [SerializeField] int price;
     [SerializeField] GameObject doorA;
     [SerializeField] GameObject doorB;
     [SerializeField] BoxCollider boxCollider;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    //shop variables soundfx
+    private bool canPayFor;
     void Start()
     {
         
@@ -34,5 +35,34 @@ public class DoorsHandler : MonoBehaviour
         // Instantly rotate Door B +90° around Y
         doorB.transform.localRotation = Quaternion.Euler(0f, -90f, 0f);
 
+    }
+
+    public bool IsElectrical()
+    {
+        return false;
+    }
+    public void Interact(PlayerController player)
+    {
+        //already have access to door, just open it here :]
+
+        int tempPrice = GetPrice();
+        int playerScore = player.currentPoints;
+        if (playerScore >= tempPrice)
+        {
+            canPayFor = true;
+
+            player.SetPoints(playerScore - tempPrice);
+            AnimateDoors();
+
+        }
+        else
+        {
+            //canPayFor should default to false after calling noise
+            canPayFor = false;
+        }
+    }
+    public bool CanAffordSoundFX()
+    {
+        return canPayFor;
     }
 }

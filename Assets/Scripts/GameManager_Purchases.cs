@@ -57,11 +57,13 @@ public class GameManager_Purchases : MonoBehaviour
     {
         PlayerController player = sender as PlayerController;
         int playerScore = player.GetPoints();
+        IInteract recepiant = e.overLapHit.GetComponent<IInteract>();
         switch (e.overLapHit.layer)
         {
             case DOOR_LAYER:
                 //pass the object hit, the players score, the player object for access to additional methods if needed
-                HandleDoorPurchase(e.overLapHit, playerScore,player);
+                recepiant.Interact(player);
+                CanAfford_sound(recepiant.CanAffordSoundFX());
                 break;
             case BOX_LAYER:
                 HandleMysterBoxPurchase(e.overLapHit,playerScore,player);
@@ -95,7 +97,9 @@ public class GameManager_Purchases : MonoBehaviour
                 
                 break;
             case DOOR_LAYER:
-                HandleDoorPurchase(e.lookAtInteract, playerScore, player);
+                //HandleDoorPurchase(e.lookAtInteract, playerScore, player);
+                recepiant.Interact(player);
+                CanAfford_sound(recepiant.CanAffordSoundFX());
                 break;
             case PACK_A_PUNCH_LAYER:
                 //todo make a pack A punch
@@ -104,45 +108,25 @@ public class GameManager_Purchases : MonoBehaviour
                 if (powerOn)
                 {
 
-                    //HandleTrapPurchase(e.lookAtInteract, playerScore, player);
                     recepiant.Interact(player);
-                    CanAfford_sound(recepiant.CanAfford());
+                    CanAfford_sound(recepiant.CanAffordSoundFX());
                 }
                 else
                 {
-                    CanAfford_sound(recepiant.CanAfford());
+                    CanAfford_sound(recepiant.CanAffordSoundFX());
                     Debug.Log("NO POWWWWER!");
                 }
 
 
                 break;
             case POWER_LAYER:
-                
-                e.lookAtInteract.GetComponent<IInteract>().Interact(player);
-                
+
+                recepiant.Interact(player);
+
                 break;
         }
     }
-    private void HandleDoorPurchase(GameObject item,int playerScore, PlayerController player)
-    {
-        //already have access to door, just open it here :]
-        
-        int tempPrice= item.GetComponent<DoorsHandler>().GetPrice();
-        if (playerScore >= tempPrice)
-        {
-            canPayFor = true;
-            CanAfford_sound(canPayFor);
-            player.SetPoints(playerScore - tempPrice);
-            item.GetComponent<DoorsHandler>().AnimateDoors();
 
-        }
-        else
-        {
-            //canPayFor should default to false after calling noise
-            CanAfford_sound(canPayFor);
-        }
-        
-    }
     private void HandleWallBuyPurchase(GameObject item, int playerScore, PlayerController player)
     {
         //TODO edit gun SO
@@ -178,27 +162,7 @@ public class GameManager_Purchases : MonoBehaviour
 
 
 
-    //private void HandleTrapPurchase(GameObject item, int playerScore, PlayerController player)
-    //{
-    //    bool canBuy = !item.GetComponent<TrapSwitchController>().GetIsActive();
-    //    int price = 300;
-    //    if (playerScore >= price && canBuy)
-    //    {
-    //        //- points
-    //        //call trapOn
-    //        canPayFor = true;
-    //        CanAfford_sound(canPayFor);
-    //        player.SetPoints(playerScore -= price);
-    //        item.GetComponent<TrapSwitchController>().TrapActivate();
 
-    //    }
-    //    else
-    //    {
-    //        //canPayFor should default to false after calling noise
-    //        CanAfford_sound(canPayFor);
-        
-    //    }
-    //}
     //perk stuff
     private void HandlePerkPurchase(GameObject item, int playerScore, PlayerController player)
     {

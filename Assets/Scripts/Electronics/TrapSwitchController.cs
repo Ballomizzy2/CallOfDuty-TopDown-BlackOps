@@ -23,7 +23,7 @@ public class TrapSwitchController : MonoBehaviour,IInteract
     private bool isCoolDown=false;
     private bool isActive = false;
 
-    //shop variables
+    //shop variables soundfx
     private bool canPayFor;
     private void Update()
     {
@@ -118,14 +118,15 @@ public class TrapSwitchController : MonoBehaviour,IInteract
         }
         else
         {
-            //despite the warning, this is here to reset
-            canPayFor = false;
+            canPayFor= false;
         }
+
     }
 
-    public bool CanAfford()
+    public bool CanAffordSoundFX()
     {
         return canPayFor;
     }
+
 
 }

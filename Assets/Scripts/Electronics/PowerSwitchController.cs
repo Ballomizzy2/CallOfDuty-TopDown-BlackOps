@@ -28,7 +28,7 @@ public class PowerSwitchController : MonoBehaviour, IInteract
     {
         ActivatePower();
     }
-    public bool CanAfford()
+    public bool CanAffordSoundFX()
     {
         return true;
     }
