@@ -2,16 +2,15 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MysteryBox : MonoBehaviour
+public class MysteryBox : MonoBehaviour, IInteract
 {
     [Header("Weapon Pool")]
     public List<GunData> possibleGuns = new List<GunData>();
 
     [Header("Interaction")]
     public float interactDistance = 3f;
-    public KeyCode interactKey = KeyCode.E;
 
-    private Transform player;
+    private Transform playerTransform;
 
     [Header("GameObjectReferences")]
     [SerializeField] private GameObject lid;
@@ -23,6 +22,8 @@ public class MysteryBox : MonoBehaviour
     private GameObject currentSpawnedModel;
     private int boxPrice = 950;
 
+    //shop variables soundfx
+    private bool canPayFor;
     private void Awake()
     {
         modelLookup = new Dictionary<string, GameObject>();
@@ -36,35 +37,12 @@ public class MysteryBox : MonoBehaviour
     }
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void Update()
     {
-        if (player == null) return;
 
-        float distance = Vector3.Distance(player.position, transform.position);
-
-
-        if (distance <= interactDistance && Input.GetKeyDown(interactKey))
-        {
-            if (CanAfford_n_lidClose())
-            {
-                ToggleLid();
-                SpawnWeapon();
-                SoundMng.Instance.PlayBuySound();
-                PlayerController.Instance.SetPoints(PlayerController.Instance.GetPoints() - boxPrice);
-            }
-            else if (isOpen)
-            {
-                SoundMng.Instance.PlayAcceptSound();
-                GiveRandomWeapon(tempWeapon);
-            }
-            else
-            {
-                SoundMng.Instance.PlayDeniedSound();
-            }
-        }
 
     }
 
@@ -72,7 +50,7 @@ public class MysteryBox : MonoBehaviour
     {
         
 
-        WeaponManager weaponManager = player.GetComponent<WeaponManager>();
+        WeaponManager weaponManager = playerTransform.GetComponent<WeaponManager>();
         if (weaponManager != null)
         {
             weaponManager.ReplaceCurrentWeapon(randomGun);
@@ -131,6 +109,44 @@ public class MysteryBox : MonoBehaviour
     {
         
         return !isOpen && PlayerController.Instance.GetPoints() > boxPrice;
+    }
+
+    //IInteract contract
+    public bool IsElectrical()
+    {
+        return false;
+    }
+    public void Interact(PlayerController player)
+    {
+        if (playerTransform == null) return;
+
+        float distance = Vector3.Distance(playerTransform.position, transform.position);
+
+
+        if (distance <= interactDistance)
+        {
+            if (CanAfford_n_lidClose())
+            {
+                ToggleLid();
+                SpawnWeapon();
+                SoundMng.Instance.PlayBuySound();
+                PlayerController.Instance.SetPoints(PlayerController.Instance.GetPoints() - boxPrice);
+            }
+            else if (isOpen)
+            {
+                SoundMng.Instance.PlayAcceptSound();
+                GiveRandomWeapon(tempWeapon);
+            }
+            else
+            {
+                SoundMng.Instance.PlayDeniedSound();
+            }
+        }
+    }
+
+    public bool CanAffordSoundFX()
+    {
+        return canPayFor;
     }
 
 }

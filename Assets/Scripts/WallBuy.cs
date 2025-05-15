@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WallBuy : MonoBehaviour
+public class WallBuy : MonoBehaviour, IInteract
 {
     [Header("Weapon Settings")]
     public GunData weaponToGive;
@@ -21,6 +21,9 @@ public class WallBuy : MonoBehaviour
 
 
     private Transform player;
+
+    //shop variables soundfx
+    private bool canPayFor;
 
     private void Start()
     {
@@ -130,5 +133,19 @@ public class WallBuy : MonoBehaviour
         }
     }
 
+    //IInteract contract
+    public bool IsElectrical()
+    {
+        return false;
+    }
+    public void Interact(PlayerController player)
+    {
+        AttemptPurchase();
+    }
+
+    public bool CanAffordSoundFX()
+    {
+        return canPayFor;
+    }
 
 }

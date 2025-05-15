@@ -26,7 +26,7 @@ public class GameManager_Purchases : MonoBehaviour
     private const int PERK_LAYER = 6;
     private const int WALLBUY_LAYER = 7;
     private const int DOOR_LAYER = 8;
-    private const int BOX_LAYER = 9;
+    private const int MYSTERY_BOX_LAYER = 10;
     private const int POWER_LAYER = 11;
     private const int PACK_A_PUNCH_LAYER = 12;
     private const int TRAP_SWITCH_LAYER = 13;
@@ -64,9 +64,12 @@ public class GameManager_Purchases : MonoBehaviour
                 //pass the object hit, the players score, the player object for access to additional methods if needed
                 recepiant.Interact(player);
                 CanAfford_sound(recepiant.CanAffordSoundFX());
+                
                 break;
-            case BOX_LAYER:
-                HandleMysterBoxPurchase(e.overLapHit,playerScore,player);
+            case MYSTERY_BOX_LAYER:
+                //HandleMysterBoxPurchase(e.overLapHit,playerScore,player);
+                recepiant.Interact(player);
+                //sound is in said script...
                 break;
 
 
@@ -93,11 +96,14 @@ public class GameManager_Purchases : MonoBehaviour
 
                     break;
             case WALLBUY_LAYER:
-                HandleWallBuyPurchase(e.lookAtInteract, playerScore, player);
-                
+               
+                recepiant.Interact(player);
+                //rn the noise is in wall buy...
+
+
                 break;
             case DOOR_LAYER:
-                //HandleDoorPurchase(e.lookAtInteract, playerScore, player);
+             
                 recepiant.Interact(player);
                 CanAfford_sound(recepiant.CanAffordSoundFX());
                 break;
@@ -124,41 +130,15 @@ public class GameManager_Purchases : MonoBehaviour
                 recepiant.Interact(player);
 
                 break;
+            case MYSTERY_BOX_LAYER:
+                //HandleMysterBoxPurchase(e.overLapHit,playerScore,player);
+                recepiant.Interact(player);
+                //sound is in said script...
+                break;
         }
     }
 
-    private void HandleWallBuyPurchase(GameObject item, int playerScore, PlayerController player)
-    {
-        //TODO edit gun SO
-       //edit weapon SO to have a price?
-       //int tempPrice= item.GetComponent<GunSOHolder>.GetHeldGun();
-       //do same thing as perks
-       item.GetComponent<WallBuy>().AttemptPurchase();
 
-    }
-    private void HandleMysterBoxPurchase(GameObject item,int playerScore,PlayerController player)
-    {
-        //HANDLED INSIDE MYSTERBOX PREFAB RN
-        int mysteryBoxPrice = 950;
-       
-        
-        if(playerScore >= mysteryBoxPrice)
-        {
-            //mysterybox should have methods for all these. e.g item.RollGuns();
-            //put all gun SO in an array that put it in random 
-            //spawn gun(with collider), hide box collider, move gun down for x sec, then close box
-            //if player interacts w/ gun, equip and close box
-            //canPayFor = true;
-            //CanAfford_sound(canPayFor);
-
-        }
-        else
-        {
-            //CanAfford_sound(canPayFor);
-
-        }
-
-    }
 
 
 
