@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bb8a0e3964a6fc49a92b0e6d8545229, type: 3}
   m_Name: SpeedCola
   m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 6d68c26a9d1a7454a8c7230cb59187b6, type: 3}
   perkName: SpeedCola
   perkID: 2
   price: 3000

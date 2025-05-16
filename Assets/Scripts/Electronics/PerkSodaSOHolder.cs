@@ -72,6 +72,7 @@ public class PerkSodaSOHolder : MonoBehaviour,IInteract
             //call method to do handle stats...
             HandlePerkSodaModifierAllocation(heldPerkSodaSO);
             Debug.Log($"-{player.GetPoints()}, you got {heldPerkSodaSO.perkID}");
+            HUDController.Instance.SetPerkIcons(player.playerPerkList);
 
         }
         else

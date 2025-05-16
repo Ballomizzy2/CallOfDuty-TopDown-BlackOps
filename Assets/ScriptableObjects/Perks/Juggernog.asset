@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bb8a0e3964a6fc49a92b0e6d8545229, type: 3}
   m_Name: Juggernog
   m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: ef472e0b7bd855f42a73eeaecb8de9af, type: 3}
   perkName: Juggernog
   perkID: 0
   price: 2500

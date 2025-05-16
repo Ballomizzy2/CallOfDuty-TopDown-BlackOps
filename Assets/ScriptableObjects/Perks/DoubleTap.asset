@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bb8a0e3964a6fc49a92b0e6d8545229, type: 3}
   m_Name: DoubleTap
   m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 39c97ce2f8e6f8140bb7bac4ceeff8f7, type: 3}
   perkName: Double Tap
   perkID: 3
   price: 2000

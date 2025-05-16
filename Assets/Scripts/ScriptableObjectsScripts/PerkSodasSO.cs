@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class PerkSodasSO : ScriptableObject
 {
     //holds a perk with a potential list of modifiers;
+    public Sprite icon;
     public string perkName;
     public PerkID perkID;
     public int price;
