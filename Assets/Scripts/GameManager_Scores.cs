@@ -52,7 +52,7 @@ public class GameManager_Scores : MonoBehaviour
     public void PointsPerHit()
     {
         pointsToAdd = 10;
-        PlayerController.Instance.AddPoints(pointsToAdd * multiplier);
+        PointsMathStuff(pointsToAdd);
     }
 
     public void PointsPerKill(DamageType killType)
@@ -74,19 +74,30 @@ public class GameManager_Scores : MonoBehaviour
 
         }
         PlayerController.Instance.AddKillCount();
-        PlayerController.Instance.AddPoints(pointsToAdd * multiplier);
+        PointsMathStuff(pointsToAdd);
 
+    }
+    public void PointsPerBarrier()
+    {
+        pointsToAdd = 20;
+        PointsMathStuff(pointsToAdd);
     }
     public void NukePoints()
     {
         pointsToAdd = 400;
-        PlayerController.Instance.AddPoints(pointsToAdd * multiplier);
+        PointsMathStuff(pointsToAdd);
     }
 
     public void PointsPerRound()
     {
         roundPoints += 50;
-        PlayerController.Instance.AddPoints(pointsToAdd * multiplier);
+        PointsMathStuff(roundPoints);
+    }
+
+    private void PointsMathStuff(int p)
+    {
+        //tired of calling player Instance
+        PlayerController.Instance.AddPoints(p * multiplier);
     }
 
 

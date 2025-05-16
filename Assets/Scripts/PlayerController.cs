@@ -49,8 +49,6 @@ public class PlayerController : MonoBehaviour
     private bool isHurt = false;
     private float hurtInterval = 3;
 
-    private const int POWER_LAYER = 11;
-
     [Header("HUD")]
     [SerializeField] private HUDController hudControllerObject;
     [SerializeField] private TextMeshProUGUI interactText;
@@ -233,6 +231,14 @@ public class PlayerController : MonoBehaviour
     public int GetPoints()
     {
         return currentPoints;
+    }
+    public int GetTotalPoints()
+    {
+        return totalPoints;
+    }
+    public int GetTotalKills()
+    {
+        return totalKills;
     }
     public void SetPoints(int score)
     {
