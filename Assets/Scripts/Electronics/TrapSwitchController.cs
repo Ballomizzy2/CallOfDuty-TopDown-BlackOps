@@ -128,5 +128,9 @@ public class TrapSwitchController : MonoBehaviour,IInteract
         return canPayFor;
     }
 
+    public bool UsesUniversalStoreSoundFX()
+    {
+        return true;
+    }
 
 }

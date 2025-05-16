@@ -41,5 +41,8 @@ public class PowerSwitchController : MonoBehaviour, IInteract
     {
         canPayFor = false;
     }
-
+    public bool UsesUniversalStoreSoundFX()
+    {
+        return false;
+    }
 }

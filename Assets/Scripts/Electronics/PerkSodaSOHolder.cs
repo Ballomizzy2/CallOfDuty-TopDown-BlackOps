@@ -86,6 +86,9 @@ public class PerkSodaSOHolder : MonoBehaviour,IInteract
     {
         return canPayFor;
     }
-
+    public bool UsesUniversalStoreSoundFX()
+    {
+        return true;
+    }
 
 }

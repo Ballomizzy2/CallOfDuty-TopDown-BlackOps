@@ -7,5 +7,6 @@ public interface IInteract
 
     public bool CanAffordSoundFX();
 
- 
+    //add a bool for universal noise, other wise objects will handle their own noise?
+    public bool UsesUniversalStoreSoundFX();
 }

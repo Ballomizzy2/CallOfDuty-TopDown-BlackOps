@@ -149,5 +149,9 @@ public class MysteryBox : MonoBehaviour, IInteract
         return canPayFor;
     }
 
+    public bool UsesUniversalStoreSoundFX()
+    {
+        return false;
+    }
 
 }

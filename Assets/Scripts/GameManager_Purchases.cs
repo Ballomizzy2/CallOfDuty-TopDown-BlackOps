@@ -105,17 +105,20 @@ public class GameManager_Purchases : MonoBehaviour
         if (canUse)
         {
             target.Interact(player);
-                CanAfford_sound(target.CanAffordSoundFX());
-            if(e.lookAtInteract.layer== POWER_LAYER)
+            if(target.UsesUniversalStoreSoundFX())
             {
-                PowerSwitchController.Instance.ChangeBoolFX();
+                CanAfford_sound(target.CanAffordSoundFX());
             }
+           
             
             
         }
         else
         {
-            CanAfford_sound(target.CanAffordSoundFX());
+            if (target.UsesUniversalStoreSoundFX())
+            {
+                CanAfford_sound(target.CanAffordSoundFX());
+            }
             Debug.Log("NO POWWWWER!");
         }
     }
