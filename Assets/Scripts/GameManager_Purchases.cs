@@ -23,7 +23,7 @@ public class GameManager_Purchases : MonoBehaviour
     private const int PACK_A_PUNCH_LAYER = 12;
     private const int TRAP_SWITCH_LAYER = 13;
 
-    [SerializeField] bool powerOn = false;
+    [SerializeField] private bool powerOn = false;
     //[SerializeField] bool fireSaleActive; //
 
     private void Awake()
@@ -141,6 +141,10 @@ public class GameManager_Purchases : MonoBehaviour
             SoundMng.Instance.PlayDeniedSound();
         }
    
+    }
+    public bool GetPowerStatus()
+    {
+        return powerOn;
     }
     private void OnDestroy()
     {

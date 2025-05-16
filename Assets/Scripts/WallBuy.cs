@@ -153,4 +153,9 @@ public class WallBuy : MonoBehaviour, IInteract
         return false;
     }
 
+    public string GetInteractText()
+    {
+        return $"Press [E] to purchase {weaponToGive.name}: {cost}";
+    }
+
 }

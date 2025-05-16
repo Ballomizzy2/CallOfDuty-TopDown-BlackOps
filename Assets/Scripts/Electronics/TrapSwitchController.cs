@@ -20,6 +20,7 @@ public class TrapSwitchController : MonoBehaviour,IInteract
     [SerializeField] private Color colorOff = Color.gray;
     [SerializeField] private Color colorReady = Color.green;
     [SerializeField] private Color colorCooldown = Color.red;
+    private int price = 300;
     private bool isCoolDown=false;
     private bool isActive = false;
 
@@ -102,7 +103,7 @@ public class TrapSwitchController : MonoBehaviour,IInteract
     public void Interact(PlayerController player)
     {
         bool readyToBuy = !GetIsActive();
-        int price = 300;
+       
         int playerScore = player.currentPoints;
         
         if (playerScore >= price && readyToBuy)
@@ -131,6 +132,11 @@ public class TrapSwitchController : MonoBehaviour,IInteract
     public bool UsesUniversalStoreSoundFX()
     {
         return true;
+    }
+
+    public string GetInteractText()
+    {
+        return $"Press [E] to purchase trap: {price}";
     }
 
 }

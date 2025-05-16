@@ -18,7 +18,6 @@ public class HUDController : MonoBehaviour
         Instance = this;
         perkIconTemplate.gameObject.SetActive(false);
     }
-
     void Update()
     {
         UpdateAmmoDisplay();

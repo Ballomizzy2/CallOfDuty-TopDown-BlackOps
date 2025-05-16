@@ -8,6 +8,7 @@ public class PerkSodaSOHolder : MonoBehaviour,IInteract
     //---INSTANCE CANNOT WORK HERE---
     //shop variables soundfx
     private bool canPayFor;
+    private bool inList = false;
     public PerkSodasSO GetHeldPerkSodaSO()
     {
         return heldPerkSodaSO;
@@ -73,6 +74,7 @@ public class PerkSodaSOHolder : MonoBehaviour,IInteract
             HandlePerkSodaModifierAllocation(heldPerkSodaSO);
             Debug.Log($"-{player.GetPoints()}, you got {heldPerkSodaSO.perkID}");
             HUDController.Instance.SetPerkIcons(player.playerPerkList);
+            inList = true;
 
         }
         else
@@ -90,6 +92,21 @@ public class PerkSodaSOHolder : MonoBehaviour,IInteract
     public bool UsesUniversalStoreSoundFX()
     {
         return true;
+    }
+
+    public string GetInteractText()
+    {
+   
+        if (!inList)
+        {
+            //if player owns: ""
+            return $"Press [E] to purchase {heldPerkSodaSO.name}: {heldPerkSodaSO.price}";
+        }
+        else
+        {
+            return "";
+        }
+ 
     }
 
 }

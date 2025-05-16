@@ -153,5 +153,9 @@ public class MysteryBox : MonoBehaviour, IInteract
     {
         return false;
     }
+    public string GetInteractText()
+    {
+        return $"Press [E] to purchase Mystery Box: {boxPrice}";
+    }
 
 }

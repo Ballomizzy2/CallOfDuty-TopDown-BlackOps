@@ -69,4 +69,8 @@ public class DoorsHandler : MonoBehaviour, IInteract
     {
         return true;
     }
+    public string GetInteractText()
+    {
+        return $"Press [E] to purchase door: {price}";
+    }
 }

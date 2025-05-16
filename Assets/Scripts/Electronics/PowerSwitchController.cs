@@ -45,4 +45,18 @@ public class PowerSwitchController : MonoBehaviour, IInteract
     {
         return false;
     }
+
+    public string GetInteractText()
+    {
+        if (!GameManager_Purchases.Instance.GetPowerStatus())
+        {
+            //if power is off, message
+            return "Press [E] to turn on power";
+        }
+        else
+        {
+            return "";
+        }
+        
+    }
 }

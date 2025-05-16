@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -51,6 +53,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("HUD")]
     [SerializeField] private HUDController hudControllerObject;
+    [SerializeField] private TextMeshProUGUI interactText;
+    private bool sawTheObject = false;
 
     private void Awake()
     {
@@ -65,7 +69,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
-        
+        HideUI();
     }
 
     private void Update()
@@ -132,6 +136,7 @@ public class PlayerController : MonoBehaviour
             OnRayCastHitInteract?.Invoke(this, new RayCastHitInteract { lookAtInteract = storedRayHit });
             //MiscInteractions(storedRayHit);
 
+
         }
         else if (storedShereHit != null)
         {
@@ -148,6 +153,18 @@ public class PlayerController : MonoBehaviour
             //Debug.Log(raycastHit.transform);
             storedRayHit = raycastHit.transform.gameObject;
             storedShereHit = null;
+            if (storedRayHit.GetComponent<IInteract>()!=null)
+            {
+              
+                    ShowUI(storedRayHit.GetComponent<IInteract>());
+               
+                
+            }
+            else
+            {
+                HideUI();
+            }
+            
         }
         else
         {
@@ -160,27 +177,33 @@ public class PlayerController : MonoBehaviour
                 if (hit != null) // optional: filter by tag/layer here
                 {
                     storedShereHit = hit.gameObject;
+                    if (storedShereHit.GetComponent<IInteract>() != null)
+                    {
+                        //interactText.text += storedShereHit.GetComponent<IInteract>().GetInteractText();
+                      
+                            ShowUI(storedShereHit.GetComponent<IInteract>());
+                       
+                        
+                    }
+                    else
+                    {
+                        
+                        HideUI();
+                       
+                    }
+
                     break;
                 }
             }
         }
+      
 
 
 
-        Debug.DrawRay(transform.position, transform.forward, Color.red);
+
+            Debug.DrawRay(transform.position, transform.forward, Color.red);
     }
 
-    //private void MiscInteractions(GameObject thingHit)
-    //{
-    //    //if you guys want the player to interact w/ random stuff
-    //    //assign the object a layer and this should work
-    //    switch (thingHit.layer)
-    //    {
-    //        case POWER_LAYER:
-    //            PowerSwitchController.Instance.ActivatePower();
-    //            break;
-    //    }
-    //}
 
     private void OnTriggerEnter(Collider other)
     {
@@ -270,4 +293,35 @@ public class PlayerController : MonoBehaviour
     {
         return perkLimit;
     }
+
+    //for the interact ui
+    public void ShowUI(IInteract interactObject)
+    {
+        
+        if (!interactObject.IsElectrical())
+        {
+            interactText.text = interactObject.GetInteractText();
+        }
+        else
+        {
+            //assume is electrical
+            if (GameManager_Purchases.Instance.GetPowerStatus())
+            {
+                interactText.text = interactObject.GetInteractText();
+            }
+            else
+            {
+                interactText.text = "Turn on the power!";
+            }
+        }
+        //if we add a backdrop to text, uncomment if to prevent empty backdrops
+        //if(!string.IsNullOrEmpty(interactObject.GetInteractText()){ }
+        interactText.enabled = true;
+    }
+    public void HideUI()
+    {
+        interactText.enabled = false;
+    }
+
+
 }

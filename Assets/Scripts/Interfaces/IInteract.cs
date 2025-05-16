@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public interface IInteract 
@@ -9,4 +10,7 @@ public interface IInteract
 
     //add a bool for universal noise, other wise objects will handle their own noise?
     public bool UsesUniversalStoreSoundFX();
+
+    public string GetInteractText();
+
 }
