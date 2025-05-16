@@ -6,6 +6,10 @@ public class PowerSwitchController : MonoBehaviour, IInteract
     public static PowerSwitchController Instance { get; private set; }
     public event EventHandler OnLeverFlipped;
     [SerializeField] GameObject lever;//move to y 1.3
+    bool noisePlayed = false;
+
+    //shop variables soundfx
+    private bool canPayFor =true;
 
     private void Awake()
     {
@@ -17,6 +21,7 @@ public class PowerSwitchController : MonoBehaviour, IInteract
         Vector3 newPos = lever.transform.localPosition;
         newPos.y = 1.3f;
         lever.transform.localPosition = newPos;
+        noisePlayed = true;
 
         OnLeverFlipped?.Invoke(this,EventArgs.Empty);
     }
@@ -30,6 +35,11 @@ public class PowerSwitchController : MonoBehaviour, IInteract
     }
     public bool CanAffordSoundFX()
     {
-        return true;
+        return canPayFor;
     }
+    public void ChangeBoolFX()
+    {
+        canPayFor = false;
+    }
+
 }

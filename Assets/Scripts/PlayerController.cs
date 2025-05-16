@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -26,6 +27,10 @@ public class PlayerController : MonoBehaviour
     [Header("Inventory")]
     public Transform weaponHolder;
     private GameObject currentWeapon;
+    [SerializeField] public List<PerkSodasSO> playerPerkList;
+    ///player var
+    private int perkCount = 0;
+    private int perkLimit = 4;
 
     [Header("Interaction")]
     private InputSystem_Actions inputActions;
@@ -238,5 +243,31 @@ public class PlayerController : MonoBehaviour
     private void OnDestroy()
     {
         inputActions.Player.Interact.performed -= Interact_performed;
+    }
+
+    //perks
+    public bool HasPerk(PerkSodasSO perkSoda)
+    {
+        //iterate thu player list to see if they have said perk
+        for (int i = 0; i < playerPerkList.Count; i++)
+        {
+            if (perkSoda == playerPerkList[i])
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public void AddPerkCount()
+    {
+        perkCount++;
+    }
+    public int GetPerkCount()
+    {
+        return perkCount;
+    }
+    public int GetPerkLimit()
+    {
+        return perkLimit;
     }
 }

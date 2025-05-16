@@ -40,16 +40,15 @@ public class Gun : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         playerMovement = FindObjectOfType<PlayerMovement>();
         originalMoveSpeed = playerMovement.speed;
-        GameManager_Purchases.Instance.OnSpeedColaPurchase += GameManager_Purchases_OnSpeedColaPurchase;
-        GameManager_Purchases.Instance.OnDoubleTapPurchase += GameManager_Purchases_OnDoubleTapPurchase;
+       
     }
 
-    private void GameManager_Purchases_OnDoubleTapPurchase(object sender, EventArgs e)
+    private void ApplyDoubleTap(object sender, EventArgs e)
     {
         doubleTapBuff = 1- 0.3f;
     }
 
-    private void GameManager_Purchases_OnSpeedColaPurchase(object sender, EventArgs e)
+    private void ApplySpeedCola(object sender, EventArgs e)
     {
         speedColaBuff = 0.5f;
     }
@@ -337,11 +336,18 @@ public class Gun : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    private void OnEnable()
     {
-        GameManager_Purchases.Instance.OnSpeedColaPurchase -= GameManager_Purchases_OnSpeedColaPurchase;
-        GameManager_Purchases.Instance.OnDoubleTapPurchase -= GameManager_Purchases_OnDoubleTapPurchase;
+        PerkEventHub.OnSpeedColaPurchase += ApplySpeedCola;
+        PerkEventHub.OnDoubleTapPurchase += ApplyDoubleTap;
     }
+
+    private void OnDisable()
+    {
+        PerkEventHub.OnSpeedColaPurchase -= ApplySpeedCola;
+        PerkEventHub.OnDoubleTapPurchase -= ApplyDoubleTap;
+    }
+
 
 
 }

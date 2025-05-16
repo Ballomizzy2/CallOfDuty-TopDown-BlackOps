@@ -148,4 +148,5 @@ public class WallBuy : MonoBehaviour, IInteract
         return canPayFor;
     }
 
+
 }

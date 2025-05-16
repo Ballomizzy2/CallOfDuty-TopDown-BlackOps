@@ -6,4 +6,6 @@ public interface IInteract
     public void Interact(PlayerController player);
 
     public bool CanAffordSoundFX();
+
+ 
 }

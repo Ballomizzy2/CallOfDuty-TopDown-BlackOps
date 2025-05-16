@@ -65,4 +65,5 @@ public class DoorsHandler : MonoBehaviour, IInteract
     {
         return canPayFor;
     }
+
 }
