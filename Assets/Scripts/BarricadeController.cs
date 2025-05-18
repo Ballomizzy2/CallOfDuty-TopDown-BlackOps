@@ -14,31 +14,42 @@ public class BarricadeController : MonoBehaviour, IInteract
     [SerializeField] private bool playerIsReparing = true;
     private void Start()
     {
-        for(int i = 0; i < transform.childCount; i++)
-        {
-            boards.Add(transform.GetChild(i).gameObject);
-        } 
+        //if (boards == null || boards.Count == 0)
+        //{
+        //    boards = new List<GameObject>();
+        //    for (int i = 0; i < transform.childCount; i++)
+        //    {
+        //        boards.Add(transform.GetChild(i).gameObject);
+        //    }
+        //}
+        Debug.Log(boards.Count);
         currentHits = 0;
         isBreached = false;
     }
 
     public void RegisterHit()
     {
-        if (isBreached) return;
+        if (isBreached)
+        {
+            //Debug.Log("Tried to hit, but already breached.");
+            return;
+        }
+
+        //Debug.Log($"RegisterHit called. currentHits = {currentHits}, boards.Count = {boards.Count}");
 
         if (currentHits < boards.Count)
         {
             canPayFor = true;
             boards[currentHits].SetActive(false);
             currentHits++;
+            //Debug.Log($"Board {currentHits} disabled.");
         }
 
         if (currentHits == boards.Count)
         {
             canPayFor = false;
             isBreached = true;
-            Debug.Log("Barricade breached!");
-            //sounds/animations
+            //Debug.Log("Barricade breached!");
         }
     }
 
@@ -56,6 +67,7 @@ public class BarricadeController : MonoBehaviour, IInteract
 
         if (currentHits == 0)
             isBreached = false;
+        canPayFor = true;
         GameManager_Scores.Instance.PointsPerBarrier();
         return true; // Successfully repaired one board
     }
@@ -104,7 +116,7 @@ public class BarricadeController : MonoBehaviour, IInteract
         }
         else
         {
-            return $"Press [E] to damage repair barrier";
+            return $"Press [E] to damage barrier";
         }
         
     }
