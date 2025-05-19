@@ -724,18 +724,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUDCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 7343154988224604962, guid: cece3df2434623b4495ea944e2307028, type: 3}
-      propertyPath: weaponManager
-      value: 
-      objectReference: {fileID: 1462966705}
-    - target: {fileID: 8189278619538407032, guid: cece3df2434623b4495ea944e2307028, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 83.3999
-      objectReference: {fileID: 0}
-    - target: {fileID: 8445088311133639788, guid: cece3df2434623b4495ea944e2307028, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -53.07007
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

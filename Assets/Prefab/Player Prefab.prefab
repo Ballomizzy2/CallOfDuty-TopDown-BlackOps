@@ -70,7 +70,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1963415748804770814}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -279,7 +279,8 @@ MonoBehaviour:
   gunData: {fileID: 11400000, guid: 2e95c4aa2a5bc0a4eab03c23dcc6d231, type: 2}
   gunMuzzle: {fileID: 385853314965586011}
   hitEffectPrefab: {fileID: 0}
-  slot: 1
+  bulletTrailPrefab: {fileID: 0}
+  modelHolder: {fileID: 0}
   gm_score: {fileID: 0}
 --- !u!1 &2709654394844738485
 GameObject:
@@ -642,7 +643,8 @@ MonoBehaviour:
   gunData: {fileID: 11400000, guid: 41b2d4ce874bff14eab12bd0e873d33a, type: 2}
   gunMuzzle: {fileID: 2561328447581851960}
   hitEffectPrefab: {fileID: 0}
-  slot: 0
+  bulletTrailPrefab: {fileID: 0}
+  modelHolder: {fileID: 0}
   gm_score: {fileID: 0}
 --- !u!1 &4388106751376689294
 GameObject:
@@ -844,7 +846,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6008505149739264911}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -927,6 +929,7 @@ MonoBehaviour:
   currentStamina: 0
   isInCooldown: 0
   cooldownTimer: 0
+  animator: {fileID: 6200533593543969870}
 --- !u!114 &5825048858589592858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1113,6 +1116,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41d71e394628b614d8180ce4d8565483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grenadePrefab: {fileID: 2143593270022689438, guid: a7b2e3e14bc0b904b8053ef112f0b80e, type: 3}
+  throwForce: 15
+  grenadeSpawnPoint: {fileID: 8160094277721873226}
+  maxGrenades: 4
+  currentGrenades: 0
+  grenadeFuseTime: 3
   weapons:
   - {fileID: 3085064108381781860}
   - {fileID: 7871798969999380686}
@@ -1132,11 +1141,13 @@ MonoBehaviour:
   totalPoints: 0
   totalKills: 0
   weaponHolder: {fileID: 0}
+  playerPerkList: []
   interactRayCastDist: 4
   sphereRadius: 1
   castDistance: 5
   hp: 3
   hudControllerObject: {fileID: 0}
+  interactText: {fileID: 0}
 --- !u!1 &6258007117591553193
 GameObject:
   m_ObjectHideFlags: 0
@@ -1540,6 +1551,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcb334eb247ae3e488abb081c847cf09, type: 3}
+--- !u!95 &6200533593543969870 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: fcb334eb247ae3e488abb081c847cf09, type: 3}
+  m_PrefabInstance: {fileID: 6200533593551305006}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6200533593551692690 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400060, guid: fcb334eb247ae3e488abb081c847cf09, type: 3}

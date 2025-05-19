@@ -1,19 +1,27 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private int HP = 150;
     private Animator animator;
 
-    private NavMeshAgent agent;
+    private NavMeshAgent agent; //uncomment when not debugging
     public bool isDead = false;
+
+    [Header("Debug")]
+    [SerializeField] private bool staticDummy = false;
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
-        agent = GetComponent<NavMeshAgent>();
+        if(!staticDummy)
+        {
+            animator = GetComponent<Animator>();
+            agent = GetComponent<NavMeshAgent>(); //uncomment when not debugging
+        }
+
     }
 
     public void TakeDamage(int damage, DamageType dmgType)
@@ -24,35 +32,70 @@ public class Enemy : MonoBehaviour
         }
 
         HP -= damage;
-        if (HP <= 0)
+
+        if (!staticDummy)
         {
-            agent.isStopped = true;
-            SoundMng.Instance.zombieChannel.PlayOneShot(SoundMng.Instance.zombieDeath);
-            PowerUpManager.Instance.TryDropPowerUp(transform.position);
-            PlayerVoicelineManager.Instance.PlayVoiceline(PlayerVoicelineManager.Instance.zombieKillClips);
-            int randomValue = Random.Range(0, 2);
-            if (randomValue == 0){
-                animator.SetTrigger("DIE2");
-                PointsForDeath(dmgType);
-                Destroy(gameObject, 3f);
+       
+            if (HP <= 0)
+            {
+                if (staticDummy)
+                {
+                    agent.isStopped = true; //uncomment when not debugging
+                }
+
+                SoundMng.Instance.zombieChannel.PlayOneShot(SoundMng.Instance.zombieDeath);
+                PowerUpManager.Instance.TryDropPowerUp(transform.position);
+                PlayerVoicelineManager.Instance.PlayVoiceline(PlayerVoicelineManager.Instance.zombieKillClips);
+                int randomValue = Random.Range(0, 2);
+                if (randomValue == 0)
+                {
+                    animator.SetTrigger("DIE2");
+                    PointsForDeath(dmgType);
+                    Destroy(gameObject, 3f);
+                }
+                else
+                {
+                    animator.SetTrigger("DIE1");
+                    PointsForDeath(dmgType);
+                    Destroy(gameObject, 3f);
+                }
+                isDead = true;
+                GetComponent<CapsuleCollider>().enabled = false;
+
+
             }
             else
             {
-                animator.SetTrigger("DIE1");
-                PointsForDeath(dmgType);
-                Destroy(gameObject, 3f);
-            }
-            isDead = true;
-            GetComponent<CapsuleCollider>().enabled = false;
+                animator.SetTrigger("DAMAGE");
 
-            
+                SoundMng.Instance.zombieChannel.PlayOneShot(SoundMng.Instance.zombieHurt);
+            }
         }
         else
         {
-            animator.SetTrigger("DAMAGE");
+            if (HP <= 0)
+            {
+          
 
-            SoundMng.Instance.zombieChannel.PlayOneShot(SoundMng.Instance.zombieHurt);
+                SoundMng.Instance.zombieChannel.PlayOneShot(SoundMng.Instance.zombieDeath);
+                PowerUpManager.Instance.TryDropPowerUp(transform.position);
+                PlayerVoicelineManager.Instance.PlayVoiceline(PlayerVoicelineManager.Instance.zombieKillClips);
+
+                PointsForDeath(dmgType);
+                isDead = true;
+                Destroy(gameObject);
+
+
+
+            }
+            else
+            {
+               
+
+                SoundMng.Instance.zombieChannel.PlayOneShot(SoundMng.Instance.zombieHurt);
+            }
         }
+       
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -146,14 +189,14 @@ public class Enemy : MonoBehaviour
     {
         //this switch gives points
         //Nuke is isolated bc we don't want 400 points PER zombie on map. lol
-        if (dmgType == DamageType.Nuke)
+        if (dmgType != DamageType.Nuke)
         {
-
+                 Debug.Log("ded");
+            GameManager_Scores.Instance.PointsPerKill(dmgType);
         }
         else
         {
-            Debug.Log("ded");
-            GameManager_Scores.Instance.PointsPerKill(dmgType);
+       
         }
     }
 }
