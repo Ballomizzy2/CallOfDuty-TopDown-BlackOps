@@ -1,6 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-
+/// <summary>
+///             ----This should handle the number of zombies on map and track them and the current round----
+/// round- determines how many zombies n their strength (when reserve AND currentZombieOnMap==0, ++round)
+/// totalZombies- track total zombies for round, do math based on round to determine
+/// reserveZombies- IF current LESS THAN maxZombiesOnMap, spawn more zombies until ==maxZombiesOnMap (decrement reserveZombies in process)
+/// currentZombies- number of zombies on the map
+/// maxZombiesOnMap- caps the number of zombies on map (24)
+/// 
+///              ----BACAUSE THIS ALSO TRACKS BARRICADES, carpenter should talk to this script?...----
+/// should talk to spawners/access spawners
+/// 
+///             ----So far, all instances of this script is disabled?----
+/// </summary>
 public class SpawnManager : MonoBehaviour
 {
     [System.Serializable]
@@ -17,12 +29,18 @@ public class SpawnManager : MonoBehaviour
     public Transform player;
     public float heightOffset = 0.25f;
 
-    
-    private Transform[] spawnPoints;
+    [Header("Map Data")]
+    [SerializeField] private Transform[] spawnPoints;
+    [SerializeField] private List<BarricadeController> barricadeList;
+
+    [Header("Debugging stuff")]
+    [SerializeField] private bool isUsingOriginalUse = true;
+
 
     #region ──  Initialisation ────────────────────────────────────────────────────
     private void Awake()
     {
+
         GameObject[] objs = GameObject.FindGameObjectsWithTag("SpawnPoint");
         spawnPoints = new Transform[objs.Length];
         for (int i = 0; i < objs.Length; i++)
@@ -58,4 +76,9 @@ public class SpawnManager : MonoBehaviour
         }
     }
     #endregion
+    public List<BarricadeController> GetBars()
+    {
+        return barricadeList;
+    }
+    
 }

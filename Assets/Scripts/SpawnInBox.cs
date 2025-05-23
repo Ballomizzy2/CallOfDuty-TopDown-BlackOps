@@ -13,6 +13,7 @@ public class SpawnInBox : MonoBehaviour
     }
     void Start()
     {
+        GameObject zombieFolder = new GameObject("Zombie-Folder");
         if (areaCollider == null || prefabToSpawn == null)
         {
             Debug.LogError("Missing reference in RandomSpawnerInBox.");
@@ -21,8 +22,10 @@ public class SpawnInBox : MonoBehaviour
 
         for (int i = 0; i < spawnCount; i++)
         {
+          
             Vector3 spawnPos = GetRandomPointInBox(areaCollider);
-            Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
+            GameObject zombie =Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
+            zombie.transform.parent = zombieFolder.transform;
         }
     }
 

@@ -8,6 +8,7 @@ using UnityEngine;
 public class RoomSpawnerData : MonoBehaviour
 {
     [SerializeField] private List<SpawnInBox> zombieSpawners;
+    [SerializeField] private List<BarricadeController> barricadeList;
     //mystery box spawner holder
     [SerializeField] private bool isStartingRoom = false;
     private void Start()

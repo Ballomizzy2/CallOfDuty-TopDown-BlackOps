@@ -1,5 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
+/// <summary>
+/// ----two birds one stone---
+/// IF zombie, trigger should change state to "break barrier"
+///     -zombie should pass once barriers are down
+/// player will use this for its Interact via raycast
+///     -player CANNOT pass no matter what
+/// </summary>
 
 public class BarricadeController : MonoBehaviour, IInteract
 {
@@ -8,7 +15,7 @@ public class BarricadeController : MonoBehaviour, IInteract
     public bool isBreached = false;
 
     //shop variables soundfx
-    private bool canPayFor = true;
+    private bool canPayFor = false;
 
     [Header("Debug")]
     [SerializeField] private bool debug_playerIsReparing = true;
@@ -55,6 +62,7 @@ public class BarricadeController : MonoBehaviour, IInteract
 
     public bool RepairOneBoard()
     {
+        //player calls
         if (currentHits <= 0 || currentHits > boards.Count)
         {
             canPayFor = false;
@@ -69,6 +77,23 @@ public class BarricadeController : MonoBehaviour, IInteract
             isBreached = false;
         canPayFor = true;
         GameManager_Scores.Instance.PointsPerBarrier();
+        return true; // Successfully repaired one board
+    }
+    public bool RepairAllBoards()
+    {
+        //carpenter calls
+        if (!isBreached) return false;
+
+        isBreached=false;
+
+        currentHits=0;
+        //boards[currentHits].SetActive(true);
+        foreach (var board in boards)
+        {
+            board.SetActive(true);
+        }
+        
+
         return true; // Successfully repaired one board
     }
 
@@ -112,7 +137,15 @@ public class BarricadeController : MonoBehaviour, IInteract
     {
         if (debug_playerIsReparing)
         {
-            return $"Press [E] to purchase repair barrier";
+            if (canPayFor)
+            {
+                return $"Press [E] to repair barrier";
+            }
+            else
+            {
+                return "";
+            }
+            
         }
         else
         {

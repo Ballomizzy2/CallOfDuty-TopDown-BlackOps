@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int HP = 150;
     private Animator animator;
 
-    private NavMeshAgent agent; //uncomment when not debugging
+    private NavMeshAgent agent; 
     public bool isDead = false;
 
     [Header("Debug")]
@@ -19,7 +19,6 @@ public class Enemy : MonoBehaviour
         if(!staticDummy)
         {
             animator = GetComponent<Animator>();
-            agent = GetComponent<NavMeshAgent>(); //uncomment when not debugging
         }
 
     }
@@ -40,7 +39,7 @@ public class Enemy : MonoBehaviour
             {
                 if (staticDummy)
                 {
-                    agent.isStopped = true; //uncomment when not debugging
+                    agent.isStopped = true; 
                 }
 
                 SoundMng.Instance.zombieChannel.PlayOneShot(SoundMng.Instance.zombieDeath);
@@ -191,7 +190,7 @@ public class Enemy : MonoBehaviour
         //Nuke is isolated bc we don't want 400 points PER zombie on map. lol
         if (dmgType != DamageType.Nuke)
         {
-                 Debug.Log("ded");
+                 //Debug.Log("ded");
             GameManager_Scores.Instance.PointsPerKill(dmgType);
         }
     }

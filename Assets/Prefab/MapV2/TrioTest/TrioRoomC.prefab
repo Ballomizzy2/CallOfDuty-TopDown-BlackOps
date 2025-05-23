@@ -797,6 +797,9 @@ MonoBehaviour:
   zombieSpawners:
   - {fileID: 6688701061161430457}
   - {fileID: 4745554873162084744}
+  barricadeList:
+  - {fileID: 6080576571271717524}
+  - {fileID: 4859751689081236118}
   isStartingRoom: 0
 --- !u!1 &6632279647028644926
 GameObject:
@@ -1106,6 +1109,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f44e645fc2ea7dc42aa6a14cf6a07d82, type: 3}
+--- !u!114 &4859751689081236118 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5472356926068185726, guid: f44e645fc2ea7dc42aa6a14cf6a07d82, type: 3}
+  m_PrefabInstance: {fileID: 612764189433000168}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c70c9f3175a4844386c60ad33723fd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6002078515529899415 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6614472100819381631, guid: f44e645fc2ea7dc42aa6a14cf6a07d82, type: 3}
@@ -1173,6 +1187,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6614472100819381631, guid: f44e645fc2ea7dc42aa6a14cf6a07d82, type: 3}
   m_PrefabInstance: {fileID: 2275227715781523690}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6080576571271717524 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5472356926068185726, guid: f44e645fc2ea7dc42aa6a14cf6a07d82, type: 3}
+  m_PrefabInstance: {fileID: 2275227715781523690}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c70c9f3175a4844386c60ad33723fd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5514737126666420665
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -36,6 +36,10 @@ public class GameManager_Scores : MonoBehaviour
             CountDownDoublePoints();
         }
     }
+    public void StartDoublePoints()
+    {
+        multiplier = 2;
+    }
 
     private void CountDownDoublePoints()
     {

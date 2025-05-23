@@ -37,13 +37,14 @@ public class PowerUp : MonoBehaviour
             }
             else if (type == PowerUpType.DoublePoints)
             {
-                //GameManager_Scores.Instance.CountDownDoublePoints();
+                GameManager_Scores.Instance.StartDoublePoints();
                 PowerUpSoundManager.Instance.PlaySoundEffect(PowerUpSoundManager.Instance.doublePointsClip);
                 PlayerVoicelineManager.Instance.PlayVoiceline(PlayerVoicelineManager.Instance.pickupDoublePointsClips);
             }
             else if (type == PowerUpType.Carpenter)
             {
-                //BarricadeController
+                //List<BarricadeController> fixEm= SpawnManager.Instance.GetBars();
+                //loop thru and fix and call the object's RepairAllBoards()
                 //PowerUpSoundManager.Instance.PlaySoundEffect(PowerUpSoundManager.Instance.carpenterClip);
                 //PlayerVoiceManager.Instance.PlayVoiceline(PlayerVoiceManager.Instance.pickupCarpenterClips);
             }
