@@ -146,6 +146,7 @@ public class PlayerController : MonoBehaviour
     private void Interactions()
     {
         // these should wake up respective UI for objects hit e.g. Press [KEY] to interact
+        //sawObject was supposed to go in here cus technically its constnantly updating the UI...
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit raycastHit, interactRayCastDist))
         {
             //Debug.Log(raycastHit.transform);

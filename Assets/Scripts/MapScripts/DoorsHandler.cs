@@ -6,6 +6,8 @@ public class DoorsHandler : MonoBehaviour, IInteract
     [SerializeField] GameObject doorA;
     [SerializeField] GameObject doorB;
     [SerializeField] BoxCollider boxCollider;
+    [SerializeField] private DoorController controller;
+
 
     //shop variables soundfx
     private bool canPayFor;
@@ -52,6 +54,7 @@ public class DoorsHandler : MonoBehaviour, IInteract
             canPayFor = true;
 
             player.SetPoints(playerScore - tempPrice);
+            controller.SendDataToSpawnManager();
             AnimateDoors();
 
         }

@@ -11,7 +11,7 @@ public class BarricadeController : MonoBehaviour, IInteract
     private bool canPayFor = true;
 
     [Header("Debug")]
-    [SerializeField] private bool playerIsReparing = true;
+    [SerializeField] private bool debug_playerIsReparing = true;
     private void Start()
     {
         //if (boards == null || boards.Count == 0)
@@ -79,7 +79,7 @@ public class BarricadeController : MonoBehaviour, IInteract
     }
     public void Interact(PlayerController player)
     {
-        if (playerIsReparing)
+        if (debug_playerIsReparing)
         {
             RepairOneBoard();
         }
@@ -92,7 +92,7 @@ public class BarricadeController : MonoBehaviour, IInteract
 
     public bool CanAffordSoundFX()
     {
-        if (playerIsReparing)
+        if (debug_playerIsReparing)
         {
             return canPayFor;
         }
@@ -110,7 +110,7 @@ public class BarricadeController : MonoBehaviour, IInteract
 
     public string GetInteractText()
     {
-        if (playerIsReparing)
+        if (debug_playerIsReparing)
         {
             return $"Press [E] to purchase repair barrier";
         }
