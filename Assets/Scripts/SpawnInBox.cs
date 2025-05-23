@@ -13,20 +13,7 @@ public class SpawnInBox : MonoBehaviour
     }
     void Start()
     {
-        GameObject zombieFolder = new GameObject("Zombie-Folder");
-        if (areaCollider == null || prefabToSpawn == null)
-        {
-            Debug.LogError("Missing reference in RandomSpawnerInBox.");
-            return;
-        }
 
-        for (int i = 0; i < spawnCount; i++)
-        {
-          
-            Vector3 spawnPos = GetRandomPointInBox(areaCollider);
-            GameObject zombie =Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
-            zombie.transform.parent = zombieFolder.transform;
-        }
     }
 
     // 获取 BoxCollider 内的随机位置
@@ -40,5 +27,24 @@ public class SpawnInBox : MonoBehaviour
         float z = Random.Range(center.z - size.z, center.z + size.z);
 
         return new Vector3(x, y, z);
+    }
+
+    public void SpawnTheZombies(int spawnManagerSpawnCount)
+    {
+        //SpawnManager will call this
+        GameObject zombieFolder = new GameObject("Zombie-Folder");
+        if (areaCollider == null || prefabToSpawn == null)
+        {
+            Debug.LogError("Missing reference in RandomSpawnerInBox.");
+            return;
+        }
+
+        for (int i = 0; i < spawnManagerSpawnCount; i++)
+        {
+
+            Vector3 spawnPos = GetRandomPointInBox(areaCollider);
+            GameObject zombie = Instantiate(prefabToSpawn, spawnPos, Quaternion.identity);
+            zombie.transform.parent = zombieFolder.transform;
+        }
     }
 }

@@ -29,7 +29,7 @@ public class BarricadeController : MonoBehaviour, IInteract
         //        boards.Add(transform.GetChild(i).gameObject);
         //    }
         //}
-        Debug.Log(boards.Count);
+        
         currentHits = 0;
         isBreached = false;
     }

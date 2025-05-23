@@ -9,7 +9,7 @@ public class RoomSpawnerData : MonoBehaviour
 {
     [SerializeField] private List<SpawnInBox> zombieSpawners;
     [SerializeField] private List<BarricadeController> barricadeList;
-    //mystery box spawner holder
+    [SerializeField] private GameObject mysteryBoxSpawner; //TODO place holder change type later...
     [SerializeField] private bool isStartingRoom = false;
     private void Start()
     {
@@ -24,5 +24,17 @@ public class RoomSpawnerData : MonoBehaviour
             
     }
 
+    public List<SpawnInBox> ZombieSpawnersInRoom()
+    {
+        return zombieSpawners;
+    }
 
+    public List<BarricadeController > BarricadesInRoom()
+    {
+        return barricadeList;
+    }
+    public GameObject MysteryBoxSpawner()
+    {
+        return mysteryBoxSpawner;
+    }
 }
