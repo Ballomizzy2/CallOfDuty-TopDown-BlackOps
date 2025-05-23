@@ -194,9 +194,5 @@ public class Enemy : MonoBehaviour
                  Debug.Log("ded");
             GameManager_Scores.Instance.PointsPerKill(dmgType);
         }
-        else
-        {
-       
-        }
     }
 }
