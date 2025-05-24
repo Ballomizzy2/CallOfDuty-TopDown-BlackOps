@@ -7,13 +7,19 @@ public class SpawnInBox : MonoBehaviour
     public GameObject prefabToSpawn;      // 要生成的 prefab
     public int spawnCount = 5;            // 生成的数量
 
+    [Header("debug Settings")]
+    [SerializeField] private bool isUsingOriginalScript = true;
+
     private void Awake()
     {
         areaCollider = GetComponent<BoxCollider>();
     }
     void Start()
     {
-
+        if (isUsingOriginalScript)
+        {
+            SpawnTheZombies(spawnCount);
+        }
     }
 
     // 获取 BoxCollider 内的随机位置
