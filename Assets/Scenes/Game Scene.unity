@@ -261,9 +261,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 20.52
       objectReference: {fileID: 0}
+    - target: {fileID: 1156085801324893743, guid: f5f0e714dc3f7bc47a55030551c217c2, type: 3}
+      propertyPath: isUsingOriginalScript
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1664206655928455924, guid: f5f0e714dc3f7bc47a55030551c217c2, type: 3}
+      propertyPath: isUsingOriginalScript
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2169452164261820813, guid: f5f0e714dc3f7bc47a55030551c217c2, type: 3}
       propertyPath: m_LocalPosition.y
       value: 25.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908430764584940552, guid: f5f0e714dc3f7bc47a55030551c217c2, type: 3}
+      propertyPath: isUsingOriginalScript
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3226831232395832211, guid: f5f0e714dc3f7bc47a55030551c217c2, type: 3}
       propertyPath: m_Name
@@ -271,6 +283,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3480854932323018490, guid: f5f0e714dc3f7bc47a55030551c217c2, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4841653339221459657, guid: f5f0e714dc3f7bc47a55030551c217c2, type: 3}
+      propertyPath: isUsingOriginalScript
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4903590380141726757, guid: f5f0e714dc3f7bc47a55030551c217c2, type: 3}
+      propertyPath: isUsingOriginalScript
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5283725568492071948, guid: f5f0e714dc3f7bc47a55030551c217c2, type: 3}
+      propertyPath: isUsingOriginalScript
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6281854172656918061, guid: f5f0e714dc3f7bc47a55030551c217c2, type: 3}
+      propertyPath: isUsingOriginalScript
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7619976432021352284, guid: f5f0e714dc3f7bc47a55030551c217c2, type: 3}
+      propertyPath: isUsingOriginalScript
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8477379271083754539, guid: f5f0e714dc3f7bc47a55030551c217c2, type: 3}
@@ -365,7 +397,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 38b427a9d996ba24bbed8681a81fd353, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 11e43e6e36d37fb4d98b1f95e38f44e0, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &606146215
 GameObject:
@@ -974,6 +1006,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3484782477702582351, guid: cece3df2434623b4495ea944e2307028, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484782477702582351, guid: cece3df2434623b4495ea944e2307028, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484782477702582351, guid: cece3df2434623b4495ea944e2307028, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3484782477702582351, guid: cece3df2434623b4495ea944e2307028, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4869023314694487763, guid: cece3df2434623b4495ea944e2307028, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1581,11 +1629,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPoints: 1000
+  totalPoints: 0
+  totalKills: 0
   weaponHolder: {fileID: 0}
+  playerPerkList: []
   interactRayCastDist: 4
   sphereRadius: 1
   castDistance: 5
   hp: 3
+  hudControllerObject: {fileID: 0}
+  interactText: {fileID: 0}
 --- !u!4 &1462966707 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6021592366621572436, guid: cba0fb39ed0ab09489c1c63a8d85ed66, type: 3}
