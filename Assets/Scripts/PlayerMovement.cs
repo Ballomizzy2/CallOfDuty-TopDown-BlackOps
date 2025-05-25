@@ -32,6 +32,13 @@ public class PlayerMovement : MonoBehaviour
     private bool isSprinting = false;
     private CharacterController controller;
 
+    [Header("Gravity")]
+    public float gravity = -9.81f;
+    public float groundDistance = 0.4f;
+    public Transform groundCheck;
+    public LayerMask groundMask;
+    Vector3 velocity; //fall speed
+    bool isGrounded;
     private void Awake()
     {
         currentStamina = maxStamina;
@@ -70,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
         aimPlayer();
         handleStamina();
         handleAnimation(); // Call the animation handling function
+        GravityCheck();
     }
 
     //function that controls our player's movement
@@ -160,5 +168,20 @@ public class PlayerMovement : MonoBehaviour
     {
         bool isMoving = move != Vector2.zero; // Check if the player is moving
         animator.SetBool("idle", !isMoving); // If not moving, set idle to true; otherwise, false
+    }
+    private void GravityCheck()
+    {
+        //Gravity on me never let me down gently
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+
+        if (isGrounded && velocity.y < 0)
+        {
+            velocity.y = -2f; // small value to keep grounded
+        }
+
+        // Apply gravity manually
+        velocity.y += gravity * Time.deltaTime;
+        controller.Move(velocity * Time.deltaTime);
+        controller.Move(velocity * Time.deltaTime);
     }
 }

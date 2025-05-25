@@ -593,6 +593,7 @@ Transform:
   - {fileID: 8224940302874409633}
   - {fileID: 6021592366621572436}
   - {fileID: 853518474686446399}
+  - {fileID: 4099510505284215526}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4077112769396758227
@@ -930,6 +931,12 @@ MonoBehaviour:
   isInCooldown: 0
   cooldownTimer: 0
   animator: {fileID: 6200533593543969870}
+  gravity: -9.81
+  groundDistance: 0.4
+  groundCheck: {fileID: 4099510505284215526}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!114 &5825048858589592858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1178,6 +1185,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5445288679028290735}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7281003172348734731
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4099510505284215526}
+  m_Layer: 0
+  m_Name: GravityCheckObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4099510505284215526
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7281003172348734731}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5720298622740733336}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8510827031407290294
 GameObject:
