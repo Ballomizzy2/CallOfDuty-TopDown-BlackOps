@@ -1,0 +1,86 @@
+using UnityEngine;
+
+public class GameManager_Scores : MonoBehaviour
+{
+    /*listen for:
+     * [event] - [origin of event]
+     * hit zombie- gun hit zombie
+     * kill zombie -gun hit zombie && hp<=0
+     * barriers - barriers built
+     * wave completed - GameManager_Rounds (or what ever handles the rounds)
+     * -----Discuss how these will work-----
+     * double points - DoublePoints drop will fire an EventEMpty.args and when it gets here, multiplier =2
+     * powers: nuke, carpenter, etc
+     */
+    [SerializeField] private int multiplier=1;
+    [SerializeField] private float doublePointsTime=5f;
+
+    [SerializeField] private WeaponManager weaponManagerScript;
+    int pointsToAdd = 10;
+    public static GameManager_Scores Instance {  get; private set; }
+    private void Awake()
+    {
+      Instance = this;
+    }
+
+
+    private void Start()
+    {
+        multiplier = 1;
+    }
+    private void Update()
+    {
+        if(multiplier == 2)
+        {
+            CountDownDoublePoints();
+        }
+    }
+
+    private void CountDownDoublePoints()
+    {
+        doublePointsTime -= Time.deltaTime;
+        if (doublePointsTime <= 0f)
+        {
+            //Kitchen Chaos timer
+            //after x secs
+            multiplier = 1;
+            doublePointsTime = 5f;
+        }
+        
+    }
+    public void PointsPerHit()
+    {
+        pointsToAdd = 10;
+        PlayerController.Instance.AddPoints(pointsToAdd * multiplier);
+    }
+
+    public void PointsPerKill(DamageType killType)
+    {
+        switch (killType)
+        {
+            case DamageType.Knife:
+                pointsToAdd = 130;
+                break;
+            case DamageType.Gun:
+                pointsToAdd = 60;
+                break;
+            case DamageType.Explosive:
+                //place holder, prob not gonna make is :-:
+                break;
+            case DamageType.Nuke:
+                pointsToAdd = 400;
+                break;
+
+        }
+        PlayerController.Instance.AddKillCount();
+        PlayerController.Instance.AddPoints(pointsToAdd * multiplier);
+
+    }
+    public void NukePoints()
+    {
+        pointsToAdd = 400;
+        PlayerController.Instance.AddPoints(pointsToAdd * multiplier);
+    }
+
+
+}

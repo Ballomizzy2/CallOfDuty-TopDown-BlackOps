@@ -1,17 +1,23 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
+using System;
 
 public class Gun : MonoBehaviour
 {
-    public GunData gunData; // Drag the ScriptableObject into this field
+
+    public GunData gunData; // Assign in Inspector
     [SerializeField] private Transform gunMuzzle;
+    [SerializeField] private GameObject hitEffectPrefab;
     [SerializeField] private GameObject bulletTrailPrefab;
+    private const string ZOMBIE_TAG = "Zombie";
     private GameObject weaponModelInstance;
     [SerializeField] private Transform modelHolder;
 
 
-    private int currentAmmo;
-    private int reserveAmmo;
+    internal int currentAmmo;
+    internal int reserveAmmo;
+    // public int GetCurrentAmmo() => currentAmmo;
+    // public int GetReserveAmmo() => reserveAmmo;
     private float nextFireTime = 0f;
     private bool isReloading = false;
     private AudioSource audioSource;
@@ -19,6 +25,11 @@ public class Gun : MonoBehaviour
     private PlayerMovement playerMovement;
     private float originalMoveSpeed;
     private bool adsSlowed = false;
+
+    [SerializeField] private GameManager_Scores gm_score;
+    private float speedCola = 1f;
+
+
 
     private void Start()
     {
@@ -28,6 +39,12 @@ public class Gun : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         playerMovement = FindObjectOfType<PlayerMovement>();
         originalMoveSpeed = playerMovement.speed;
+        GameManager_Purchases.Instance.OnSpeedColaPurchase += GameManager_Purchases_OnSpeedColaPurchase;
+    }
+
+    private void GameManager_Purchases_OnSpeedColaPurchase(object sender, EventArgs e)
+    {
+        speedCola = 0.5f;
     }
 
     void Update()
@@ -35,6 +52,19 @@ public class Gun : MonoBehaviour
         isAiming = Input.GetMouseButton(1); // Right-click to aim
 
         HandleADSMovement();
+
+        if ((float)reserveAmmo / gunData.reserveAmmo < 0.30f && reserveAmmo > 0 && PlayerVoicelineManager.Instance.hasreloaded && PlayerVoicelineManager.Instance.canSpeak)
+        {
+            PlayerVoicelineManager.Instance.PlayVoiceline(PlayerVoicelineManager.Instance.lowAmmoClips);
+            //Debug.Log((float)reserveAmmo / gunData.reserveAmmo);
+            PlayerVoicelineManager.Instance.hasreloaded = false;
+        }
+
+        if (reserveAmmo <= 0 && !PlayerVoicelineManager.Instance.outOfAmmoSaid && PlayerVoicelineManager.Instance.canSpeak)
+        {
+            PlayerVoicelineManager.Instance.PlayVoiceline(PlayerVoicelineManager.Instance.outOfAmmoClips);
+            PlayerVoicelineManager.Instance.outOfAmmoSaid = true;
+        }
 
         if (isReloading) return;
         isAiming = Input.GetMouseButton(1); // Right-click = Aim Down Sights
@@ -90,7 +120,7 @@ public class Gun : MonoBehaviour
             Bullet bulletScript = bullet.GetComponent<Bullet>();
             if (bulletScript != null)
             {
-                bulletScript.SetBulletStats(gunData.bulletSpeed, gunData.damage);
+                bulletScript.SetBulletStats(gunData.bulletSpeed, gunData.damage, gm_score);
             }
         }
 
@@ -99,7 +129,7 @@ public class Gun : MonoBehaviour
             AudioSource tempAudio = gameObject.AddComponent<AudioSource>();
             tempAudio.clip = gunData.shootSound;
             tempAudio.volume = 1f;
-            tempAudio.pitch = Random.Range(0.95f, 1.05f);
+            tempAudio.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
             tempAudio.spatialBlend = 0f;
             tempAudio.Play();
             Destroy(tempAudio, gunData.shootSound.length);
@@ -116,13 +146,13 @@ public class Gun : MonoBehaviour
             AudioSource tempAudio = gameObject.AddComponent<AudioSource>();
             tempAudio.clip = gunData.reloadSound;
             tempAudio.volume = 1f;
-            tempAudio.pitch = Random.Range(0.95f, 1.05f);
+            tempAudio.pitch = UnityEngine.Random.Range(0.95f, 1.05f);
             tempAudio.spatialBlend = 0f;
             tempAudio.Play();
             Destroy(tempAudio, gunData.reloadSound.length);
         }
 
-        yield return new WaitForSeconds(gunData.reloadTime);
+        yield return new WaitForSeconds(gunData.reloadTime * speedCola);
 
         int ammoNeeded = gunData.magazineSize - currentAmmo;
         int ammoToReload = Mathf.Min(ammoNeeded, reserveAmmo);
@@ -130,6 +160,8 @@ public class Gun : MonoBehaviour
         reserveAmmo -= ammoToReload;
 
         isReloading = false;
+
+        PlayerVoicelineManager.Instance.hasreloaded = true;
     }
 
     private IEnumerator BurstFire()
@@ -170,7 +202,7 @@ public class Gun : MonoBehaviour
 
             if (hit.collider.CompareTag("Zombie"))
             {
-                hit.collider.GetComponent<Enemy>().TakeDamage(gunData.damage);
+                hit.collider.GetComponent<Enemy>().TakeDamage(gunData.damage,DamageType.Gun);
             }
         }
 
@@ -212,6 +244,7 @@ public class Gun : MonoBehaviour
 
                 if (hit.collider.CompareTag("Zombie"))
                 {
+                    hit.collider.GetComponent<Enemy>().TakeDamage(gunData.damage, DamageType.Gun);
                     Destroy(hit.collider.gameObject);
                 }
             }
@@ -238,7 +271,7 @@ public class Gun : MonoBehaviour
         float spreadRadius = Mathf.Tan(spreadAngle * Mathf.Deg2Rad / 2f);
 
         // Only randomize along the X-axis (left-right)
-        float randomX = Random.Range(-spreadRadius, spreadRadius);
+        float randomX = UnityEngine.Random.Range(-spreadRadius, spreadRadius);
 
         Vector3 spreadDirection = direction + (gunMuzzle.right * randomX);
         return spreadDirection.normalized;

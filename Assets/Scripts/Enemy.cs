@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private int HP = 100;
+    [SerializeField] private int HP = 150;
     private Animator animator;
 
     private NavMeshAgent agent;
@@ -16,26 +16,36 @@ public class Enemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, DamageType dmgType)
     {
+        if (PowerUpManager.Instance.instaKillActive)
+        {
+            damage = 2147483647;
+        }
+
         HP -= damage;
         if (HP <= 0)
         {
             agent.isStopped = true;
             //SoundMng.Instance.zombieChannel.PlayOneShot(SoundMng.Instance.zombieDeath);
-            SoundMng.Instance.zombieChannel.PlayOneShot(SoundMng.Instance.zombieDeath);
+            PowerUpManager.Instance.TryDropPowerUp(transform.position);
+            PlayerVoicelineManager.Instance.PlayVoiceline(PlayerVoicelineManager.Instance.zombieKillClips);
             int randomValue = Random.Range(0, 2);
             if (randomValue == 0){
                 animator.SetTrigger("DIE2");
+                PointsForDeath(dmgType);
                 Destroy(gameObject, 3f);
             }
             else
             {
                 animator.SetTrigger("DIE1");
+                PointsForDeath(dmgType);
                 Destroy(gameObject, 3f);
             }
             isDead = true;
             GetComponent<CapsuleCollider>().enabled = false;
+
+            
         }
         else
         {
@@ -131,4 +141,19 @@ public class Enemy : MonoBehaviour
     //         // Handle collision with player (e.g., stop moving, play attack animation, etc.)
     //     }
     // }
+
+    private void PointsForDeath(DamageType dmgType)
+    {
+        //this switch gives points
+        //Nuke is isolated bc we don't want 400 points PER zombie on map. lol
+        if (dmgType == DamageType.Nuke)
+        {
+
+        }
+        else
+        {
+            Debug.Log("ded");
+            GameManager_Scores.Instance.PointsPerKill(dmgType);
+        }
+    }
 }

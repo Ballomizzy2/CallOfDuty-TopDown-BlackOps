@@ -13,13 +13,9 @@ public class PlayerMelee : MonoBehaviour
     [Header("Melee")]
     [SerializeField] private GameObject playerMeleeHitBox;
     [SerializeField] private float meleeTimer = 0.1f;
+    [SerializeField] private int knifeDamage = 50;
     private bool meleeBoxIsActive = false;
     private InputSystem_Actions inputActions;
-
-
-
-
-
 
     private void Start()
     {
@@ -28,8 +24,6 @@ public class PlayerMelee : MonoBehaviour
 
     private void Awake()
     {
-
-
         Instance = this;
         //reference the new input system to get acess to 'performed.
         inputActions = new InputSystem_Actions();
@@ -91,7 +85,8 @@ public class PlayerMelee : MonoBehaviour
         if (hitObject != null)
         {
             //Debug.Log("Hit: " + hitObject.name);
-            Destroy(hitObject);
+            bool isKnife = true;
+            hitObject.GetComponent<Enemy>().TakeDamage(knifeDamage, DamageType.Knife);
         }
 
 

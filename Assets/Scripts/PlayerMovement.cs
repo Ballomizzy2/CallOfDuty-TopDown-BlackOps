@@ -24,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
     public float currentStamina;
     public bool isInCooldown = false;
     public float cooldownTimer = 0f;
+
+    [Header("Animation")]
+    public Animator animator; // Reference to the animator
     
     private Vector2 move;
     private bool isSprinting = false;
@@ -66,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
         movePlayer();
         aimPlayer();
         handleStamina();
+        handleAnimation(); // Call the animation handling function
     }
 
     //function that controls our player's movement
@@ -149,5 +153,12 @@ public class PlayerMovement : MonoBehaviour
             isInCooldown = true;
             isSprinting = false;
         }
+    }
+
+    // Function to handle animations
+    void handleAnimation()
+    {
+        bool isMoving = move != Vector2.zero; // Check if the player is moving
+        animator.SetBool("idle", !isMoving); // If not moving, set idle to true; otherwise, false
     }
 }

@@ -2,13 +2,16 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.InputSystem.LowLevel;
-//handles Game logic
+using System;
+//handles Game point spending logic
 
 public class GameManager_Purchases : MonoBehaviour
 {
 
     //map items: doors, wall guns, box, perks
     //logic for buying stuff?
+    public static GameManager_Purchases Instance {  get; private set; }
+    public event EventHandler OnSpeedColaPurchase;
     [SerializeField] private List<PerkSodasSO> mapPerkSodas; //doesn't do anything
 
     ///player var
@@ -22,12 +25,13 @@ public class GameManager_Purchases : MonoBehaviour
     private const int DOOR_LAYER = 8;
     private const int BOX_LAYER = 9;
     private const int PACK_A_PUNCH_LAYER = 12;
+    private const int TRAP_SWITCH_LAYER = 13;
     [SerializeField] bool powerOn = false;
     //[SerializeField] bool fireSaleActive; //
 
     private void Awake()
     {
-
+        Instance = this;
     }
     private void Start()
     {
@@ -56,6 +60,7 @@ public class GameManager_Purchases : MonoBehaviour
             case BOX_LAYER:
                 HandleMysterBoxPurchase(e.overLapHit,playerScore,player);
                 break;
+
 
         }
     }
@@ -87,6 +92,18 @@ public class GameManager_Purchases : MonoBehaviour
             case PACK_A_PUNCH_LAYER:
                 //todo make a pack A punch
                 break;
+            case TRAP_SWITCH_LAYER:
+                if (powerOn)
+                {
+                    
+                    HandleTrapPurchase(e.lookAtInteract, playerScore, player);
+                }
+                else
+                {
+                    Debug.Log("NO POWWWWER!");
+                }
+
+                break;
         }
     }
     private void HandleDoorPurchase(GameObject item,int playerScore, PlayerController player)
@@ -113,7 +130,7 @@ public class GameManager_Purchases : MonoBehaviour
     private void HandleMysterBoxPurchase(GameObject item,int playerScore,PlayerController player)
     {
         //TODO make MysteryBox to finish this
-        int mysteryBoxPrice = 1500;
+        int mysteryBoxPrice = 950;
         
         if(playerScore >= mysteryBoxPrice)
         {
@@ -129,6 +146,26 @@ public class GameManager_Purchases : MonoBehaviour
 
     }
 
+
+
+    private void HandleTrapPurchase(GameObject item, int playerScore, PlayerController player)
+    {
+        int price = 300;
+        if (playerScore >= price)
+        {
+            //- points
+            //call trapOn
+            player.SetPoints(playerScore -= price);
+            item.GetComponent<TrapSwitchController>().TrapActivate();
+
+        }
+        else
+        {
+            //oof noise
+            Debug.Log("broke...");
+        }
+    }
+    //perk stuff
     private void HandlePerkPurchase(GameObject item, int playerScore, PlayerController player)
     {
         PerkSodasSO tempPerkSO = item.GetComponent<PerkSodaSOHolder>().GetHeldPerkSodaSO();
@@ -152,7 +189,6 @@ public class GameManager_Purchases : MonoBehaviour
         }
 
     }
-
     private bool HasPerk(PerkSodasSO perkSoda)
     {
         //iterate thu player list to see if they have said perk
@@ -189,6 +225,7 @@ public class GameManager_Purchases : MonoBehaviour
                 //access player's weapon manager-> add an increase fire rate variable-> pass into equipped Gun.cs
                 break;
             case PerkID.SpeedCola:
+                OnSpeedColaPurchase?.Invoke(this,EventArgs.Empty); 
                 //access player's weapon manager->add a x2 variable->pass it into equipped Gun.cs line 138 ...(gunData.reloadTime/speedCola)
                 break;
             case PerkID.MuleKick:
