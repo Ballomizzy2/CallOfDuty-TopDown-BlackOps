@@ -135,10 +135,22 @@ PrefabInstance:
       propertyPath: roundText
       value: 
       objectReference: {fileID: 688928637}
+    - target: {fileID: 6019503315905068125, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
+      propertyPath: doublePointsTime
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6019503315905068125, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
+      propertyPath: weaponManagerScript
+      value: 
+      objectReference: {fileID: 1462966705}
     - target: {fileID: 8476107647481137961, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
       propertyPath: isGuarantee
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8476107647481137961, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
+      propertyPath: playerPrefab
+      value: 
+      objectReference: {fileID: 1550179534}
     - target: {fileID: 8587732932215012876, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5099,7 +5111,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2822473256594858661, guid: cba0fb39ed0ab09489c1c63a8d85ed66, type: 3}
   m_PrefabInstance: {fileID: 1099248408}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1550179534}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41d71e394628b614d8180ce4d8565483, type: 3}
@@ -5282,6 +5294,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1509156727}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1550179534 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6008505149739264911, guid: cba0fb39ed0ab09489c1c63a8d85ed66, type: 3}
+  m_PrefabInstance: {fileID: 1099248408}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1582162302
 GameObject:
   m_ObjectHideFlags: 0

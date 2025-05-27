@@ -23,10 +23,11 @@ public class PowerUpManager : MonoBehaviour
 
     public void TryDropPowerUp(Vector3 position)
     {
-        //CHANGE THIS AFTER TESTING TO 0.03f
+        
         float dropChance;
         if (!isGuarantee)
         {
+            //CHANGE THIS AFTER TESTING TO 0.03f
             dropChance = 0.03f;
         }
         else

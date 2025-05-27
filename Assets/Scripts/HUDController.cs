@@ -30,7 +30,7 @@ public class HUDController : MonoBehaviour
         foreach(Transform t in powerUpList)
         {
             //clear the PowerUp UI
-            t.GetComponent<Image>().enabled=false;
+            t.gameObject.SetActive(false);
         }
     }
     void Update()
@@ -82,7 +82,7 @@ public class HUDController : MonoBehaviour
         {
             if(powerUpList[i].GetComponent<PowerUpUIHandler>().GetPowerUpType() == powerUpType)
             {
-                powerUpList[i].GetComponent<Image>().enabled = true;
+                powerUpList[i].gameObject.SetActive(true);
                 break;
             }
         }
@@ -93,7 +93,7 @@ public class HUDController : MonoBehaviour
         {
             if (powerUpList[i].GetComponent<PowerUpUIHandler>().GetPowerUpType() == powerUpType)
             {
-                powerUpList[i].GetComponent<Image>().enabled = false;
+                powerUpList[i].gameObject.SetActive(false);
                 break;
             }
         }

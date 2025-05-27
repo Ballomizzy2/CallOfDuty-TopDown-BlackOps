@@ -13,6 +13,7 @@ public class GameManager_Scores : MonoBehaviour
      * powers: nuke, carpenter, etc
      */
     [SerializeField] private int multiplier=1;
+    [SerializeField] private float doublePointsTimeMax = 30f;
     [SerializeField] private float doublePointsTime=30f;
     private int roundPoints = 0;
 
@@ -31,26 +32,31 @@ public class GameManager_Scores : MonoBehaviour
     }
     private void Update()
     {
-        if(multiplier == 2)
-        {
+    
             CountDownDoublePoints();
-        }
+        
     }
     public void StartDoublePoints()
     {
+        HUDController.Instance.EnablePowerUpUI(PowerUpType.DoublePoints);
         multiplier = 2;
     }
 
     private void CountDownDoublePoints()
     {
-        doublePointsTime -= Time.deltaTime;
-        if (doublePointsTime <= 0f)
+        if (multiplier == 2)
         {
-            //Kitchen Chaos timer
-            //after x secs
-            multiplier = 1;
-            doublePointsTime = 30f;
+            doublePointsTime -= Time.deltaTime;
+            if (doublePointsTime <= 0f)
+            {
+                //Kitchen Chaos timer
+                //after x secs
+                HUDController.Instance.DisablePowerUpUI(PowerUpType.DoublePoints);
+                multiplier = 1;
+                doublePointsTime = doublePointsTimeMax;
+            }
         }
+
         
     }
     public void PointsPerHit()
@@ -102,6 +108,11 @@ public class GameManager_Scores : MonoBehaviour
     {
         //tired of calling player Instance
         PlayerController.Instance.AddPoints(p * multiplier);
+    }
+
+    public float GetPowerUpTimer()
+    {
+        return doublePointsTime / doublePointsTimeMax;
     }
 
 
