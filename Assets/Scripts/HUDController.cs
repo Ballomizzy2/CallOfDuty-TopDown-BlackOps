@@ -10,13 +10,28 @@ public class HUDController : MonoBehaviour
     public TextMeshProUGUI ammoText;
     public TextMeshProUGUI scoreText;
     public WeaponManager weaponManager;
+    [Header("Perk Display")]
     [SerializeField] private Transform perkContainer;
     [SerializeField] private Transform perkIconTemplate;
+
+    [Header("Power UP Display")]
+    [SerializeField] private Transform powerUpContainer;
+    [SerializeField] private Transform powerUpIconTemplate;
+    //[SerializeField] private PowerUpUIHandler powerUpUIHandler;
+    [SerializeField] private List<Transform> powerUpList;
 
     private void Awake()
     {
         Instance = this;
         perkIconTemplate.gameObject.SetActive(false);
+    }
+    private void Start()
+    {
+        foreach(Transform t in powerUpList)
+        {
+            //clear the PowerUp UI
+            t.GetComponent<Image>().enabled=false;
+        }
     }
     void Update()
     {
@@ -60,4 +75,28 @@ public class HUDController : MonoBehaviour
             perkIconTransform.GetComponent<Image>().sprite = perkSodasSO.icon;
         }
     }
+
+    public void EnablePowerUpUI(PowerUpType powerUpType)
+    {
+        for (int i = 0; i<powerUpList.Count; i++)
+        {
+            if(powerUpList[i].GetComponent<PowerUpUIHandler>().GetPowerUpType() == powerUpType)
+            {
+                powerUpList[i].GetComponent<Image>().enabled = true;
+                break;
+            }
+        }
+    }
+    public void DisablePowerUpUI(PowerUpType powerUpType)
+    {
+        for (int i = 0; i < powerUpList.Count; i++)
+        {
+            if (powerUpList[i].GetComponent<PowerUpUIHandler>().GetPowerUpType() == powerUpType)
+            {
+                powerUpList[i].GetComponent<Image>().enabled = false;
+                break;
+            }
+        }
+    }
+
 }

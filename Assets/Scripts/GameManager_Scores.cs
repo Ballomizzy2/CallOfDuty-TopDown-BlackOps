@@ -13,7 +13,7 @@ public class GameManager_Scores : MonoBehaviour
      * powers: nuke, carpenter, etc
      */
     [SerializeField] private int multiplier=1;
-    [SerializeField] private float doublePointsTime=5f;
+    [SerializeField] private float doublePointsTime=30f;
     private int roundPoints = 0;
 
     [SerializeField] private WeaponManager weaponManagerScript;
@@ -49,7 +49,7 @@ public class GameManager_Scores : MonoBehaviour
             //Kitchen Chaos timer
             //after x secs
             multiplier = 1;
-            doublePointsTime = 5f;
+            doublePointsTime = 30f;
         }
         
     }

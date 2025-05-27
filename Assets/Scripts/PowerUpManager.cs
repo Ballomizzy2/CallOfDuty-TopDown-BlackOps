@@ -10,6 +10,9 @@ public class PowerUpManager : MonoBehaviour
     public static PowerUpManager Instance;
     internal bool instaKillActive = false;
 
+    [Header("Debug")]
+    [SerializeField] private bool isGuarantee = false;
+
     private void Awake() {
         //Debug.Log("[PowerUpManager] Awake called from: " + gameObject.name);
         if (Instance == null) 
@@ -21,7 +24,16 @@ public class PowerUpManager : MonoBehaviour
     public void TryDropPowerUp(Vector3 position)
     {
         //CHANGE THIS AFTER TESTING TO 0.03f
-        float dropChance = 0.03f;
+        float dropChance;
+        if (!isGuarantee)
+        {
+            dropChance = 0.03f;
+        }
+        else
+        {
+            dropChance = 1f;
+        }
+        
         float randomNumber = Random.value;
         //Debug.Log($"[PowerUpManager] Will try to spawn {powerUpPrefabs.Count} prefabs");
         
@@ -50,11 +62,13 @@ public class PowerUpManager : MonoBehaviour
     private IEnumerator InstaKillRoutine(float duration)
     {
         instaKillActive = true;
+        HUDController.Instance.EnablePowerUpUI(PowerUpType.InstaKill);
         Debug.Log("InstaKill Active");
         
         yield return new WaitForSeconds(duration);
 
         instaKillActive = false;
+        HUDController.Instance.DisablePowerUpUI(PowerUpType.InstaKill);
         Debug.Log("InstaKill Ended");
     }
 }

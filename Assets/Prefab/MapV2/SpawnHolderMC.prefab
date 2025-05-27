@@ -3565,6 +3565,10 @@ PrefabInstance:
       propertyPath: prefabToSpawn
       value: 
       objectReference: {fileID: 935753900411941629, guid: e528f273faeab3f4b9bb37641b2e0baf, type: 3}
+    - target: {fileID: 960341155360239665, guid: 3939031b630d4e843aee2bb6c4bff180, type: 3}
+      propertyPath: isUsingOriginalScript
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3054375543711408333, guid: 3939031b630d4e843aee2bb6c4bff180, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
