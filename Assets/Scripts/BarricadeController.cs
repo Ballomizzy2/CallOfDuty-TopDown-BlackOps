@@ -82,7 +82,6 @@ public class BarricadeController : MonoBehaviour, IInteract
     public bool RepairAllBoards()
     {
         //carpenter calls
-        if (!isBreached) return false;
 
         isBreached=false;
 

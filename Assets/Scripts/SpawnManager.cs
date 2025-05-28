@@ -207,6 +207,14 @@ public class SpawnManager : MonoBehaviour
 
     }
 
+    public void CarpenterTriggered()
+    {
+        foreach(BarricadeController barricade in barricadeList)
+        {
+            barricade.RepairAllBoards();
+        }
+    }
+
 
     /* idea for listen
      * private void Enemy_OnDeath( ... )

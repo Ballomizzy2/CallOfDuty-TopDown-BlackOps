@@ -47,6 +47,10 @@ public class PowerUp : MonoBehaviour
                 //loop thru and fix and call the object's RepairAllBoards()
                 //PowerUpSoundManager.Instance.PlaySoundEffect(PowerUpSoundManager.Instance.carpenterClip);
                 //PlayerVoiceManager.Instance.PlayVoiceline(PlayerVoiceManager.Instance.pickupCarpenterClips);
+                GameManager_Scores.Instance.CarpenterPoints();
+                SpawnManager.Instance.CarpenterTriggered();
+                PowerUpSoundManager.Instance.PlaySoundEffect(PowerUpSoundManager.Instance.carpenterClip);
+                PlayerVoicelineManager.Instance.PlayVoiceline(PlayerVoicelineManager.Instance.pickupCarpenterClips);
             }
             
             Destroy(gameObject);

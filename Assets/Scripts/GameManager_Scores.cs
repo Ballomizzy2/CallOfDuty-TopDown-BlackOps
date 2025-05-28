@@ -97,6 +97,11 @@ public class GameManager_Scores : MonoBehaviour
         pointsToAdd = 400;
         PointsMathStuff(pointsToAdd);
     }
+    public void CarpenterPoints()
+    {
+        pointsToAdd = 200;
+        PointsMathStuff(pointsToAdd);
+    }
 
     public void PointsPerRound()
     {
