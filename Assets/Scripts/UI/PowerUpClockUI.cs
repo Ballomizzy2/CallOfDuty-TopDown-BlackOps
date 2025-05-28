@@ -20,7 +20,7 @@ public class PowerUpClockUI : MonoBehaviour
         {
             case PowerUpType.InstaKill:
                 //PowerUpManager uses an IEnumerator...
-                //powerUpClock.fillAmount = 
+                powerUpClock.fillAmount = PowerUpManager.Instance.GetInstaKillTimerNormalized();
                 break;
             case PowerUpType.DoublePoints:
                 //somethn

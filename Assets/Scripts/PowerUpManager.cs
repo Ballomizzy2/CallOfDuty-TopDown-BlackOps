@@ -9,6 +9,8 @@ public class PowerUpManager : MonoBehaviour
     
     public static PowerUpManager Instance;
     internal bool instaKillActive = false;
+    internal float instaKillMaxtimer;
+    internal float instaKillTimer;
 
     [Header("Debug")]
     [SerializeField] private bool isGuarantee = false;
@@ -63,13 +65,24 @@ public class PowerUpManager : MonoBehaviour
     private IEnumerator InstaKillRoutine(float duration)
     {
         instaKillActive = true;
+        instaKillMaxtimer=duration;
+        instaKillTimer=duration;
         HUDController.Instance.EnablePowerUpUI(PowerUpType.InstaKill);
         Debug.Log("InstaKill Active");
-        
-        yield return new WaitForSeconds(duration);
 
+        while (instaKillTimer > 0f)
+        {
+            instaKillTimer -= Time.deltaTime;
+            yield return null;
+        }
+
+        instaKillTimer = 0f;
         instaKillActive = false;
         HUDController.Instance.DisablePowerUpUI(PowerUpType.InstaKill);
         Debug.Log("InstaKill Ended");
+    }
+    public float GetInstaKillTimerNormalized()
+    {
+        return instaKillMaxtimer > 0 ? instaKillTimer / instaKillMaxtimer : 0f;
     }
 }

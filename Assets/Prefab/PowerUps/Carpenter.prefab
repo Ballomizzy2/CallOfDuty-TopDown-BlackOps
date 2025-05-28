@@ -127,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUpPrefabs: []
   playerPrefab: {fileID: 0}
+  isGuarantee: 0
 --- !u!108 &6080044402787495739
 Light:
   m_ObjectHideFlags: 0

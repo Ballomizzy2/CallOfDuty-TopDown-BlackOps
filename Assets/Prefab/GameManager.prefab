@@ -63,7 +63,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   multiplier: 1
-  doublePointsTime: 5
+  doublePointsTimeMax: 30
+  doublePointsTime: 30
   weaponManagerScript: {fileID: 0}
 --- !u!114 &3522690826308374241
 MonoBehaviour:
