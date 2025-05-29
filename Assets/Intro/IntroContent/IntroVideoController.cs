@@ -1,0 +1,1 @@
+// Placeholder script. Actual logic to be added in Unity Editor.
