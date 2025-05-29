@@ -202,10 +202,7 @@ public class SpawnManager : MonoBehaviour
             barricadeList.Add(bar);
         }
     }
-    public void AddMysteryBoxMapData()
-    {
 
-    }
 
     public void CarpenterTriggered()
     {

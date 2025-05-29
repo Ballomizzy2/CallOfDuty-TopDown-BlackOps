@@ -1,7 +1,10 @@
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+/// <summary>
+/// logic for mysterybox
+/// ANIMATION SHOULD BE A SEPERATE SCRIPT HELD BY A SEPERATE OBJECT (harder to implement in here since box disables on leave?)
+/// </summary>
 public class MysteryBox : MonoBehaviour, IInteract
 {
     [Header("Weapon Pool")]
@@ -21,6 +24,12 @@ public class MysteryBox : MonoBehaviour, IInteract
     private GunData tempWeapon;
     private GameObject currentSpawnedModel;
     private int boxPrice = 950;
+
+    [Header("MysteryBox Display Handler")]
+    [SerializeField] private MysteryBoxDisplayHandler displayHandler;
+
+    [Header("debug")]
+    [SerializeField] private bool isToy=false;
 
     //shop variables soundfx
     private bool canPayFor;
@@ -81,28 +90,36 @@ public class MysteryBox : MonoBehaviour, IInteract
 
         // 1. Pick a random weapon
         GunData randomGun = possibleGuns[Random.Range(0, possibleGuns.Count)];
-        tempWeapon = randomGun;
-        string weaponKey = randomGun.gunName;
-
-        // 2. Lookup the matching model
-        if (!modelLookup.TryGetValue(weaponKey, out GameObject modelPrefab))
+        if (isToy)
         {
-            Debug.LogWarning($"Weapon model not found: {weaponKey} Model");
-            return;
+            //toy is last, force weapong to fail
+            randomGun = possibleGuns[possibleGuns.Count - 1];
+        }
+        
+        if(randomGun.name == "Toy")
+        {
+            WarpBox();
+        }
+        else
+        {
+            tempWeapon = randomGun;
+            string weaponKey = randomGun.gunName;
+
+            // 2. Lookup the matching model
+            if (!modelLookup.TryGetValue(weaponKey, out GameObject modelPrefab))
+            {
+                Debug.LogWarning($"Weapon model not found: {weaponKey} Model");
+                return;
+            }
+
+
+            // Instantiate and store new one
+            currentSpawnedModel = Instantiate(modelPrefab, weaponSpawnReference.position, Quaternion.identity);
+
+            currentSpawnedModel.transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
         }
 
-
-        // Instantiate and store new one
-        currentSpawnedModel = Instantiate(modelPrefab, weaponSpawnReference.position, Quaternion.identity);
-       
- 
-            currentSpawnedModel.transform.localRotation = Quaternion.Euler(0f, 90f, 0f);
-        
-        
-
-
-
-        // TODO: Animate the weapon float-up here
+      
     }
 
     private bool CanAfford_n_lidClose()
@@ -142,6 +159,12 @@ public class MysteryBox : MonoBehaviour, IInteract
                 SoundMng.Instance.PlayDeniedSound();
             }
         }
+    }
+
+    private void WarpBox()
+    {
+        displayHandler.DisableBox();
+        MysteryBoxLocation.Instance.ChooseRoom();
     }
 
     public bool CanAffordSoundFX()

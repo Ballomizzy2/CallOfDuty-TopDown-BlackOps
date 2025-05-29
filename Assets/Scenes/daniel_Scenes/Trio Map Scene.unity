@@ -127,6 +127,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2094997924496419078, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
+      propertyPath: RoomData.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2094997924496419078, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
+      propertyPath: 'RoomData.Array.data[0]'
+      value: 
+      objectReference: {fileID: 499956171}
+    - target: {fileID: 2094997924496419078, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
+      propertyPath: 'RoomData.Array.data[1]'
+      value: 
+      objectReference: {fileID: 318229435}
+    - target: {fileID: 2094997924496419078, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
+      propertyPath: 'RoomData.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2049879659}
     - target: {fileID: 4958243128093147274, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
       propertyPath: player
       value: 
@@ -139,34 +155,14 @@ PrefabInstance:
       propertyPath: startingRoom
       value: 
       objectReference: {fileID: 499956171}
-    - target: {fileID: 4958243128093147274, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
-      propertyPath: isUsingOriginalUse
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6019503315905068125, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
-      propertyPath: doublePointsTime
-      value: 30
-      objectReference: {fileID: 0}
     - target: {fileID: 6019503315905068125, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
       propertyPath: weaponManagerScript
       value: 
       objectReference: {fileID: 852087557}
     - target: {fileID: 8476107647481137961, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
-      propertyPath: isGuarantee
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8476107647481137961, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
       propertyPath: playerPrefab
       value: 
       objectReference: {fileID: 852087558}
-    - target: {fileID: 8476107647481137961, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
-      propertyPath: powerUpPrefabs.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8476107647481137961, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
-      propertyPath: 'powerUpPrefabs.Array.data[4]'
-      value: 
-      objectReference: {fileID: 5380283588147013934, guid: f72b3affa1d13a94f959740118a596b9, type: 3}
     - target: {fileID: 8587732932215012876, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

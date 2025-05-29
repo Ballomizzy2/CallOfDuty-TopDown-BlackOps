@@ -634,6 +634,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5835117885219160820}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2183575194623021511
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3376663414996852545}
+  m_Layer: 0
+  m_Name: SnapToStand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3376663414996852545
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2183575194623021511}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.0495381, y: -0.5000001, z: 0.023394585}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5360326749415202046}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2433931139607245958
 GameObject:
   m_ObjectHideFlags: 0
@@ -1183,10 +1214,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 41b2d4ce874bff14eab12bd0e873d33a, type: 2}
   - {fileID: 11400000, guid: 4edb1fb4ba6dc4a4dac8e1be13272ac0, type: 2}
   - {fileID: 11400000, guid: 2e95c4aa2a5bc0a4eab03c23dcc6d231, type: 2}
+  - {fileID: 11400000, guid: fcce2c8823f7f2b4f9fe8c6cb39392c1, type: 2}
   interactDistance: 3
   lid: {fileID: 8615412620930037782}
   weaponSpawnReference: {fileID: 241476371559025584}
   weaponModelParent: {fileID: 5642763843253290410}
+  displayHandler: {fileID: 0}
 --- !u!1 &4091906569822717726
 GameObject:
   m_ObjectHideFlags: 0
@@ -1747,6 +1780,7 @@ Transform:
   m_Children:
   - {fileID: 5835117885219160820}
   - {fileID: 4377369949645534932}
+  - {fileID: 3376663414996852545}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7523969588234785518

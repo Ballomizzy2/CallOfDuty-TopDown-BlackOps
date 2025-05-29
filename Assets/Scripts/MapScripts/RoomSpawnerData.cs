@@ -4,12 +4,13 @@ using UnityEngine;
 /// <summary>
 /// this script holds the zombie spawners and a mystery box spawner
 /// when room "wakes up" feed the spawn manager this data via DoorController
+/// holds mysterboxDUO. (a combo of stand and mysterybox)
 /// </summary>
 public class RoomSpawnerData : MonoBehaviour
 {
     [SerializeField] private List<SpawnInBox> zombieSpawners;
     [SerializeField] private List<BarricadeController> barricadeList;
-    [SerializeField] private GameObject mysteryBoxSpawner; //TODO place holder change type later...
+    [SerializeField] private MysteryBoxDisplayHandler mysteryBoxDUO; //each room has a box, and a MysterBox manager will manager their activity...?
     [SerializeField] private bool isStartingRoom = false;
     private void Start()
     {
@@ -33,8 +34,9 @@ public class RoomSpawnerData : MonoBehaviour
     {
         return barricadeList;
     }
-    public GameObject MysteryBoxSpawner()
+    public MysteryBoxDisplayHandler GetMysteryBoxObject()
     {
-        return mysteryBoxSpawner;
+        return mysteryBoxDUO;
     }
+    
 }

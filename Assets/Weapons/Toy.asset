@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f542cd5718dcafc4691dd4028ec0110b, type: 3}
+  m_Name: Toy
+  m_EditorClassIdentifier: 
+  gunName: New Gun
+  magazineSize: 8
+  reserveAmmo: 80
+  reloadTime: 1.5
+  fireDelay: 0.25
+  bulletSpeed: 30
+  damage: 20
+  bulletPrefab: {fileID: 0}
+  muzzleFlashPrefab: {fileID: 0}
+  shootSound: {fileID: 0}
+  reloadSound: {fileID: 0}
+  isAutomatic: 0
+  isBurst: 0
+  burstCount: 3
+  burstDelay: 0.1
+  useRaycast: 0
+  raycastRange: 100
+  hipfireSpreadAngle: 5
+  adsSpreadAngle: 1
+  adsSpeedMultiplier: 0.5
+  isShotgun: 0
+  pelletsPerShot: 8
+  weaponIcon: {fileID: 0}
+  weaponModelPrefab: {fileID: 0}

@@ -19,7 +19,7 @@ public class DoorController : MonoBehaviour
             mapA.enabled = true;
             SpawnManager.Instance.AddBarricadeMapData(mapA.BarricadesInRoom());
             SpawnManager.Instance.AddZombieMapData(mapA.ZombieSpawnersInRoom());
-            //mysterybox
+            
             //send this to spawn manager
         }
         else if (!mapB.enabled)
