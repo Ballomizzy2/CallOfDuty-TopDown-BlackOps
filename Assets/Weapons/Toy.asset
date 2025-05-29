@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f542cd5718dcafc4691dd4028ec0110b, type: 3}
   m_Name: Toy
   m_EditorClassIdentifier: 
-  gunName: New Gun
+  gunName: Toy
   magazineSize: 8
   reserveAmmo: 80
   reloadTime: 1.5
