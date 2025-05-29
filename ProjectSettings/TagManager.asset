@@ -11,6 +11,7 @@ TagManager:
   - ZombieInteracts
   - SpawnPoint
   - WallBuy
+  - PersistentAudio
   - Enemy
   layers:
   - Default
