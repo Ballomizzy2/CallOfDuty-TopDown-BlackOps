@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
+using System;
 /// <summary>
 ///             ----This should handle the number of zombies on map and track them and the current round----
 /// round- determines how many zombies n their strength (when reserve AND currentZombieOnMap==0, ++round)
@@ -25,6 +26,7 @@ public class SpawnManager : MonoBehaviour
         public int count;
     }
     public static SpawnManager Instance { get; private set; }
+
     [Header("Wave settings")]
     public List<SpawnWave> waves = new List<SpawnWave>();
 
@@ -59,9 +61,11 @@ public class SpawnManager : MonoBehaviour
     #region ──  Initialisation ────────────────────────────────────────────────────
     private void Awake()
     {
+        //play a somber tune to signigy start?
         Instance = this;    
         if (isUsingOriginalUse)
         {
+            SoundMng.Instance.PlayRoundStartJingle();
             GameObject[] objs = GameObject.FindGameObjectsWithTag("SpawnPoint");
             spawnPoints = new Transform[objs.Length];
             for (int i = 0; i < objs.Length; i++)
@@ -95,7 +99,7 @@ public class SpawnManager : MonoBehaviour
         {
             for (int i = 0; i < wave.count; i++)
             {
-                Transform point = spawnPoints[Random.Range(0, spawnPoints.Length)];
+                Transform point = spawnPoints[UnityEngine.Random.Range(0, spawnPoints.Length)];
 
                 // If the SpawnPoint is on the NavMesh this is usually enough,
                 // otherwise you can still sample the NavMesh around “point.position”.
@@ -160,6 +164,7 @@ public class SpawnManager : MonoBehaviour
         else if(reserveZombies==0 && currentZombies==0)
         {
             //round is over
+            SoundMng.Instance.PlayRoundEndJingle();
             GameManager_Scores.Instance.PointsPerRound();
             roundOver = true;
         }
@@ -168,9 +173,15 @@ public class SpawnManager : MonoBehaviour
 
     private void ReadyUp()
     {
+       
         gracePeriodTimer -=Time.deltaTime;
         if (gracePeriodTimer < 0)
         {
+            //if (round != 1)//use this when we get an intro jingle
+            //{
+            //    SoundMng.Instance.PlayRoundStartJingle();
+            //}
+            SoundMng.Instance.PlayRoundStartJingle();
             roundText.text=round.ToString();
             if(round % bossRound == 0)
             {
@@ -179,7 +190,7 @@ public class SpawnManager : MonoBehaviour
             else
             {
                 TotalZombiesMath();
-                ShuffleTheZombies();
+                ShuffleTheZombies();//to start the round
             }
             gracePeriodTimer = 3f;
             roundOver = false;
@@ -217,7 +228,7 @@ public class SpawnManager : MonoBehaviour
      * private void Enemy_OnDeath( ... )
      * {
      *      currentZombies--;
-     *      ShuffleTheZombies();
+     *      ShuffleTheZombies();//to keep the game going
      * }
      */
     

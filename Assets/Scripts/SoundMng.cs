@@ -89,6 +89,20 @@ public class SoundMng : MonoBehaviour
     public void PlayRoundStartJingle()
     {
         //add the src thingy
+        if (roundStartJingle)
+        {
+            AudioSource tempAudio = gameObject.AddComponent<AudioSource>();
+            tempAudio.clip = roundStartJingle;
+            tempAudio.volume = 1f;
+            tempAudio.pitch = Random.Range(0.95f, 1.05f);
+            tempAudio.spatialBlend = 1f;
+            tempAudio.minDistance = 5f;
+            tempAudio.maxDistance = 30f;
+            tempAudio.Play();
+            Destroy(tempAudio, roundStartJingle.length);
+        }
+
+
     }
     public void PlayRoundEndJingle()
     {

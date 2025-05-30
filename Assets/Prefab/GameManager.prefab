@@ -89,9 +89,9 @@ MonoBehaviour:
   buySound: {fileID: 8300000, guid: 866cec09a8e094a408855dea9c4740a7, type: 3}
   deniedSound: {fileID: 8300000, guid: 1d5548f9d40258e41a4f2da848cfee33, type: 3}
   acceptSound: {fileID: 8300000, guid: a8dbef26e72a0a44baaf7af910c9acb4, type: 3}
-  roundStartJingle: {fileID: 0}
-  roundEndJingle: {fileID: 0}
-  gameOverJingle: {fileID: 0}
+  roundStartJingle: {fileID: 8300000, guid: 595f2e031ec901e41a3a25f388427c3a, type: 3}
+  roundEndJingle: {fileID: 8300000, guid: 0be7f1b3d62426f47827713137e3a67e, type: 3}
+  gameOverJingle: {fileID: 8300000, guid: 659d23dbd2f1f2944ab40a32b04cf563, type: 3}
   laughSound: {fileID: 8300000, guid: 688b33931cdf6d9409041fc4cb51387f, type: 3}
 --- !u!114 &2094997924496419078
 MonoBehaviour:
