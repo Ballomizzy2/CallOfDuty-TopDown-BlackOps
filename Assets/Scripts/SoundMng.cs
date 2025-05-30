@@ -23,7 +23,10 @@ public class SoundMng : MonoBehaviour
     [SerializeField] private AudioClip roundStartJingle;
     [SerializeField] private AudioClip roundEndJingle;
     [SerializeField] private AudioClip gameOverJingle;
-    
+
+    [Header("Box sfx")]
+    [SerializeField] private AudioClip laughSound;
+
 
     private void Awake()
     {
@@ -94,5 +97,20 @@ public class SoundMng : MonoBehaviour
     public void PlayGameOverJingle()
     {
 
+    }
+    public void PlayBoxLaugh()
+    {
+        if (laughSound)
+        {
+            AudioSource tempAudio = gameObject.AddComponent<AudioSource>();
+            tempAudio.clip = laughSound;
+            tempAudio.volume = 1f;
+            tempAudio.pitch = Random.Range(0.95f, 1.05f);
+            tempAudio.spatialBlend = 1f;
+            tempAudio.minDistance = 5f;
+            tempAudio.maxDistance = 30f;
+            tempAudio.Play();
+            Destroy(tempAudio, laughSound.length);
+        }
     }
 }

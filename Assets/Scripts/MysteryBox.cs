@@ -98,7 +98,8 @@ public class MysteryBox : MonoBehaviour, IInteract
         
         if(randomGun.name == "Toy")
         {
-            WarpBox();
+
+            displayHandler.StartCoroutine(displayHandler.AnimationBoxWarp());
         }
         else
         {
@@ -161,11 +162,7 @@ public class MysteryBox : MonoBehaviour, IInteract
         }
     }
 
-    private void WarpBox()
-    {
-        displayHandler.DisableBox();
-        MysteryBoxLocation.Instance.ChooseRoom();
-    }
+
 
     public bool CanAffordSoundFX()
     {

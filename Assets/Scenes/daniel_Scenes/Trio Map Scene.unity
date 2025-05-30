@@ -143,6 +143,10 @@ PrefabInstance:
       propertyPath: 'RoomData.Array.data[2]'
       value: 
       objectReference: {fileID: 2049879659}
+    - target: {fileID: 3522690826308374241, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
+      propertyPath: laughSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 688b33931cdf6d9409041fc4cb51387f, type: 3}
     - target: {fileID: 4958243128093147274, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
       propertyPath: player
       value: 

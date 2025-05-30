@@ -92,6 +92,7 @@ MonoBehaviour:
   roundStartJingle: {fileID: 0}
   roundEndJingle: {fileID: 0}
   gameOverJingle: {fileID: 0}
+  laughSound: {fileID: 8300000, guid: 688b33931cdf6d9409041fc4cb51387f, type: 3}
 --- !u!114 &2094997924496419078
 MonoBehaviour:
   m_ObjectHideFlags: 0
