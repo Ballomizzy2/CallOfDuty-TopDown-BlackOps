@@ -25,26 +25,46 @@ public class MysteryBoxDisplayHandler : MonoBehaviour
     [SerializeField] private float spinDuration = 2f;
     [SerializeField] private ParticleSystem poof;
 
+    private Vector3 savedBoxPosition;
+    private Quaternion savedBoxRotation;
+
+
     private void Start()
     {
         origninalSnapPosition = snapPointBox.transform.position;
         currentSnapPostion = origninalSnapPosition;
+
+        savedBoxPosition = box.transform.position;
+        savedBoxRotation = box.transform.rotation;
     }
     public void EnableBox()
     {
 
         box.SetActive(true);
         toy.SetActive(false);
+
+        boxScript.enabled = true;
+        Debug.Log(Aligned());
         if (!Aligned())
         {
-            //move the box.position.y DOWN until snapPointbox andSnapPoint frame ==true;
-            //call a method in Update -OR- figure out IEnumorator
+            
+            //Vector3 angles = box.transform.eulerAngles;
+            //box.transform.rotation = Quaternion.Euler(0f, box.transform.eulerAngles.y, box.transform.eulerAngles.z);
+            //StartCoroutine(AnimationSetDownBox());
+            boxScript.ToggleLid();
+            box.transform.position = savedBoxPosition;
+            box.transform.rotation = savedBoxRotation;
         }
-        boxScript.enabled = true;
+       
+       
+            
+
         
+
     }
     public void DisableBox() 
     {
+       
         currentSnapPostion = snapPointBox.transform.position;
         box.SetActive(false); 
         toy.SetActive(true); 
@@ -101,8 +121,32 @@ public class MysteryBoxDisplayHandler : MonoBehaviour
 
         poof?.Play();
         //get a "pop" noise
+        
         DisableBox();
         MysteryBoxLocation.Instance.ChooseRoom();
         yield return null;
     }
+
+    public IEnumerator AnimationSetDownBox()
+    {
+        //idk how to se this up rn, broken.
+        Vector3 startPosition = box.transform.position;
+        Vector3 endPosition = snapPointBox.position;
+
+        float elapsed = 0f;
+        while (elapsed < riseDuration)
+        {
+            float t = elapsed / riseDuration;
+            box.transform.position = Vector3.Lerp(startPosition, endPosition, t);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        box.transform.position = endPosition; // snap to final pos
+        currentSnapPostion = endPosition;
+
+        boxScript.enabled = true;
+        boxScript.ToggleLid();
+    }
+
 }
