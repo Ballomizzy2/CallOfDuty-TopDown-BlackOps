@@ -155,7 +155,7 @@ public class SpawnManager : MonoBehaviour
             {
                 //use avalible spawners...but how?
                 //bounce thu each one with a random number? x into each until current>max?  hm...
-                Debug.Log($"total zombies in round: {totalZombiesInRound}, {currentZombies}/{totalZombiesInRound}");
+                //Debug.Log($"total zombies in round: {totalZombiesInRound}, {currentZombies}/{totalZombiesInRound}");
                 currentZombies++;
                 reserveZombies--;
                 if (reserveZombies < 0) break;

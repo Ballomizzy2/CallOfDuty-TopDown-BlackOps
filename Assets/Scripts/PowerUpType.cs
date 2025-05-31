@@ -6,5 +6,6 @@ public enum PowerUpType
     InstaKill,
     MaxAmmo,
     Nuke,
-    Carpenter
+    Carpenter,
+    FireSale
 }

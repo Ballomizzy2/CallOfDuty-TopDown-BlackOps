@@ -24,6 +24,8 @@ public class MysteryBox : MonoBehaviour, IInteract
     private GunData tempWeapon;
     private GameObject currentSpawnedModel;
     private int boxPrice = 950;
+    private int salePrice = 10;
+    private int ogBoxPrice = 950;
 
     [Header("MysteryBox Display Handler")]
     [SerializeField] private MysteryBoxDisplayHandler displayHandler;
@@ -127,6 +129,15 @@ public class MysteryBox : MonoBehaviour, IInteract
     {
         
         return !isOpen && PlayerController.Instance.GetPoints() > boxPrice;
+    }
+
+    public void SetFireSalePrice()
+    {
+        boxPrice = salePrice;
+    }
+    public void EndFireSalePrice()
+    {
+        boxPrice = ogBoxPrice;
     }
 
     //IInteract contract

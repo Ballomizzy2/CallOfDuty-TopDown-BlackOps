@@ -52,8 +52,14 @@ public class PowerUp : MonoBehaviour
                 PowerUpSoundManager.Instance.PlaySoundEffect(PowerUpSoundManager.Instance.carpenterClip);
                 PlayerVoicelineManager.Instance.PlayVoiceline(PlayerVoicelineManager.Instance.pickupCarpenterClips);
             }
-            
-            Destroy(gameObject);
+            else if(type ==PowerUpType.FireSale)
+            {
+                PowerUpManager.Instance.FireSaleEffect();
+                //play announcer voice
+               
+            }
+
+                Destroy(gameObject);
         }
     }
 }

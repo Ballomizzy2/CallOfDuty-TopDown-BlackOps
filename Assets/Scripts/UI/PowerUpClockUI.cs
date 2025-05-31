@@ -26,6 +26,9 @@ public class PowerUpClockUI : MonoBehaviour
                 //somethn
                 powerUpClock.fillAmount = GameManager_Scores.Instance.GetPowerUpTimer();
                 break;
+            case PowerUpType.FireSale:
+                powerUpClock.fillAmount = PowerUpManager.Instance.GetFireSaleTimerNormalized();
+                break;
             default:
                 //lol
                 break;
@@ -36,6 +39,6 @@ public class PowerUpClockUI : MonoBehaviour
         DoTheCountDown();
     }
 
-    
+
 
 }

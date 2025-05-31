@@ -12,6 +12,12 @@ public class PowerUpManager : MonoBehaviour
     internal float instaKillMaxtimer;
     internal float instaKillTimer;
 
+    [Header("FireSale")]
+    internal bool fireSaleActive = false;
+    internal float fireSaleMaxtimer;
+    internal float fireSaleTimer;
+
+
     [Header("Debug")]
     [SerializeField] private bool isGuarantee = false;
 
@@ -56,7 +62,7 @@ public class PowerUpManager : MonoBehaviour
             }
         }
     }
-
+    //instakill
     internal void instaKillEffect()
     {
         StartCoroutine(InstaKillRoutine(30));
@@ -84,5 +90,33 @@ public class PowerUpManager : MonoBehaviour
     public float GetInstaKillTimerNormalized()
     {
         return instaKillMaxtimer > 0 ? instaKillTimer / instaKillMaxtimer : 0f;
+    }
+    //fire sale
+    internal void FireSaleEffect()
+    {
+        StartCoroutine(FireSaleRoutine(5));
+    }
+    private IEnumerator FireSaleRoutine(float duration)
+    {
+        fireSaleActive = true;
+        fireSaleMaxtimer = duration;
+        fireSaleTimer = duration;
+        HUDController.Instance.EnablePowerUpUI(PowerUpType.FireSale);
+        MysteryBoxLocation.Instance.ActivateFireSale();
+        while (fireSaleTimer > 0f)
+        {
+            fireSaleTimer -= Time.deltaTime;
+            Debug.Log(fireSaleTimer);
+            yield return null;
+        }
+        fireSaleTimer = 0;
+        fireSaleActive = false;
+        HUDController.Instance.DisablePowerUpUI(PowerUpType.FireSale);
+        MysteryBoxLocation.Instance.EndFireSale();
+
+    }
+    public float GetFireSaleTimerNormalized()
+    {
+        return fireSaleMaxtimer > 0 ? fireSaleTimer / fireSaleMaxtimer : 0f;
     }
 }

@@ -145,7 +145,7 @@ PrefabInstance:
       objectReference: {fileID: 1462966705}
     - target: {fileID: 8476107647481137961, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
       propertyPath: isGuarantee
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8476107647481137961, guid: 047e4db5ef33be44a9dcf76c9834bbf6, type: 3}
       propertyPath: playerPrefab

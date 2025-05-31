@@ -55,11 +55,6 @@ public class MysteryBoxDisplayHandler : MonoBehaviour
             box.transform.position = savedBoxPosition;
             box.transform.rotation = savedBoxRotation;
         }
-       
-       
-            
-
-        
 
     }
     public void DisableBox() 
@@ -88,6 +83,10 @@ public class MysteryBoxDisplayHandler : MonoBehaviour
     private bool Aligned()
     {
         return Vector3.Distance(currentSnapPostion, origninalSnapPosition) < 0.001f;
+    }
+    public MysteryBox GetMysteryBoxScript()
+    {
+        return boxScript;
     }
     public IEnumerator AnimationBoxWarp()
     {
@@ -120,7 +119,7 @@ public class MysteryBoxDisplayHandler : MonoBehaviour
 
 
         poof?.Play();
-        //get a "pop" noise
+        //get a "pop" noise here
         
         DisableBox();
         MysteryBoxLocation.Instance.ChooseRoom();

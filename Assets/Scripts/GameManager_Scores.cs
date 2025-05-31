@@ -40,6 +40,7 @@ public class GameManager_Scores : MonoBehaviour
     {
         HUDController.Instance.EnablePowerUpUI(PowerUpType.DoublePoints);
         multiplier = 2;
+        doublePointsTime = doublePointsTimeMax;
     }
 
     private void CountDownDoublePoints()
