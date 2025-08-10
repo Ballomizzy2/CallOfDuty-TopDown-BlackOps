@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using System;
 
 public class Enemy : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class Enemy : MonoBehaviour
 
     private NavMeshAgent agent; 
     public bool isDead = false;
+
+    public static EventHandler OnZombieSlotFreed;
 
     [Header("Debug")]
     [SerializeField] private bool staticDummy = false;
@@ -34,6 +37,7 @@ public class Enemy : MonoBehaviour
 
         if (!staticDummy)
         {
+            //this block is for moving zombies
        
             if (HP <= 0)
             {
@@ -45,7 +49,7 @@ public class Enemy : MonoBehaviour
                 SoundMng.Instance.zombieChannel.PlayOneShot(SoundMng.Instance.zombieDeath);
                 PowerUpManager.Instance.TryDropPowerUp(transform.position);
                 PlayerVoicelineManager.Instance.PlayVoiceline(PlayerVoicelineManager.Instance.zombieKillClips);
-                int randomValue = Random.Range(0, 2);
+                int randomValue = UnityEngine.Random.Range(0, 2);
                 if (randomValue == 0)
                 {
                     animator.SetTrigger("DIE2");
@@ -58,6 +62,7 @@ public class Enemy : MonoBehaviour
                     PointsForDeath(dmgType);
                     Destroy(gameObject, 3f);
                 }
+                OnZombieSlotFreed?.Invoke(this, EventArgs.Empty);
                 isDead = true;
                 GetComponent<CapsuleCollider>().enabled = false;
 
@@ -72,6 +77,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            //this block is for idle testing zombies
             if (HP <= 0)
             {
           
@@ -82,6 +88,7 @@ public class Enemy : MonoBehaviour
 
                 PointsForDeath(dmgType);
                 isDead = true;
+                
                 Destroy(gameObject);
 
 

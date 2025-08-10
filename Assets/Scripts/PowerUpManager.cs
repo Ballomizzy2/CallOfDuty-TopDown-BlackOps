@@ -94,7 +94,7 @@ public class PowerUpManager : MonoBehaviour
     //fire sale
     internal void FireSaleEffect()
     {
-        StartCoroutine(FireSaleRoutine(5));
+        StartCoroutine(FireSaleRoutine(15));
     }
     private IEnumerator FireSaleRoutine(float duration)
     {

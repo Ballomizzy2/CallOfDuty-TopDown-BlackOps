@@ -42,7 +42,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private RoomSpawnerData startingRoom;
 
     [Header("Game Data")]
-    [SerializeField] private int round=1;
+    [SerializeField] private int round=0;
     [SerializeField] private int totalZombiesInRound;
     [SerializeField] private int reserveZombies;
     [SerializeField] private int currentZombies;
@@ -61,7 +61,8 @@ public class SpawnManager : MonoBehaviour
     #region ──  Initialisation ────────────────────────────────────────────────────
     private void Awake()
     {
-        //play a somber tune to signigy start?
+        Enemy.OnZombieSlotFreed += HandleOnZombieSlotFreed;
+        //play a somber tune to signify start?
         Instance = this;    
         if (isUsingOriginalUse)
         {
@@ -155,13 +156,18 @@ public class SpawnManager : MonoBehaviour
             {
                 //use avalible spawners...but how?
                 //bounce thu each one with a random number? x into each until current>max?  hm...
-                //Debug.Log($"total zombies in round: {totalZombiesInRound}, {currentZombies}/{totalZombiesInRound}");
+                
+                //---
+                //choose a random spot and populate 1 zombie?
+                int targetSpawner = UnityEngine.Random.Range(0,spawnerList.Count);
+                spawnerList[targetSpawner].SpawnTheZombies(1);
                 currentZombies++;
                 reserveZombies--;
+                Debug.Log($"total zombies in round: {totalZombiesInRound}, {currentZombies}/{totalZombiesInRound}");
                 if (reserveZombies < 0) break;
             }
         }
-        else if(reserveZombies==0 && currentZombies==0)
+        else if(reserveZombies<=0 && currentZombies==0)
         {
             //round is over
             SoundMng.Instance.PlayRoundEndJingle();
@@ -177,6 +183,7 @@ public class SpawnManager : MonoBehaviour
         gracePeriodTimer -=Time.deltaTime;
         if (gracePeriodTimer < 0)
         {
+            round++;
             //if (round != 1)//use this when we get an intro jingle
             //{
             //    SoundMng.Instance.PlayRoundStartJingle();
@@ -229,7 +236,21 @@ public class SpawnManager : MonoBehaviour
      * {
      *      currentZombies--;
      *      ShuffleTheZombies();//to keep the game going
+     *      //shuffleTheZombie is in a while/loop thing, maybe keep that forr round start and a different onw to handle the mid game spawning...?
      * }
      */
-    
+
+    private void HandleOnZombieSlotFreed(object sender, EventArgs e)
+    {
+        currentZombies--;
+        Debug.Log($"total zombies in round: {totalZombiesInRound}, currentZombies:{currentZombies} / totalZombies:{totalZombiesInRound}, reserved zombies:{reserveZombies}");
+        
+        ShuffleTheZombies();
+    }
+
+    private void OnDestroy()
+    {
+        Enemy.OnZombieSlotFreed -= HandleOnZombieSlotFreed;
+    }
+
 }
