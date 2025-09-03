@@ -218,7 +218,11 @@ public class SpawnManager : MonoBehaviour
     }
     public void AddBarricadeMapData(List<BarricadeController> barTemp)
     {
-        barTemp = startingRoom.BarricadesInRoom();
+        if(round == 0)
+        {
+            barTemp = startingRoom.BarricadesInRoom();
+        }
+        
         foreach (BarricadeController bar in barTemp)
         {
             barricadeList.Add(bar);
