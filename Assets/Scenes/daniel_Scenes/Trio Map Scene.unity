@@ -2121,7 +2121,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1826856667880391163, guid: d8e9317368d9c7546a0a3d659f826b0a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2251117916471734777, guid: d8e9317368d9c7546a0a3d659f826b0a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2171,13 +2171,21 @@ PrefabInstance:
       propertyPath: prefabToSpawn
       value: 
       objectReference: {fileID: 935753900411941629, guid: e528f273faeab3f4b9bb37641b2e0baf, type: 3}
+    - target: {fileID: 4479924987431429481, guid: d8e9317368d9c7546a0a3d659f826b0a, type: 3}
+      propertyPath: isUsingOriginalScript
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5236348694317270871, guid: d8e9317368d9c7546a0a3d659f826b0a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5600401325973737865, guid: d8e9317368d9c7546a0a3d659f826b0a, type: 3}
       propertyPath: m_Name
       value: TrioRoomB
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600401325973737865, guid: d8e9317368d9c7546a0a3d659f826b0a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6016386119164941898, guid: d8e9317368d9c7546a0a3d659f826b0a, type: 3}
       propertyPath: m_TagString
@@ -2191,6 +2199,10 @@ PrefabInstance:
       propertyPath: prefabToSpawn
       value: 
       objectReference: {fileID: 935753900411941629, guid: e528f273faeab3f4b9bb37641b2e0baf, type: 3}
+    - target: {fileID: 8059920627038102469, guid: d8e9317368d9c7546a0a3d659f826b0a, type: 3}
+      propertyPath: isUsingOriginalScript
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2363,11 +2375,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3050011462575427463, guid: 60b579d04e4a89241a7af1de5eaed6b6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3988854931423531958, guid: 60b579d04e4a89241a7af1de5eaed6b6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4325867734289724907, guid: 60b579d04e4a89241a7af1de5eaed6b6, type: 3}
       propertyPath: isToy
@@ -2377,6 +2389,10 @@ PrefabInstance:
       propertyPath: prefabToSpawn
       value: 
       objectReference: {fileID: 935753900411941629, guid: e528f273faeab3f4b9bb37641b2e0baf, type: 3}
+    - target: {fileID: 4745554873162084744, guid: 60b579d04e4a89241a7af1de5eaed6b6, type: 3}
+      propertyPath: isUsingOriginalScript
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4887538601152558712, guid: 60b579d04e4a89241a7af1de5eaed6b6, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2425,10 +2441,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrioRoomC
       objectReference: {fileID: 0}
+    - target: {fileID: 6415236964369546162, guid: 60b579d04e4a89241a7af1de5eaed6b6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6688701061161430457, guid: 60b579d04e4a89241a7af1de5eaed6b6, type: 3}
       propertyPath: prefabToSpawn
       value: 
       objectReference: {fileID: 935753900411941629, guid: e528f273faeab3f4b9bb37641b2e0baf, type: 3}
+    - target: {fileID: 6688701061161430457, guid: 60b579d04e4a89241a7af1de5eaed6b6, type: 3}
+      propertyPath: isUsingOriginalScript
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

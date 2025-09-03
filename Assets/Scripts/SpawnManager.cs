@@ -206,7 +206,11 @@ public class SpawnManager : MonoBehaviour
 
     public void AddZombieMapData(List<SpawnInBox> temp)
     {
-        temp = startingRoom.ZombieSpawnersInRoom();
+        if (round == 0)
+        {
+            temp = startingRoom.ZombieSpawnersInRoom();
+        }
+        
         foreach (SpawnInBox spawn in temp)
         {
             spawnerList.Add(spawn);

@@ -14,20 +14,26 @@ public class DoorController : MonoBehaviour
     public void SendDataToSpawnManager()
     {
         //if map has not been "woken up" before
-        if (!mapA.enabled)
+        if (!mapA.IsRoomActive())
         {
-            mapA.enabled = true;
+            mapA.OpenThisRoom();
             SpawnManager.Instance.AddBarricadeMapData(mapA.BarricadesInRoom());
             SpawnManager.Instance.AddZombieMapData(mapA.ZombieSpawnersInRoom());
-            
+
             //send this to spawn manager
+            Debug.Log("current room!");
         }
-        else if (!mapB.enabled)
+        else if (!mapB.IsRoomActive())
         {
-            mapB.enabled = true;
+            mapB.OpenThisRoom();
             SpawnManager.Instance.AddBarricadeMapData(mapB.BarricadesInRoom());
             SpawnManager.Instance.AddZombieMapData(mapB.ZombieSpawnersInRoom());
             //send this to 
+            Debug.Log("next room!");
+        }
+        else
+        {
+            //nothing if both rooms are already opened
         }
     }
 }

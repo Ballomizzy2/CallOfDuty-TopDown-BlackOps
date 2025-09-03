@@ -12,15 +12,19 @@ public class RoomSpawnerData : MonoBehaviour
     [SerializeField] private List<BarricadeController> barricadeList;
     [SerializeField] private MysteryBoxDisplayHandler mysteryBoxDUO; //each room has a box, and a MysterBox manager will manager their activity...?
     [SerializeField] private bool isStartingRoom = false;
+
+    [SerializeField] private bool isThisRoomOpen;
     private void Start()
     {
         if (isStartingRoom)
         {
-            this.enabled = true;
+            isThisRoomOpen = this.enabled;
+          
         }
         else
         {
-            this.enabled = false;
+            isThisRoomOpen = false;
+           
         }
             
     }
@@ -37,6 +41,14 @@ public class RoomSpawnerData : MonoBehaviour
     public MysteryBoxDisplayHandler GetMysteryBoxObject()
     {
         return mysteryBoxDUO;
+    }
+    public bool IsRoomActive()
+    {
+        return isThisRoomOpen;
+    }
+    public void OpenThisRoom()
+    {
+        isThisRoomOpen = true;
     }
     
 }
